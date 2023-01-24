@@ -36,6 +36,7 @@ public class Connector extends Local {
         return false;
     }
 
+
     public boolean recharge(Player player) {
         long currentTime = System.currentTimeMillis();
         String playerName = player.getName();
@@ -50,8 +51,11 @@ public class Connector extends Local {
         // Update last interaction time
         lastInteraction.put(playerName, currentTime);
         // Recharge energy
-        player.setCurrentEnergy(player.getCurrentEnergy() + super.getEnergy());
+        player.setCurrentEnergy((int) (player.getCurrentEnergy() + super.getEnergy()));
         System.out.println("Energy recharged successfully!");
         return true;
     }
+
+
+
 }

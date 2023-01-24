@@ -15,6 +15,8 @@ public class Player {
         this.currentEnergy = currentEnergy;
     }
 
+    public Player(){}
+
     public String getName() {
         return name;
     }
@@ -66,18 +68,20 @@ public class Player {
 
     public boolean rechargeEnergy(Connector connector) {
         long currentTime = System.currentTimeMillis();
-        if (cooldowns.containsKey(connector.getId())) {
-            long lastInteraction = cooldowns.get(connector.getId());
+        if (connector.getCooldown().containsKey(connector.getId())) {
+            long lastInteraction = connector.getCooldown().get(connector.getId());
             if (currentTime - lastInteraction >= connector.getCooldown()) {
-                this.energy += connector.getEnergy();
-                cooldowns.put(connector.getId(), currentTime);
+                //this.energy += connector.getEnergy(); verificar linha abaixo, tendo em conta esta
+                connector.setEnergy(connector.getEnergy() + connector.getEnergy());
+                connector.getCooldown().put(connector.getId(), currentTime);
                 return true;
             } else {
                 return false;
             }
         } else {
-            this.energy += connector.getEnergy();
-            cooldowns.put(connector.getId(), currentTime);
+            //this.energy += connector.getEnergy();
+            connector.setEnergy( + connector.getEnergy()); //dá assim?
+            connector.getCooldown().put(connector.getId(), currentTime);
             return true;
         }
     }

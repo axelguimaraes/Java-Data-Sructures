@@ -27,9 +27,9 @@ public class Portal extends Local {
     }
 
     public boolean canConquer(Player player) {
-        if (this.ownership.equals("neutral")) {
+        if (super.getOwnership().equals("neutral")) {
             return true;
-        } else if (this.ownership.equals(player.getTeam())) {
+        } else if (super.getOwnership().equals(player.getTeam())) {
             return true;
         } else {
             System.out.println("Cannot conquer. Portal already belongs to another team.");
@@ -38,18 +38,18 @@ public class Portal extends Local {
     }
 
     public boolean attack(Player player) {
-        if (!this.ownership.equals(player.getTeam())) {
+        if (!super.getOwnership().equals(player.getTeam())) {
             int playerEnergy = player.getCurrentEnergy();
-            if (playerEnergy >= this.energy) {
-                player.setCurrentEnergy(playerEnergy - this.energy);
-                this.energy = 0;
-                this.ownership = "neutral";
+            if (playerEnergy >= super.getEnergy()) {
+                player.setCurrentEnergy(playerEnergy - player.getCurrentEnergy());
+                super.setEnergy(0);
+                //super.setOwnership("neutral");
                 System.out.println("Portal conquered!");
                 return true;
             } else {
-                this.energy -= playerEnergy;
+                super.setEnergy(super.getEnergy() - playerEnergy);
                 player.setCurrentEnergy(0);
-                System.out.println("Not enough energy to conquer the portal. Portal energy remaining: " + this.energy);
+                System.out.println("Not enough energy to conquer the portal. Portal energy remaining: " + player.getCurrentEnergy());
                 return false;
             }
         } else {
@@ -59,11 +59,11 @@ public class Portal extends Local {
     }
 
     public boolean recharge(Player player, int energy) {
-        if (this.ownership.equals(player.getTeam())) {
+        if (super.getOwnership().equals(player.getTeam())) {
             int playerEnergy = player.getCurrentEnergy();
             if (playerEnergy >= energy) {
                 player.setCurrentEnergy(playerEnergy - energy);
-                this.energy += energy;
+                super.setEnergy(super.getEnergy() + energy);
                 System.out.println("Portal recharged successfully!");
                 return true;
             } else {

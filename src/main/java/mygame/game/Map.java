@@ -57,6 +57,7 @@ public class Map {
         return mapGraph.size();
     }
 
+
     public void importData(String filePath) throws IOException {
         Gson gson = new Gson();
         Type localListType = new TypeToken<List<LocalData>>(){}.getType();
@@ -87,10 +88,19 @@ public class Map {
     }
 
     private static class LocalData {
+
         int id;
         String type;
         Coordinates coordinates;
         GameSettings gameSettings;
+
+        public LocalData(int id, String type, Coordinates coordinates, GameSettings gameSettings){
+            this.id = id;
+            this.type = type;
+            this.coordinates = coordinates;
+            this.gameSettings = gameSettings;
+        }
+
     }
 
     private static class RouteData {

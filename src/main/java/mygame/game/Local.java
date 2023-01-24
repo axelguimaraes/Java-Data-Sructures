@@ -6,6 +6,8 @@ public class Local {
     private double latitude;
     private double energy;
 
+    private Player ownership;
+
     public Local(int id, double longitude, double latitude, double energy) {
         this.id = id;
         this.longitude = longitude;
@@ -28,9 +30,16 @@ public class Local {
     public double getEnergy() {
         return energy;
     }
-
     public void setEnergy(double energy) {
         this.energy = energy;
+    }
+
+    public Player getOwnership() {
+        return ownership;
+    }
+
+    public void setOwnership(Player ownership) {
+        this.ownership = ownership;
     }
 }
 
