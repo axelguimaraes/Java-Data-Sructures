@@ -26,6 +26,7 @@ public class Portal extends Local {
         this.player = player;
     }
 
+    /*
     public boolean canConquer(Player player) {
         if (this.ownership.equals("neutral")) {
             return true;
@@ -36,6 +37,8 @@ public class Portal extends Local {
             return false;
         }
     }
+
+
 
     public boolean attack(Player player) {
         if (!this.ownership.equals(player.getTeam())) {
@@ -58,6 +61,8 @@ public class Portal extends Local {
         }
     }
 
+
+
     public boolean recharge(Player player, int energy) {
         if (this.ownership.equals(player.getTeam())) {
             int playerEnergy = player.getCurrentEnergy();
@@ -75,4 +80,6 @@ public class Portal extends Local {
             return false;
         }
     }
+
+     */
 }

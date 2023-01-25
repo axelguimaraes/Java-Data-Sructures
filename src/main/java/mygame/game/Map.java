@@ -2,7 +2,6 @@ package mygame.game;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import mygame.structs.graphs.LinkedGraph;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Map {
+    /*
     private LinkedGraph<Local> mapGraph;
 
     public Map() {
@@ -106,4 +106,6 @@ public class Map {
     private static class GameSettings {
         //fields will vary depending on the type of Local
     }
+
+     */
 }

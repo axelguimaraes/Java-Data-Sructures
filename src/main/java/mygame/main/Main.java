@@ -9,6 +9,7 @@ import java.io.IOException;
 
 
 public class Main {
+    /*
     public static void main(String[] args) throws IOException {
         //initialize game state
         Map gameMap = new Map();
@@ -33,6 +34,8 @@ public class Main {
             }
         }
     }
+
+     */
 }
 
 
