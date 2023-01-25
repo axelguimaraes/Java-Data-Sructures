@@ -352,4 +352,12 @@ public class Network<T> implements NetworkADT<T> {
         text += "\n";
         return text;
     }
+
+    public int getNumVertices() {
+        return this.numVertices;
+    }
+
+    public UnorderedListADT<NetworkNode<T>> getNodesList() {
+        return this.nodesList;
+    }
 }
