@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" afterDir="false" />
-    </list>
+    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +61,7 @@
       <recent name="C:\Users\axelg\Documents\GitHub\ED_TP_2022_2023\src\main\java\mygame\structs\graphs" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.demo">
     <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="mygame.main.Menu" />
       <module name="ED_TP_2022_2023.main" />
