@@ -4,7 +4,7 @@ package mygame.structures.lists;
 import mygame.exceptions.ElementNotFoundException;
 import mygame.exceptions.EmptyListException;
 
-public class LinkedList<T> {
+public abstract class LinkedList<T> {
 
     private int count;
     private LinearNode<T> head, tail;

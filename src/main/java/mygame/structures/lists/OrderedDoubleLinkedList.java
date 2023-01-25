@@ -1,6 +1,6 @@
 package mygame.structures.lists;
 
-public class DoubleLinkedOrderedList<T> extends DoubleLinkedList<T> implements OrderedListADT<T> {
+public class OrderedDoubleLinkedList<T> extends DoubleLinkedList<T> implements OrderedListADT<T> {
 
 
     /**

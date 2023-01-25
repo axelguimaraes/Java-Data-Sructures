@@ -1,85 +1,116 @@
 package mygame.game;
 
-public class Portal extends Local {
-    private String state;
-    private String player;
+import mygame.interfaces.IPlayer;
+import mygame.interfaces.IPortal;
 
-    public Portal(int id, double longitude, double latitude, double energy, String state, String player) {
-        super(id, longitude, latitude, energy);
-        this.state = state;
-        this.player = player;
+public class Portal extends Local implements IPortal {
+    private String name;
+    private Team team;
+    private Player conqueror;
+    private final int maxEnergy;
+
+    public Portal(String name, int energy, Coordinates coordinates, Player conqueror, int maxEnergy) {
+        super(energy, coordinates);
+        this.team = Team.NONE;
+        this.conqueror = conqueror;
+        this.name = name;
+        this.maxEnergy = maxEnergy;
     }
 
-    public String getState() {
-        return state;
+    @Override
+    public String getName() {
+        return this.name;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlayer() {
-        return player;
+    @Override
+    public Team getTeam() {
+        return this.team;
     }
 
-    public void setPlayer(String player) {
-        this.player = player;
+    @Override
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    /*
-    public boolean canConquer(Player player) {
-        if (this.ownership.equals("neutral")) {
-            return true;
-        } else if (this.ownership.equals(player.getTeam())) {
-            return true;
-        } else {
-            System.out.println("Cannot conquer. Portal already belongs to another team.");
+    @Override
+    public Player getConqueror() {
+        return this.conqueror;
+    }
+
+    @Override
+    public void setConqueror(Player player) {
+        this.conqueror = player;
+    }
+
+    @Override
+    public boolean rechargeEnergy(IPlayer player, int energy) {
+        if (this.getTeam().equals(Team.NONE)) {
+            System.out.println("Portal not associated to a team");
             return false;
         }
+
+        Player playerRecharge = (Player) player;
+        if (playerRecharge.isFromDifferentTeam(this)) {
+            System.out.println("Portal doesn't belong to player's team!");
+            return false;
+        }
+
+        this.setEnergy(this.getEnergy() + energy);
+        System.out.println("Portal recharged by " + energy + " points");
+        return true;
     }
 
+    public boolean getConquered(IPlayer player) {
+        if (this.team.equals(Team.NONE)) {
+            this.team = player.getTeam();
+            this.conqueror = (Player) player;
 
+            System.out.println("Portal conquered by " + ((Player) player).getName() + " from team " + player.getTeam().toString());
+            return true;
+        }
 
-    public boolean attack(Player player) {
-        if (!this.ownership.equals(player.getTeam())) {
-            int playerEnergy = player.getCurrentEnergy();
-            if (playerEnergy >= this.energy) {
-                player.setCurrentEnergy(playerEnergy - this.energy);
-                this.energy = 0;
-                this.ownership = "neutral";
-                System.out.println("Portal conquered!");
-                return true;
+        Player playerConqueror = (Player) player;
+        if (playerConqueror.isFromDifferentTeam(this)) { // Se o jogador for de equipa diferente
+            if (this.getEnergy() < playerConqueror.getEnergy()) { // Se o jogador tiver mais energia que o portal
+                playerConqueror.setEnergy(playerConqueror.getEnergy() - this.getEnergy());
+                this.setEnergy(0);
+
+                if (playerConqueror.getEnergy() >= this.getEnergy() * 0.25) { // Se o jogador tiver mais de 25% da energia maxima do portal
+                    this.setEnergy((int) (this.maxEnergy * 0.25));
+                    playerConqueror.setEnergy((int) (playerConqueror.getEnergy() - this.maxEnergy * 0.25));
+                    this.setTeam(playerConqueror.getTeam());
+                    this.setConqueror(playerConqueror);
+                    System.out.println("Portal conquered by " + ((Player) player).getName() + " from team " + player.getTeam().toString());
+                    return true;
+
+                } else {
+                    this.setTeam(Team.NONE);
+                    System.out.println("Portal team set to NONE due to player not having enough energy to conquer");
+                    return false;
+                }
             } else {
-                this.energy -= playerEnergy;
-                player.setCurrentEnergy(0);
-                System.out.println("Not enough energy to conquer the portal. Portal energy remaining: " + this.energy);
+                System.out.println("Player doesn't have enough energy to conquer portal. Portal team not changed");
                 return false;
             }
         } else {
-            System.out.println("Cannot attack own team's portal.");
+            System.out.println("Portal already belongs to player's team");
             return false;
         }
     }
 
-
-
-    public boolean recharge(Player player, int energy) {
-        if (this.ownership.equals(player.getTeam())) {
-            int playerEnergy = player.getCurrentEnergy();
-            if (playerEnergy >= energy) {
-                player.setCurrentEnergy(playerEnergy - energy);
-                this.energy += energy;
-                System.out.println("Portal recharged successfully!");
-                return true;
-            } else {
-                System.out.println("Not enough energy to recharge portal.");
-                return false;
-            }
-        } else {
-            System.out.println("Cannot recharge another team's portal.");
-            return false;
-        }
+    @Override
+    public String toString() {
+        return "PORTAL\n" +
+                "ID: " + super.getId() + "\n" +
+                "Name: " + this.name + "\n" +
+                "Team: " + this.team + "\n" +
+                "Conquerer: " + this.conqueror + "\n" +
+                "Energy: " + super.getEnergy() + "\n" +
+                "Coordinates: " + super.getCoordinates() + "\n";
     }
-
-     */
 }

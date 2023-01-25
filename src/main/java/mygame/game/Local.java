@@ -1,36 +1,41 @@
 package mygame.game;
 
-public class Local {
-    private int id;
-    private double longitude;
-    private double latitude;
-    private double energy;
+import mygame.interfaces.ILocal;
 
-    public Local(int id, double longitude, double latitude, double energy) {
-        this.id = id;
-        this.longitude = longitude;
-        this.latitude = latitude;
+public abstract class Local implements ILocal {
+    private static int nextId = 1;
+    private final int id;
+    private int energy;
+    private Coordinates coordinates;
+
+    public Local(int energy, Coordinates coordinates) {
+        this.id = nextId++;
         this.energy = energy;
+        this.coordinates = coordinates;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public int getEnergy() {
+        return 0;
     }
 
-    public double getLongitude() {
-        return longitude;
+    @Override
+    public void setEnergy(int energy) {
+
     }
 
-    public double getLatitude() {
-        return latitude;
+    @Override
+    public String getId() {
+        return null;
     }
 
-    public double getEnergy() {
-        return energy;
+    @Override
+    public Coordinates getCoordinates() {
+        return this.coordinates;
     }
 
-    public void setEnergy(double energy) {
-        this.energy = energy;
+    @Override
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }
-

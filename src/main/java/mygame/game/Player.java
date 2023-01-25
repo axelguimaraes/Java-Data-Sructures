@@ -1,18 +1,83 @@
 package mygame.game;
 
-public class Player {
-    private String name;
-    private Team team;
-    private int level;
-    private int experiencePoints;
-    private int currentEnergy;
+import mygame.interfaces.IConnector;
+import mygame.interfaces.ILocal;
+import mygame.interfaces.IPlayer;
+import mygame.interfaces.IPortal;
+import mygame.structures.lists.UnorderedArrayList;
 
-    public Player(String name, Team team, int level, int experiencePoints, int currentEnergy) {
+public class Player implements IPlayer {
+    private static int nextId;
+    private final int id;
+    private int energy;
+    private Team team;
+    private String name;
+    private ILocal currentPosition;
+
+    public Player(String name, int energy, Team team) {
         this.name = name;
+        this.id = ++nextId;
+        this.energy = energy;
         this.team = team;
-        this.level = level;
-        this.experiencePoints = experiencePoints;
-        this.currentEnergy = currentEnergy;
+        this.currentPosition = null;
+    }
+
+    @Override
+    public int getEnergy() {
+        return this.energy;
+    }
+
+    @Override
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    @Override
+    public boolean conquerPortal(IPortal portal) {
+        return ((Portal) portal).getConquered(this);
+    }
+
+    @Override
+    public boolean rechargeEnergy(IConnector connector) {
+        return ((Connector) connector).chargePlayer(this);
+    }
+
+    @Override
+    public Team getTeam() {
+        return this.team;
+    }
+
+    @Override
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    @Override
+    public UnorderedArrayList<IPortal> getConqueredPortals() {
+        return null;
+    }
+
+    @Override
+    public ILocal getLocation() {
+        return null;
+    }
+
+    @Override
+    public void navigateTo(ILocal destination) {
+        this.currentPosition = destination; // TODO: here
+    }
+
+    public ILocal getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(ILocal currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
+    @Override
+    public boolean chargePortal(IPortal portal, int energy) {
+        return portal.rechargeEnergy(this, energy);
     }
 
     public String getName() {
@@ -23,73 +88,11 @@ public class Player {
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getExperiencePoints() {
-        return experiencePoints;
-    }
-
-    public void setExperiencePoints(int experiencePoints) {
-        this.experiencePoints = experiencePoints;
-    }
-
-    public int getCurrentEnergy() {
-        return currentEnergy;
-    }
-
-    public void setCurrentEnergy(int currentEnergy) {
-        this.currentEnergy = currentEnergy;
-    }
-
-    public boolean conquerPortal(Portal portal, double energy) {
-        if (portal.attack(this)) {
-            this.currentEnergy -= energy;
-            return true;
-        } else {
+    public boolean isFromDifferentTeam(IPortal portal) {
+        if (portal.getTeam().equals(Team.NONE)) {
             return false;
         }
-    }
 
-    public boolean rechargeEnergy(Connector connector) {
-        long currentTime = System.currentTimeMillis();
-        if (cooldowns.containsKey(connector.getId())) {
-            long lastInteraction = cooldowns.get(connector.getId());
-            if (currentTime - lastInteraction >= connector.getCooldown()) {
-                this.energy += connector.getEnergy();
-                cooldowns.put(connector.getId(), currentTime);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            this.energy += connector.getEnergy();
-            cooldowns.put(connector.getId(), currentTime);
-            return true;
-        }
-    }
-
-    public int calculateExperiencePoints() {
-        int experiencePoints = 0;
-        for (Portal portal : portals) {
-            if (portal.getState().equals(this.team)) {
-                experiencePoints += portal.getEnergy();
-            }
-        }
-        experiencePoints += connectors.size() * 10;
-        return experiencePoints;
+        return !this.team.equals(portal.getTeam());
     }
 }

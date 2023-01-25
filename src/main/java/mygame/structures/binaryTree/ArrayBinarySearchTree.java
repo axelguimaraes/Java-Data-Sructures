@@ -2,7 +2,7 @@ package mygame.structures.binaryTree;
 
 import mygame.exceptions.ElementNotFoundException;
 import mygame.exceptions.EmptyListException;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 
 import java.util.Iterator;
 
@@ -134,7 +134,7 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T> implements Bina
 
     protected void replacement(int position) {
         if((position * 2 + 1) <= maxIndex && tree[(position * 2 + 1)] != null){
-            UnorderedArray<T> list = new UnorderedArray<>();
+            UnorderedArrayList<T> list = new UnorderedArrayList<>();
             getElementsAndClean(position, list);
 
             Iterator<T> tmpItr = list.iterator();
@@ -147,7 +147,7 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T> implements Bina
                 this.addElement(tmpItr.next());
             }
         } else if (((position + 1) * 2) <= maxIndex && tree[((position + 1) * 2)] != null){
-            UnorderedArray<T> list = new UnorderedArray<>();
+            UnorderedArrayList<T> list = new UnorderedArrayList<>();
             getElementsAndClean(position, list);
 
             Iterator<T> tmpItr = list.iterator();
@@ -166,7 +166,7 @@ public class ArrayBinarySearchTree<T> extends ArrayBinaryTree<T> implements Bina
 
     }
 
-    private void getElementsAndClean(int position, UnorderedArray<T> list) {
+    private void getElementsAndClean(int position, UnorderedArrayList<T> list) {
 
         if (position < tree.length) {
             if (tree[position] != null) {

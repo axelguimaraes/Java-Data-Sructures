@@ -1,7 +1,7 @@
 package mygame.structures.binaryTree;
 
 import mygame.exceptions.ElementNotFoundException;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 
 import java.util.Iterator;
 
@@ -125,7 +125,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorInOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
         inorder(0, templist);
 
         return templist.iterator();
@@ -136,7 +136,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node the node used in the traversal
      * @param templist
      */
-    protected void inorder(int node, UnorderedArray<T> templist) {
+    protected void inorder(int node, UnorderedArrayList<T> templist) {
         if (node < this.tree.length) {
             if (this.tree[node] != null) {
                 inorder(node * 2 + 1, templist);
@@ -153,7 +153,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorPreOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
         preOrder(0, templist);
 
         return templist.iterator();
@@ -164,7 +164,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node
      * @param templist
      */
-    protected void preOrder(int node, UnorderedArray<T> templist) {
+    protected void preOrder(int node, UnorderedArrayList<T> templist) {
         if (node < this.tree.length) {
             if (this.tree[node] != null) {
                 templist.addToRear(this.tree[node]);
@@ -181,7 +181,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorPostOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
         postOrder(0, templist);
 
         return templist.iterator();
@@ -192,7 +192,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node
      * @param templist
      */
-    protected void postOrder(int node, UnorderedArray<T> templist) {
+    protected void postOrder(int node, UnorderedArrayList<T> templist) {
         if (node < this.tree.length) {
             if (this.tree[node] != null) {
                 inorder((node + 1) * 2 - 1, templist);
@@ -208,7 +208,7 @@ public class ArrayBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorLevelOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
 
         for (int ct = 0; ct < this.count; ct++) {
             templist.addToRear(this.tree[ct]);

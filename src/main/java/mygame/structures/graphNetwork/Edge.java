@@ -12,4 +12,12 @@ public class Edge<T> {
         this.nodeTo = nodeTo;
         this.weight = weight;
     }
-}
+
+     public NetworkNode<T> getNodeTo() {
+         return nodeTo;
+     }
+
+     public double getWeight() {
+         return weight;
+     }
+ }
