@@ -4,9 +4,12 @@ import mygame.game.Player;
 import mygame.game.Team;
 
 public interface IPortal extends ILocal {
+    public String getName();
+
+    public void setName(String name);
     public Team getTeam();
     public void setTeam(Team team);
     public Player getConqueror();
     public void setConqueror(Player player);
-    public void rechargeEnergy(int energy);
+    public boolean rechargeEnergy(IPlayer player, int energy);
 }

@@ -121,4 +121,8 @@ public class GameMap<T> {
     public Iterator<T> breadthFirstIterator(T startLocation) throws EmptyCollectionException {
         return this.mapGraph.iteratorBFS(startLocation);
     }
+
+    public String toString() {
+        return this.mapGraph.toString();
+    }
 }

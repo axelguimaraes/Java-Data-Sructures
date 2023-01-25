@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="" />
+    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPortal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPortal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,14 +50,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/axelg/Documents/GitHub/ED_TP_2022_2023/src/main/java/mygame"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/axelg/Documents/GitHub/ED_TP_2022_2023/src/main/java/mygame&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\axelg\Documents\GitHub\ED_TP_2022_2023\src\main\java\mygame" />

@@ -11,10 +11,12 @@ public class Player implements IPlayer {
     private final int id;
     private int energy;
     private Team team;
+    private String name;
     // cooldowns (?)
 
 
-    public Player(int energy, Team team) {
+    public Player(String name, int energy, Team team) {
+        this.name = name;
         this.id = nextId++;
         this.energy = energy;
         this.team = team;
@@ -31,13 +33,13 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void conquerPortal(IPortal portal) {
-
+    public boolean conquerPortal(IPortal portal) {
+        return ((Portal) portal).getConquered(this);
     }
 
     @Override
-    public void rechargeEnergy(IConnector connector) {
-
+    public boolean rechargeEnergy(IConnector connector) {
+        return ((Connector) connector).chargePlayer(this);
     }
 
     @Override
@@ -66,7 +68,23 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void chargePortal(IPortal portal, int energy) {
+    public boolean chargePortal(IPortal portal, int energy) {
+        return portal.rechargeEnergy(this, energy);
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isFromDifferentTeam(IPortal portal) {
+        if (portal.getTeam().equals(Team.NONE)) {
+            return false;
+        }
+
+        return !this.team.equals(portal.getTeam());
     }
 }

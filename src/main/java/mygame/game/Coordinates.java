@@ -16,4 +16,8 @@ public class Coordinates {
     public double getLongitude() {
         return longitude;
     }
+
+    public String toString() {
+        return this.latitude + " - " + this.longitude;
+    }
 }

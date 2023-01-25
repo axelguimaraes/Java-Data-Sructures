@@ -1,17 +1,34 @@
 package mygame.main;
 
-import mygame.game.Player;
-import mygame.game.PlayerInteraction;
-import mygame.game.Team;
+import mygame.exceptions.GraphExceptions;
+import mygame.game.*;
 
 public class Demo {
-    public static void main(String[] args) throws InterruptedException {
-        Player player = new Player(12312, Team.GIANTS);
-        PlayerInteraction interaction = new PlayerInteraction(player, 2);
+    public static void main(String[] args) throws GraphExceptions {
+        Portal portal1 = new Portal("Memorial fountain",150, new Coordinates(14253, 142453), null, 100);
+        Portal portal2 = new Portal("Baseball field",150, new Coordinates(14253, 142453), null, 100);
+        Portal portal3 = new Portal("Ball field",150, new Coordinates(14253, 142453), null, 100);
 
-        Thread.sleep(5000);
+        Connector connector1 = new Connector(2134, new Coordinates(141234, 1242134), 10);
+        Connector connector2 = new Connector(2134, new Coordinates(141234, 1242134), 14);
+        Connector connector3 = new Connector(2134, new Coordinates(141234, 1242134), 12);
 
-        System.out.println(interaction.getElapsedTime());
-        System.out.println(interaction.isCooldownOver());
+        GameMap<Local> map = new GameMap<>();
+        map.addLocation(portal1);
+        map.addLocation(portal2);
+        map.addLocation(portal3);
+
+        map.addLocation(connector1);
+        map.addLocation(connector2);
+        map.addLocation(connector3);
+
+        map.connectLocations(portal1, connector1, 5);
+        map.connectLocations(connector2, connector1, 10);
+        map.connectLocations(portal2, connector2, 7);
+        map.connectLocations(connector2, connector3, 4);
+        map.connectLocations(portal3, connector3, 8);
+
+        System.out.println(map);
+
     }
 }
