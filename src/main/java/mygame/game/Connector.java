@@ -32,6 +32,10 @@ public class Connector extends Local implements IConnector {
     }
 
     public boolean chargePlayer(IPlayer player) { // TODO: this
+        player.setEnergy(player.getEnergy() + super.getEnergy());
+        PlayerInteraction interaction = new PlayerInteraction((Player) player, this.cooldown);
+        lastInteractions.enqueue(interaction);
+
         return false;
     }
 

@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/files/gameMap.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/ExceedingStockException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/MapException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/WrongLocalTypeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinarySearchTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinaryTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/LinkedBinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/LinkedBinaryTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/io/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/io/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/io/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/io/Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/NetworkNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedOrderedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedDoubleLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedArrayList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/UnorderedArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/UnorderedArrayList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +53,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/axelg/Documents/GitHub/ED_TP_2022_2023/src/main/java/mygame&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/axelg/Documents/GitHub/ED_TP_2022_2023/src/main/java/mygame&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
 }</component>
   <component name="RecentsManager">

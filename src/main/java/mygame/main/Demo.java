@@ -2,9 +2,13 @@ package mygame.main;
 
 import mygame.exceptions.GraphExceptions;
 import mygame.game.*;
+import mygame.io.Input;
+import mygame.io.Output;
+
+import java.io.IOException;
 
 public class Demo {
-    public static void main(String[] args) throws GraphExceptions {
+    public static void main(String[] args) throws GraphExceptions, IOException {
         Portal portal1 = new Portal("Memorial fountain",150, new Coordinates(14253, 142453), null, 100);
         Portal portal2 = new Portal("Baseball field",150, new Coordinates(14253, 142453), null, 100);
         Portal portal3 = new Portal("Ball field",150, new Coordinates(14253, 142453), null, 100);
@@ -29,6 +33,11 @@ public class Demo {
         map.connectLocations(portal3, connector3, 8);
 
         System.out.println(map);
+
+        Output.exportGameMap(map);
+
+        GameMap newMap = Input.importGameMap();
+        System.out.println(newMap);
 
     }
 }

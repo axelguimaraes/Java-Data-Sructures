@@ -14,10 +14,10 @@ public class Player implements IPlayer {
     private String name;
     private ILocal currentPosition;
 
-    public Player(String name, int energy, Team team) {
+    public Player(String name, Team team) {
         this.name = name;
         this.id = ++nextId;
-        this.energy = energy;
+        this.energy = 0;
         this.team = team;
         this.currentPosition = null;
     }
@@ -30,6 +30,10 @@ public class Player implements IPlayer {
     @Override
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    public void addEnergy(int energy) {
+        this.energy += energy;
     }
 
     @Override
