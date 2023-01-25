@@ -3,7 +3,7 @@ package mygame.structures.binaryTree;
 
 import mygame.exceptions.ElementNotFoundException;
 import mygame.exceptions.EmptyCollectionException;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 import mygame.structures.queues.LinkedQueue;
 
 import java.util.Iterator;
@@ -122,7 +122,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorInOrder() {
-        UnorderedArray<T> tempList = new UnorderedArray<>();
+        UnorderedArrayList<T> tempList = new UnorderedArrayList<>();
         inorder(this.root, tempList);
 
         return tempList.iterator();
@@ -133,7 +133,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node the node to be used as the root for this traversal
      * @param tempList the temporary list for use in this traversal
      */
-    protected void inorder(BinaryTreeNode<T> node, UnorderedArray<T> tempList) {
+    protected void inorder(BinaryTreeNode<T> node, UnorderedArrayList<T> tempList) {
         if (node != null) {
             inorder(node.left, tempList);
             tempList.addToRear(node.element);
@@ -148,7 +148,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorPreOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
         preorder(this.root, templist);
 
         return templist.iterator();
@@ -159,7 +159,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node no
      * @param tempList lista temporaria
      */
-    protected void preorder(BinaryTreeNode<T> node, UnorderedArray<T> tempList) {
+    protected void preorder(BinaryTreeNode<T> node, UnorderedArrayList<T> tempList) {
         if (node != null) {
             tempList.addToRear(node.element);
             preorder(node.left, tempList);
@@ -174,7 +174,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorPostOrder() {
-        UnorderedArray<T> templist = new UnorderedArray<>();
+        UnorderedArrayList<T> templist = new UnorderedArrayList<>();
         postorder(this.root, templist);
 
         return templist.iterator();
@@ -185,7 +185,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * @param node no
      * @param tempList lista temporaria
      */
-    protected void postorder(BinaryTreeNode<T> node, UnorderedArray<T> tempList) {
+    protected void postorder(BinaryTreeNode<T> node, UnorderedArrayList<T> tempList) {
         if (node != null) {
             preorder(node.left, tempList);
             preorder(node.right, tempList);
@@ -199,7 +199,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      */
     @Override
     public Iterator<T> iteratorLevelOrder() {
-        UnorderedArray<T> tempList = new UnorderedArray<>();
+        UnorderedArrayList<T> tempList = new UnorderedArrayList<>();
         try {
             levelorder(this.root, tempList);
         } catch (EmptyCollectionException ex) {
@@ -215,7 +215,7 @@ public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
      * @param tempList lista temporaria
      * @throws EmptyCollectionException
      */
-    protected void levelorder(BinaryTreeNode<T> node, UnorderedArray<T> tempList) throws EmptyCollectionException {
+    protected void levelorder(BinaryTreeNode<T> node, UnorderedArrayList<T> tempList) throws EmptyCollectionException {
         LinkedQueue<BinaryTreeNode<T>> queue = new LinkedQueue();
         if (node != null) {
             queue.enqueue(node);

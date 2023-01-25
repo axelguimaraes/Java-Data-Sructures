@@ -3,7 +3,7 @@ package mygame.structures.lists;
 
 import mygame.exceptions.ListExceptions;
 
-public class UnorderedArray<T> extends ArrayList<T> implements UnorderedListADT<T> {
+public class UnorderedArrayList<T> extends ArrayList<T> implements UnorderedListADT<T> {
 
     @Override
     public void addToFront(T element) {

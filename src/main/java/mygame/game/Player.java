@@ -4,22 +4,22 @@ import mygame.interfaces.IConnector;
 import mygame.interfaces.ILocal;
 import mygame.interfaces.IPlayer;
 import mygame.interfaces.IPortal;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 
 public class Player implements IPlayer {
-    private static int nextId = 1;
+    private static int nextId;
     private final int id;
     private int energy;
     private Team team;
     private String name;
-    // cooldowns (?)
-
+    private ILocal currentPosition;
 
     public Player(String name, int energy, Team team) {
         this.name = name;
-        this.id = nextId++;
+        this.id = ++nextId;
         this.energy = energy;
         this.team = team;
+        this.currentPosition = null;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public UnorderedArray<IPortal> getConqueredPortals() {
+    public UnorderedArrayList<IPortal> getConqueredPortals() {
         return null;
     }
 
@@ -64,7 +64,15 @@ public class Player implements IPlayer {
 
     @Override
     public void navigateTo(ILocal destination) {
+        this.currentPosition = destination; // TODO: here
+    }
 
+    public ILocal getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(ILocal currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
     @Override

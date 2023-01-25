@@ -3,7 +3,7 @@ package mygame.structures.lists;
 
 import mygame.exceptions.ListExceptions;
 
-public class OrderedList<T> extends ArrayList<T>
+public class OrderedArrayList<T> extends ArrayList<T>
         implements OrderedListADT<T> {
 
     @Override

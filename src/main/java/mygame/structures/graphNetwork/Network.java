@@ -5,7 +5,7 @@ import mygame.exceptions.EmptyCollectionException;
 import mygame.exceptions.GraphExceptions;
 import mygame.exceptions.ListExceptions;
 import mygame.structures.heaps.PriorityQueue;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 import mygame.structures.lists.UnorderedListADT;
 import mygame.structures.queues.LinkedQueue;
 import mygame.structures.stacks.LinkedStack;
@@ -22,7 +22,7 @@ public class Network<T> implements NetworkADT<T> {
      */
     public Network() {
         this.numVertices = 0;
-        this.nodesList = new UnorderedArray<>();
+        this.nodesList = new UnorderedArrayList<>();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Network<T> implements NetworkADT<T> {
      */
     private Pair<T> findLastPairInShortestPair(T startVertex, T targetVertex) throws BinaryTreeExceptions, GraphExceptions, EmptyCollectionException, ListExceptions {
         PriorityQueue<Pair<T>> priorityQueue = new PriorityQueue<Pair<T>>();
-        UnorderedListADT<T> verticesInPath = new UnorderedArray<>();
+        UnorderedListADT<T> verticesInPath = new UnorderedArrayList<>();
         Pair<T> startPair = new Pair<>(null, startVertex, 0.0);
 
         priorityQueue.addElement(startPair, (int) startPair.cost);
@@ -137,7 +137,7 @@ public class Network<T> implements NetworkADT<T> {
         while (it.hasNext()) {
             NetworkNode<T> nodeTemp = it.next();
             Iterator<Edge<T>> itEdge = nodeTemp.edgeList.iterator();
-            UnorderedListADT<Edge<T>> found = new UnorderedArray<>();
+            UnorderedListADT<Edge<T>> found = new UnorderedArrayList<>();
 
             while (itEdge.hasNext()) {
                 Edge<T> edgeTemp = itEdge.next();
@@ -188,7 +188,7 @@ public class Network<T> implements NetworkADT<T> {
     @Override
     public Iterator iteratorBFS(T startVertex) throws EmptyCollectionException {
         LinkedQueue<NetworkNode<T>> traversalQueue = new LinkedQueue<>();
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         NetworkNode<T> nodeTemp, startNode;
 
         try {
@@ -197,7 +197,7 @@ public class Network<T> implements NetworkADT<T> {
             return resultList.iterator();
         }
 
-        UnorderedArray<NetworkNode<T>> visited = new UnorderedArray<>();
+        UnorderedArrayList<NetworkNode<T>> visited = new UnorderedArrayList<>();
 
         traversalQueue.enqueue(startNode);
         visited.addToRear(startNode);
@@ -221,7 +221,7 @@ public class Network<T> implements NetworkADT<T> {
     @Override
     public Iterator iteratorDFS(T startVertex) throws EmptyCollectionException {
         LinkedStack<NetworkNode<T>> traversalStack = new LinkedStack<>();
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         NetworkNode<T> nodeTemp, startNode;
         boolean found;
 
@@ -231,7 +231,7 @@ public class Network<T> implements NetworkADT<T> {
             return resultList.iterator();
         }
 
-        UnorderedArray<NetworkNode<T>> visited = new UnorderedArray<>();
+        UnorderedArrayList<NetworkNode<T>> visited = new UnorderedArrayList<>();
 
         traversalStack.push(startNode);
         resultList.addToRear(startNode.element);
@@ -261,7 +261,7 @@ public class Network<T> implements NetworkADT<T> {
 
     @Override
     public Iterator iteratorShortestPath(T startVertex, T targetVertex) throws BinaryTreeExceptions, GraphExceptions, EmptyCollectionException, ListExceptions {
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
 
         try {
             getNode(startVertex);
@@ -286,7 +286,7 @@ public class Network<T> implements NetworkADT<T> {
 
     private Pair<T> findLastPairInShortestPath(T startVertex, T targetVertex) throws BinaryTreeExceptions, GraphExceptions, EmptyCollectionException {
         PriorityQueue<Pair<T>> priorityQueue = new PriorityQueue<>();
-        UnorderedArray<T> verticesInPath = new UnorderedArray<>();
+        UnorderedArrayList<T> verticesInPath = new UnorderedArrayList<>();
         Pair<T> startPair = new Pair<>(null, startVertex, 0.0);
 
         priorityQueue.addElement(startPair, (int) startPair.cost);

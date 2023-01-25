@@ -1,6 +1,6 @@
 package mygame.structures.graphNetwork;
 
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 import mygame.structures.lists.UnorderedListADT;
 
 import java.util.Iterator;
@@ -13,7 +13,7 @@ public class NetworkNode<T> {
 
     public NetworkNode(T element) {
         this.element = element;
-        this.edgeList = new UnorderedArray<>();
+        this.edgeList = new UnorderedArrayList<>();
         this.visited = false;
     }
 

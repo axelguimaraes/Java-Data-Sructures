@@ -3,7 +3,7 @@ package mygame.structures.lists;
 import mygame.exceptions.ListExceptions;
 import java.util.Iterator;
 
-public class DoubleLinkedList<T> implements ListADT<T> {
+public abstract class DoubleLinkedList<T> implements ListADT<T> {
     protected DoubleNode<T> head, tail;
     protected int size = 0;
     protected int modCount = 0;

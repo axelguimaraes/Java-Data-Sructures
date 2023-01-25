@@ -4,7 +4,7 @@ import mygame.exceptions.BinaryTreeExceptions;
 import mygame.exceptions.EmptyCollectionException;
 import mygame.exceptions.GraphExceptions;
 import mygame.exceptions.ListExceptions;
-import mygame.structures.lists.UnorderedArray;
+import mygame.structures.lists.UnorderedArrayList;
 import mygame.structures.queues.LinkedQueue;
 import mygame.structures.stacks.LinkedStack;
 
@@ -173,7 +173,7 @@ public class Graph<T> implements GraphADT<T> {
     public Iterator iteratorBFS(int startIndex) throws EmptyCollectionException {
         Integer x;
         LinkedQueue<Integer> traversalQueue = new LinkedQueue<>();
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
 
         if (!indexIsValid(startIndex)) {
             return resultList.iterator();
@@ -205,7 +205,7 @@ public class Graph<T> implements GraphADT<T> {
         Integer x;
         boolean found;
         LinkedStack<Integer> traversalStack = new LinkedStack<>();
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         boolean[] visited = new boolean[this.numVertices];
 
         if (!indexIsValid(startIndex)) {
@@ -241,7 +241,7 @@ public class Graph<T> implements GraphADT<T> {
     }
 
     public Iterator<T> iteratorShortestPath(int startIndex, int targetIndex) throws EmptyCollectionException, EmptyCollectionException {
-        UnorderedArray<T> resultList = new UnorderedArray<>();
+        UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         if (!indexIsValid(startIndex) || !indexIsValid(targetIndex)) {
             return resultList.iterator();
         }
@@ -257,7 +257,7 @@ public class Graph<T> implements GraphADT<T> {
         int[] pathLength = new int[this.numVertices];
         int[] predecessor = new int[this.numVertices];
         LinkedQueue<Integer> trasversalQueue = new LinkedQueue<>();
-        UnorderedArray<Integer> resultList = new UnorderedArray<>();
+        UnorderedArrayList<Integer> resultList = new UnorderedArrayList<>();
 
         if (!indexIsValid(startIndex) || !indexIsValid(targetIndex) || (startIndex == targetIndex)) {
             return resultList.iterator();

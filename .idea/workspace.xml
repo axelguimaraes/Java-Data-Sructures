@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="" />
+    <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/ExceedingStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/MapException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/exceptions/WrongLocalTypeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinarySearchTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/ArrayBinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/LinkedBinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/binaryTree/LinkedBinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/NetworkNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/NetworkNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/DoubleLinkedOrderedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedDoubleLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/LinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/OrderedArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/UnorderedArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/lists/UnorderedArrayList.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
