@@ -1,6 +1,7 @@
 package mygame.game;
 
 
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.lists.UnorderedArrayList;
 
 public class Player {
@@ -13,7 +14,7 @@ public class Player {
     private int level;
     private double xp;
 
-    public Player(String name, Team team) {
+    public Player(String name, Team team) throws PlayerWithNoTeamException {
         this.name = name;
         this.id = ++nextId;
         this.energy = 0;
@@ -21,10 +22,18 @@ public class Player {
         this.currentPosition = null;
         this.level = 0;
         this.xp = 0;
+
+        if (this.team.equals(null) || this.team.equals(Team.NONE)) {
+            throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
+        }
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public int getLevel() {
-        return level;
+        return this.level;
     }
 
     public void setLevel(int level) {

@@ -17,7 +17,7 @@ public abstract class Local{
     }
 
     public void setEnergy(int energy) {
-        this.energy = energy
+        this.energy = energy;
     }
 
     public int getId() {

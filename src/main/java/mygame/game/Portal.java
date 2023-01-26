@@ -56,7 +56,7 @@ public class Portal extends Local {
         return true;
     }
 
-    public boolean getConquered(Player player) {
+    public boolean getConquered(Player player) { // Se o portal nao tiver equipa
         if (this.team.equals(Team.NONE)) {
             this.team = player.getTeam();
             this.conqueror = player;
@@ -75,7 +75,7 @@ public class Portal extends Local {
                     player.setEnergy((int) (player.getEnergy() - this.maxEnergy * 0.25));
                     this.setTeam(player.getTeam());
                     this.setConqueror(player);
-                    System.out.println("Portal conquered by " + ((Player) player).getName() + " from team " + player.getTeam().toString());
+                    System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
                     return true;
 
                 } else {

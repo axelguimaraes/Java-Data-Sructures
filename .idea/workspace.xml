@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mygame/game/PlayerPosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mygame/exceptions/PlayerWithNoTeamException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/PlayerPosition.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IConnector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/ILocal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/interfaces/IPortal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
