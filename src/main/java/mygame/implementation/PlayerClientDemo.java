@@ -29,12 +29,16 @@ public class PlayerClientDemo {
                     player.register();
                     break;
                 case 2:
-                    if (isEmpty(player)) System.out.println("No players registed"); 
-                    else player.showPlayers();
-
-                    //int playerOption = sc.nextInt();
-                    System.out.print("Option: ");
-                    /**/
+                    if (isEmpty(player)){
+                        System.out.println("No players registed");
+                    }else{
+                        player.showPlayers();
+                        int playerSelected = sc.nextInt();
+                        System.out.print("Option: ");
+                        //player.givePlayerID();
+                        PlayerSelected ps = new PlayerSelected();
+                        //ps.playerActions();
+                    }
                     break;
                 case 3:
                     if (!isEmpty(player)) player.showPlayers();

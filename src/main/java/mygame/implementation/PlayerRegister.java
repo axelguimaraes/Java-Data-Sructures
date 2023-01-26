@@ -51,10 +51,22 @@ public class PlayerRegister {
         return team == 1 ? Team.SPARKS : Team.GIANTS;
     }
 
+    public int givePlayerID(int playerSelected){
+        int playerID = 0;
+        for (Player player : playersArray){
+            if(playerSelected != player.\{
+
+            }
+        }
+
+        return playerID;
+    }
     public void showPlayers() {
         for (Player player : playersArray) {
             System.out.println(player.toString());
         }
     }
+
+
 
 }
