@@ -45,7 +45,7 @@ public class Network<T> implements NetworkADT<T> {
      * @return a network node
      * @throws GraphExceptions GraphExceptions
      */
-    protected NetworkNode<T> getNode(T targetVertex) throws GraphExceptions {
+    public NetworkNode<T> getNode(T targetVertex) throws GraphExceptions {
         boolean found = false;
         NetworkNode<T> node = null;
         Iterator<NetworkNode<T>> searchItr = nodesList.iterator();
@@ -58,7 +58,7 @@ public class Network<T> implements NetworkADT<T> {
             }
         }
 
-        if (found == false) {
+        if (!found) {
             throw new GraphExceptions(GraphExceptions.ELEMENT_NOT_FOUND);
         }
 

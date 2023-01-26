@@ -2,19 +2,22 @@ package mygame.game;
 
 import mygame.exceptions.EmptyCollectionException;
 import mygame.exceptions.GraphExceptions;
+import mygame.exceptions.LocalNotFoundException;
 import mygame.structures.graphNetwork.Edge;
 import mygame.structures.graphNetwork.Network;
 import mygame.structures.graphNetwork.NetworkNode;
+import mygame.structures.lists.UnorderedArrayList;
 import mygame.structures.stacks.LinkedStack;
 
 import java.util.Iterator;
 
 public class GameMap {
-
-    protected Network<Local> mapGraph;
+    private final Network<Local> mapGraph;
+    private UnorderedArrayList<Player> playersInGame;
 
     public GameMap() {
         this.mapGraph = new Network<>();
+        this.playersInGame = new UnorderedArrayList<>();
         this.mapGraph.addVertex(new Portal("Start", 9999, new Coordinates(123123, 123123),null, 9999));
     }
 
@@ -24,8 +27,30 @@ public class GameMap {
      *
      * @param location the location to add
      */
-    public void addLocation(Local location) {
+    public void addLocation(Local location) throws LocalNotFoundException, GraphExceptions {
         this.mapGraph.addVertex(location);
+
+        if (this.mapGraph.getNumVertices() == 2) {
+            this.mapGraph.addEdge(getLocalByID(1), location, 0);
+        }
+    }
+
+    public void addPlayer(Player player) throws LocalNotFoundException {
+        player.setCurrentPosition(getLocalByID(1));
+        playersInGame.addToRear(player);
+    }
+
+    public UnorderedArrayList<Player> getPlayersInGame() {
+        return this.playersInGame;
+    }
+
+    public Local getLocalByID(int id) throws LocalNotFoundException {
+        for (NetworkNode<Local> node : this.mapGraph.getNodesList()) {
+            if (node.getElement().getId() == id) {
+                return node.getElement();
+            }
+        }
+        throw new LocalNotFoundException();
     }
 
     /**
@@ -39,6 +64,10 @@ public class GameMap {
      */
     public void connectLocations(Local location1, Local location2, double weight) throws GraphExceptions {
         this.mapGraph.addEdge(location1, location2, weight);
+    }
+
+    public Local getLocal(Local local) throws GraphExceptions {
+        return this.mapGraph.getNode(local).getElement();
     }
 
     /**

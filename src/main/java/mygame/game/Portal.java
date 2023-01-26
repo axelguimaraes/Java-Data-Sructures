@@ -12,6 +12,7 @@ public class Portal extends Local {
         this.conqueror = conqueror;
         this.name = name;
         this.maxEnergy = maxEnergy;
+        super.setLocalType(LocalType.PORTAL);
     }
 
     public String getName() {

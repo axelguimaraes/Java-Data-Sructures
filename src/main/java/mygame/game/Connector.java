@@ -11,6 +11,7 @@ public class Connector extends Local {
         super(energy, coordinates);
         this.cooldown = cooldown;
         this.lastInteractions = new UnorderedArrayList<>();
+        super.setLocalType(LocalType.CONNECTOR);
     }
 
     public int getCooldown(Player player) {
