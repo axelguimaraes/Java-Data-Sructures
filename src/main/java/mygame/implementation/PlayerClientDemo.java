@@ -1,5 +1,6 @@
 package mygame.implementation;
 
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.Player;
 import mygame.game.Team;
 
@@ -11,7 +12,7 @@ public class PlayerClientDemo {
 
     Scanner sc = new Scanner(System.in);
 
-    public void runMenu() {
+    public void runMenu() throws PlayerWithNoTeamException {
         //Player p1 = new Player("JOAO", 0, Team.GIANTS);
         //Player p2 = new Player("JOAO", 0, Team.GIANTS);
         //Player p3 = new Player("JOAO", 0, Team.GIANTS);
@@ -33,11 +34,10 @@ public class PlayerClientDemo {
                         System.out.println("No players registed");
                     }else{
                         player.showPlayers();
-                        int playerSelected = sc.nextInt();
                         System.out.print("Option: ");
-                        //player.givePlayerID();
-                        PlayerSelected ps = new PlayerSelected();
-                        //ps.playerActions();
+                        int playerSelected = sc.nextInt();
+                        int ps = player.givePlayerID(playerSelected);
+                        
                     }
                     break;
                 case 3:

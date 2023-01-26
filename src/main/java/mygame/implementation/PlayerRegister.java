@@ -1,6 +1,7 @@
 package mygame.implementation;
 
 import com.google.gson.Gson;
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.Player;
 
 import java.io.File;
@@ -13,13 +14,16 @@ import mygame.structures.lists.UnorderedArrayList;
 
 public class PlayerRegister {
     UnorderedArrayList<Player> playersArray = new UnorderedArrayList<>();
-    Player p1 = new Player("Jaoao", 0, Team.GIANTS);
+    Player p1 = new Player("Jaoao", Team.GIANTS);
 
-    public void register(){
+    public PlayerRegister() throws PlayerWithNoTeamException {
+    }
+
+    public void register() throws PlayerWithNoTeamException {
         Gson gson = new Gson();
         String namePlayer = getInputString("Insert Name: ");
         Team teamPlayer = getInputTeam();
-        Player player = new Player(namePlayer, 0, teamPlayer);
+        Player player = new Player(namePlayer,teamPlayer);
         playersArray.addToFront(player);
         //System.out.println(playersArray.toString());
     }
@@ -54,13 +58,14 @@ public class PlayerRegister {
     public int givePlayerID(int playerSelected){
         int playerID = 0;
         for (Player player : playersArray){
-            if(playerSelected != player.\{
+            if(playerSelected == player.getId()){
+                playerID = player.getId();
 
             }
         }
-
         return playerID;
     }
+
     public void showPlayers() {
         for (Player player : playersArray) {
             System.out.println(player.toString());

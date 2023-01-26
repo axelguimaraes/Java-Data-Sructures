@@ -1,17 +1,18 @@
 package mygame.implementation;
 
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.Team;
 import mygame.structures.lists.UnorderedArrayList;
 import mygame.game.Player;
 
 //CLASSE PARA TESTES, NADA RELACIONADO AO PROGRAMA
 public class Testes {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PlayerWithNoTeamException {
 
         UnorderedArrayList<Player> players = new UnorderedArrayList<>();
-        Player p1 = new Player("JOAO",0, Team.GIANTS);
-        Player p2 = new Player("JOAO",0, Team.GIANTS);
-        Player p3 = new Player("JOAO",0, Team.GIANTS);
+        Player p1 = new Player("JOAO", Team.GIANTS);
+        Player p2 = new Player("JOAO", Team.GIANTS);
+        Player p3 = new Player("JOAO", Team.GIANTS);
         players.addToFront(p1);
         players.addToFront(p2);
         players.addToFront(p3);
