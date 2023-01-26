@@ -1,12 +1,10 @@
 package mygame.game;
 
 import mygame.exceptions.EmptyCollectionException;
-import mygame.interfaces.IConnector;
-import mygame.interfaces.IPlayer;
 import mygame.structures.queues.LinkedQueue;
 import mygame.structures.queues.QueueADT;
 
-public class Connector extends Local implements IConnector {
+public class Connector extends Local {
     private int cooldown;
     private final QueueADT<PlayerInteraction> lastInteractions;
 
@@ -16,24 +14,21 @@ public class Connector extends Local implements IConnector {
         this.lastInteractions = new LinkedQueue<>();
     }
 
-    @Override
     public int getCooldown(Player player) {
         return this.cooldown;
     }
 
-    @Override
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
 
-    @Override
     public PlayerInteraction getLastInteraction() throws EmptyCollectionException {
         return lastInteractions.first();
     }
 
-    public boolean chargePlayer(IPlayer player) { // TODO: this
+    public boolean chargePlayer(Player player) { // TODO: this
         player.setEnergy(player.getEnergy() + super.getEnergy());
-        PlayerInteraction interaction = new PlayerInteraction((Player) player, this.cooldown);
+        PlayerInteraction interaction = new PlayerInteraction(player, this.cooldown);
         lastInteractions.enqueue(interaction);
 
         return false;

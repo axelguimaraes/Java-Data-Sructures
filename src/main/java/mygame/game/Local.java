@@ -1,8 +1,6 @@
 package mygame.game;
 
-import mygame.interfaces.ILocal;
-
-public abstract class Local implements ILocal {
+public abstract class Local{
     private static int nextId;
     private final int id;
     private int energy;
@@ -14,27 +12,22 @@ public abstract class Local implements ILocal {
         this.coordinates = coordinates;
     }
 
-    @Override
     public int getEnergy() {
-        return 0;
+        return this.energy;
     }
 
-    @Override
     public void setEnergy(int energy) {
-
+        this.energy = energy
     }
 
-    @Override
-    public String getId() {
-        return null;
+    public int getId() {
+        return this.id;
     }
 
-    @Override
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
 
-    @Override
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
