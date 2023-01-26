@@ -1,9 +1,6 @@
 package mygame.game;
 
-import mygame.interfaces.IPlayer;
-import mygame.interfaces.IPortal;
-
-public class Portal extends Local implements IPortal {
+public class Portal extends Local {
     private String name;
     private Team team;
     private Player conqueror;
@@ -17,75 +14,67 @@ public class Portal extends Local implements IPortal {
         this.maxEnergy = maxEnergy;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public Team getTeam() {
         return this.team;
     }
 
-    @Override
     public void setTeam(Team team) {
         this.team = team;
     }
 
-    @Override
     public Player getConqueror() {
         return this.conqueror;
     }
 
-    @Override
     public void setConqueror(Player player) {
         this.conqueror = player;
     }
 
-    @Override
-    public boolean rechargeEnergy(IPlayer player, int energy) {
+    public boolean rechargeEnergy(Player player, int energy) { // TESTED
         if (this.getTeam().equals(Team.NONE)) {
             System.out.println("Portal not associated to a team");
             return false;
         }
 
-        Player playerRecharge = (Player) player;
-        if (playerRecharge.isFromDifferentTeam(this)) {
+        if (player.isFromDifferentTeam(this)) {
             System.out.println("Portal doesn't belong to player's team!");
             return false;
         }
 
         this.setEnergy(this.getEnergy() + energy);
+        player.setEnergy(player.getEnergy() - energy);
         System.out.println("Portal recharged by " + energy + " points");
         return true;
     }
 
-    public boolean getConquered(IPlayer player) {
-        if (this.team.equals(Team.NONE)) {
+    public boolean getConquered(Player player) { // TESTED
+        if (this.team.equals(Team.NONE)) { // Se o portal nao tiver equipa
             this.team = player.getTeam();
-            this.conqueror = (Player) player;
+            this.conqueror = player;
 
-            System.out.println("Portal conquered by " + ((Player) player).getName() + " from team " + player.getTeam().toString());
+            System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
             return true;
         }
 
-        Player playerConqueror = (Player) player;
-        if (playerConqueror.isFromDifferentTeam(this)) { // Se o jogador for de equipa diferente
-            if (this.getEnergy() < playerConqueror.getEnergy()) { // Se o jogador tiver mais energia que o portal
-                playerConqueror.setEnergy(playerConqueror.getEnergy() - this.getEnergy());
+        if (player.isFromDifferentTeam(this)) { // Se o jogador for de equipa diferente
+            if (this.getEnergy() < player.getEnergy()) { // Se o jogador tiver mais energia que o portal
+                player.setEnergy(player.getEnergy() - this.getEnergy());
                 this.setEnergy(0);
 
-                if (playerConqueror.getEnergy() >= this.getEnergy() * 0.25) { // Se o jogador tiver mais de 25% da energia maxima do portal
+                if (player.getEnergy() >= this.maxEnergy * 0.25) { // Se o jogador tiver mais de 25% da energia maxima do portal
                     this.setEnergy((int) (this.maxEnergy * 0.25));
-                    playerConqueror.setEnergy((int) (playerConqueror.getEnergy() - this.maxEnergy * 0.25));
-                    this.setTeam(playerConqueror.getTeam());
-                    this.setConqueror(playerConqueror);
-                    System.out.println("Portal conquered by " + ((Player) player).getName() + " from team " + player.getTeam().toString());
+                    player.setEnergy((int) (player.getEnergy() - this.maxEnergy * 0.25));
+                    this.setTeam(player.getTeam());
+                    this.setConqueror(player);
+                    System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
                     return true;
 
                 } else {

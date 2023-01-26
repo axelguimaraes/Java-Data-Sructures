@@ -9,20 +9,22 @@ import mygame.structures.stacks.LinkedStack;
 
 import java.util.Iterator;
 
-public class GameMap<T> {
+public class GameMap {
 
-    protected Network<T> mapGraph;
+    protected Network<Local> mapGraph;
 
     public GameMap() {
         this.mapGraph = new Network<>();
+        this.mapGraph.addVertex(new Portal("Start", 9999, new Coordinates(123123, 123123),null, 9999));
     }
+
 
     /**
      * adds a new location to the game map
      *
      * @param location the location to add
      */
-    public void addLocation(T location) {
+    public void addLocation(Local location) {
         this.mapGraph.addVertex(location);
     }
 
@@ -35,7 +37,7 @@ public class GameMap<T> {
      * @param weight    the weight of the connection
      * @throws GraphExceptions GraphExceptions
      */
-    public void connectLocations(T location1, T location2, double weight) throws GraphExceptions {
+    public void connectLocations(Local location1, Local location2, double weight) throws GraphExceptions {
         this.mapGraph.addEdge(location1, location2, weight);
     }
 
@@ -48,12 +50,12 @@ public class GameMap<T> {
      * @throws GraphExceptions if the start or end location is not found in the graph.
      * @throws EmptyCollectionException when the stack is empty and an operation is performed on it.
      */
-    public LinkedStack<T> findShortestPath(T startLocation, T endLocation) throws GraphExceptions, EmptyCollectionException {
-        LinkedStack<T> path = new LinkedStack<>();
+    public LinkedStack<Local> findShortestPath(Local startLocation, Local endLocation) throws GraphExceptions, EmptyCollectionException {
+        LinkedStack<Local> path = new LinkedStack<>();
         boolean found = false;
-        Iterator<NetworkNode<T>> itr = mapGraph.getNodesList().iterator();
+        Iterator<NetworkNode<Local>> itr = mapGraph.getNodesList().iterator();
         while (itr.hasNext() && !found) {
-            NetworkNode<T> currentNode = itr.next();
+            NetworkNode<Local> currentNode = itr.next();
             if (currentNode.getElement().equals(startLocation)) {
                 found = true;
                 currentNode.setVisited(true);
@@ -78,12 +80,12 @@ public class GameMap<T> {
      * @param path         A stack to store the nodes in the shortest path.
      * @throws EmptyCollectionException when the stack is empty and an operation is performed on it.
      */
-    private void findShortestPathRecursive(NetworkNode<T> currentNode, T endLocation, LinkedStack<T> path) throws EmptyCollectionException {
-        Iterator<Edge<T>> itr = currentNode.getEdgeList().iterator();
+    private void findShortestPathRecursive(NetworkNode<Local> currentNode, Local endLocation, LinkedStack<Local> path) throws EmptyCollectionException {
+        Iterator<Edge<Local>> itr = currentNode.getEdgeList().iterator();
         double minCost = Double.MAX_VALUE;
-        NetworkNode<T> nextNode = null;
+        NetworkNode<Local> nextNode = null;
         while (itr.hasNext()) {
-            Edge<T> edge = itr.next();
+            Edge<Local> edge = itr.next();
             if (!edge.getNodeTo().isVisited() && edge.getWeight() < minCost) {
                 minCost = edge.getWeight();
                 nextNode = edge.getNodeTo();
@@ -107,7 +109,7 @@ public class GameMap<T> {
      * @param startLocation the starting location
      * @return an iterator
      */
-    public Iterator<T> depthFirstIterator(T startLocation) throws EmptyCollectionException {
+    public Iterator<Local> depthFirstIterator(Local startLocation) throws EmptyCollectionException {
         return this.mapGraph.iteratorDFS(startLocation);
     }
 
@@ -118,7 +120,7 @@ public class GameMap<T> {
      * @param startLocation the starting location
      * @return an iterator
      */
-    public Iterator<T> breadthFirstIterator(T startLocation) throws EmptyCollectionException {
+    public Iterator<Local> breadthFirstIterator(Local startLocation) throws EmptyCollectionException {
         return this.mapGraph.iteratorBFS(startLocation);
     }
 

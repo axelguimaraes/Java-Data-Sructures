@@ -1,82 +1,110 @@
 package mygame.game;
 
-import mygame.interfaces.IConnector;
-import mygame.interfaces.ILocal;
-import mygame.interfaces.IPlayer;
-import mygame.interfaces.IPortal;
+import mygame.exceptions.ListExceptions;
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.lists.UnorderedArrayList;
 
-public class Player implements IPlayer {
+public class Player {
     private static int nextId;
     private final int id;
     private int energy;
     private Team team;
     private String name;
-    private ILocal currentPosition;
+    private Local currentPosition;
+    private int level;
+    private double xp;
 
-    public Player(String name, int energy, Team team) {
+    public Player(String name, Team team) throws PlayerWithNoTeamException {
         this.name = name;
         this.id = ++nextId;
-        this.energy = energy;
+        this.energy = 0;
         this.team = team;
         this.currentPosition = null;
+        this.level = 1;
+        this.xp = 0;
+
+        if (this.team == null || this.team.equals(Team.NONE)) {
+            throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
+        }
     }
 
-    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void levelUp() {
+        this.level++;
+    }
+
+    public double getXp() {
+        return xp;
+    }
+
+    public void setXp(double xp) {
+        this.xp = xp;
+    }
+
+    public void addXp(double xp) {
+        this.xp += xp;
+    }
+
     public int getEnergy() {
         return this.energy;
     }
 
-    @Override
     public void setEnergy(int energy) {
         this.energy = energy;
     }
 
-    @Override
-    public boolean conquerPortal(IPortal portal) {
-        return ((Portal) portal).getConquered(this);
+    public void addEnergy(int energy) {
+        this.energy += energy;
     }
 
-    @Override
-    public boolean rechargeEnergy(IConnector connector) {
-        return ((Connector) connector).chargePlayer(this);
+    public boolean conquerPortal(Portal portal) { // TESTED
+        return portal.getConquered(this);
     }
 
-    @Override
+    public boolean rechargeEnergy(Connector connector) throws ListExceptions { // TESTED
+        return connector.chargePlayer(this);
+    }
+
     public Team getTeam() {
         return this.team;
     }
 
-    @Override
     public void setTeam(Team team) {
         this.team = team;
     }
 
-    @Override
-    public UnorderedArrayList<IPortal> getConqueredPortals() {
+    public UnorderedArrayList<Portal> getConqueredPortals() {
         return null;
     }
 
-    @Override
-    public ILocal getLocation() {
+    public Local getLocation() {
         return null;
     }
 
-    @Override
-    public void navigateTo(ILocal destination) {
+    public void navigateTo(Local destination) {
         this.currentPosition = destination; // TODO: here
     }
 
-    public ILocal getCurrentPosition() {
+    public Local getCurrentPosition() {
         return currentPosition;
     }
 
-    public void setCurrentPosition(ILocal currentPosition) {
+    public void setCurrentPosition(Local currentPosition) {
         this.currentPosition = currentPosition;
     }
 
-    @Override
-    public boolean chargePortal(IPortal portal, int energy) {
+    public boolean chargePortal(Portal portal, int energy) {
         return portal.rechargeEnergy(this, energy);
     }
 
@@ -88,11 +116,19 @@ public class Player implements IPlayer {
         this.name = name;
     }
 
-    public boolean isFromDifferentTeam(IPortal portal) {
+    public boolean isFromDifferentTeam(Portal portal) {
         if (portal.getTeam().equals(Team.NONE)) {
             return false;
         }
 
         return !this.team.equals(portal.getTeam());
+    }
+
+    public String toString() {
+        return "PLAYER\n" +
+                "Name: " + this.name + "\n" +
+                "Energy: " + this.energy + "\n" +
+                "Team: " + this.team.toString() + "\n" +
+                "Level: " + this.level + "\n";
     }
 }
