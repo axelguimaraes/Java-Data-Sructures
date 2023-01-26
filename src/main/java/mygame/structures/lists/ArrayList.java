@@ -130,38 +130,38 @@ abstract class ArrayList<T> implements ListADT<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new ArrayListIterator<T>(modCount);
-    }
-
-    private class ArrayListIterator<T> implements Iterator<T> {
-
-        private int current;
-        private int expectedModCount;
-
-        public ArrayListIterator(int expectedModCount) {
-            this.current = 0;
-            this.expectedModCount = expectedModCount;
+        public Iterator<T> iterator() {
+            return new ArrayListIterator<T>(modCount);
         }
 
-        @Override
-        public boolean hasNext() {
-            if (expectedModCount == modCount) {
-                return (current < size());
+        private class ArrayListIterator<T> implements Iterator<T> {
+
+            private int current;
+            private int expectedModCount;
+
+            public ArrayListIterator(int expectedModCount) {
+                this.current = 0;
+                this.expectedModCount = expectedModCount;
             }
-            throw new ConcurrentModificationException();
-        }
 
-        @Override
-        public T next() {
-            if (!this.hasNext()) {
-                throw new ArrayIndexOutOfBoundsException();
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount == modCount) {
+                    return (current < size());
+                }
+                throw new ConcurrentModificationException();
             }
-            T tmp = (T) list[current];
-            current++;
-            return tmp;
+
+            @Override
+            public T next() {
+                if (!this.hasNext()) {
+                    throw new ArrayIndexOutOfBoundsException();
+                }
+                T tmp = (T) list[current];
+                current++;
+                return tmp;
+            }
         }
-    }
 
     protected void expandCapacity(){
         T[] tmp = (T[])(new Object[list.length + DEFAULT_CAPACITY]);
