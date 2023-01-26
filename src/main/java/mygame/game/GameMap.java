@@ -5,7 +5,6 @@ import mygame.exceptions.GraphExceptions;
 import mygame.structures.graphNetwork.Edge;
 import mygame.structures.graphNetwork.Network;
 import mygame.structures.graphNetwork.NetworkNode;
-import mygame.structures.lists.UnorderedListADT;
 import mygame.structures.stacks.LinkedStack;
 
 import java.util.Iterator;
@@ -13,7 +12,6 @@ import java.util.Iterator;
 public class GameMap {
 
     protected Network<Local> mapGraph;
-    private UnorderedListADT<PlayerPosition> playerPositions;
 
     public GameMap() {
         this.mapGraph = new Network<>();

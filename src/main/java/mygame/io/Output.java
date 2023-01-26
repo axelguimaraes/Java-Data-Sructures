@@ -11,7 +11,7 @@ import java.io.Writer;
 
 public class Output {
 
-    public static void exportGameMap(GameMap<Local> gameMap) {
+    public static void exportGameMap(GameMap gameMap) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         gsonBuilder.serializeNulls();

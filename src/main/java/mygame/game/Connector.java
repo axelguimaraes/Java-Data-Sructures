@@ -1,17 +1,16 @@
 package mygame.game;
 
-import mygame.exceptions.EmptyCollectionException;
-import mygame.structures.queues.LinkedQueue;
-import mygame.structures.queues.QueueADT;
+import mygame.exceptions.ListExceptions;
+import mygame.structures.lists.UnorderedArrayList;
 
 public class Connector extends Local {
     private int cooldown;
-    private final QueueADT<PlayerInteraction> lastInteractions;
+    private final UnorderedArrayList<PlayerInteraction> lastInteractions;
 
     public Connector(int energy, Coordinates coordinates, int cooldown) {
         super(energy, coordinates);
         this.cooldown = cooldown;
-        this.lastInteractions = new LinkedQueue<>();
+        this.lastInteractions = new UnorderedArrayList<>();
     }
 
     public int getCooldown(Player player) {
@@ -22,16 +21,29 @@ public class Connector extends Local {
         this.cooldown = cooldown;
     }
 
-    public PlayerInteraction getLastInteraction() throws EmptyCollectionException {
+    public PlayerInteraction getLastInteraction() throws ListExceptions {
         return lastInteractions.first();
     }
 
-    public boolean chargePlayer(Player player) { // TODO: this
-        player.setEnergy(player.getEnergy() + super.getEnergy());
-        PlayerInteraction interaction = new PlayerInteraction(player, this.cooldown);
-        lastInteractions.enqueue(interaction);
+    public boolean chargePlayer(Player player) throws ListExceptions { // TESTED
+        for (PlayerInteraction interaction : lastInteractions) {
+            if (interaction.getPlayer().equals(player)) { // Se jogador existir na lista
+                if (!interaction.isCooldownOver()) { // Se o cooldown não tiver acabado
+                    System.out.println("Cooldown not over. Elapsed time: " + interaction.getElapsedTime());
+                    return false;
+                } else if (interaction.isCooldownOver()) {
+                    lastInteractions.remove(interaction);
+                    break;
+                }
+            }
+        }
 
-        return false;
+        player.setEnergy(player.getEnergy() + super.getEnergy());
+        System.out.println("Player charged!");
+
+        PlayerInteraction interaction = new PlayerInteraction(player, this.cooldown);
+        lastInteractions.addToRear(interaction);
+        return true;
     }
 
     public String toString() {

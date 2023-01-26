@@ -24,7 +24,7 @@ public class Input {
         Gson gson = gsonBuilder.create();
 
         String json = new String(Files.readAllBytes(Paths.get("files/gameMap.json")));
-        GameMap<Local> gameMap = gson.fromJson(json, GameMap.class);
+        GameMap gameMap = gson.fromJson(json, GameMap.class);
 
         return gameMap;
     }

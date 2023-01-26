@@ -1,6 +1,5 @@
 package mygame.game;
 
-
 public class Portal extends Local {
     private String name;
     private Team team;
@@ -39,25 +38,25 @@ public class Portal extends Local {
         this.conqueror = player;
     }
 
-    public boolean rechargeEnergy(Player player, int energy) {
+    public boolean rechargeEnergy(Player player, int energy) { // TESTED
         if (this.getTeam().equals(Team.NONE)) {
             System.out.println("Portal not associated to a team");
             return false;
         }
 
-        Player playerRecharge = player;
-        if (playerRecharge.isFromDifferentTeam(this)) {
+        if (player.isFromDifferentTeam(this)) {
             System.out.println("Portal doesn't belong to player's team!");
             return false;
         }
 
         this.setEnergy(this.getEnergy() + energy);
+        player.setEnergy(player.getEnergy() - energy);
         System.out.println("Portal recharged by " + energy + " points");
         return true;
     }
 
-    public boolean getConquered(Player player) { // Se o portal nao tiver equipa
-        if (this.team.equals(Team.NONE)) {
+    public boolean getConquered(Player player) { // TESTED
+        if (this.team.equals(Team.NONE)) { // Se o portal nao tiver equipa
             this.team = player.getTeam();
             this.conqueror = player;
 
@@ -70,7 +69,7 @@ public class Portal extends Local {
                 player.setEnergy(player.getEnergy() - this.getEnergy());
                 this.setEnergy(0);
 
-                if (player.getEnergy() >= this.getEnergy() * 0.25) { // Se o jogador tiver mais de 25% da energia maxima do portal
+                if (player.getEnergy() >= this.maxEnergy * 0.25) { // Se o jogador tiver mais de 25% da energia maxima do portal
                     this.setEnergy((int) (this.maxEnergy * 0.25));
                     player.setEnergy((int) (player.getEnergy() - this.maxEnergy * 0.25));
                     this.setTeam(player.getTeam());

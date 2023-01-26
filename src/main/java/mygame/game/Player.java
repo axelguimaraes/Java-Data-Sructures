@@ -1,6 +1,6 @@
 package mygame.game;
 
-
+import mygame.exceptions.ListExceptions;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.lists.UnorderedArrayList;
 
@@ -20,10 +20,10 @@ public class Player {
         this.energy = 0;
         this.team = team;
         this.currentPosition = null;
-        this.level = 0;
+        this.level = 1;
         this.xp = 0;
 
-        if (this.team.equals(null) || this.team.equals(Team.NONE)) {
+        if (this.team == null || this.team.equals(Team.NONE)) {
             throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
         }
     }
@@ -68,11 +68,11 @@ public class Player {
         this.energy += energy;
     }
 
-    public boolean conquerPortal(Portal portal) {
+    public boolean conquerPortal(Portal portal) { // TESTED
         return portal.getConquered(this);
     }
 
-    public boolean rechargeEnergy(Connector connector) {
+    public boolean rechargeEnergy(Connector connector) throws ListExceptions { // TESTED
         return connector.chargePlayer(this);
     }
 
