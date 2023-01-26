@@ -95,12 +95,5 @@ public class Player implements IPlayer {
 
         return !this.team.equals(portal.getTeam());
     }
-
-    @Override
-    public String toString() {
-        return "[Player:" + id + "]:" +
-                " energy:" + energy +
-                ", team:" + team +
-                ", name:" + name;
-    }
+    
 }
