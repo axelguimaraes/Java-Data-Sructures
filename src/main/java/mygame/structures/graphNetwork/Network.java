@@ -15,7 +15,7 @@ import java.util.Iterator;
 public class Network<T> implements NetworkADT<T> {
 
     protected int numVertices;
-    protected UnorderedListADT<NetworkNode<T>> nodesList;
+    protected UnorderedArrayList<NetworkNode<T>> nodesList;
 
     /**
      * Network in list constructor
