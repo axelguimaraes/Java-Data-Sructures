@@ -7,14 +7,15 @@
     <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerClientDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerClientDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/Testes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/Testes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerSelected.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerSelected.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -35,6 +36,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="2KhfSyAKsF05lGpZdeEkkT9YarJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -123,6 +127,17 @@
       <updated>1674431741353</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ED_TP_2022_2023$PlayerMenu.ic" NAME="PlayerMenu Coverage Results" MODIFIED="1674759243901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

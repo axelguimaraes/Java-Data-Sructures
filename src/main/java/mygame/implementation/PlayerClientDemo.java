@@ -18,6 +18,7 @@ public class PlayerClientDemo {
         //Player p3 = new Player("JOAO", 0, Team.GIANTS);
 
         PlayerRegister player = new PlayerRegister();
+        PlayerSelected playerS= new PlayerSelected();
         while (1 == 1) {
             System.out.print("\nMENU\n1 - Register New Player\n2 - Login as Player\n3 - Show Players");
             System.out.print("\nOption: ");
@@ -37,7 +38,7 @@ public class PlayerClientDemo {
                         System.out.print("Option: ");
                         int playerSelected = sc.nextInt();
                         int ps = player.givePlayerID(playerSelected);
-                        
+                        playerS.playerActions(ps);
                     }
                     break;
                 case 3:
