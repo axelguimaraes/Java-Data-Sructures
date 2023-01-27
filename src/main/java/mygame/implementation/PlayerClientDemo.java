@@ -12,6 +12,10 @@ public class PlayerClientDemo {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Method to run the Player Menu
+     * @throws PlayerWithNoTeamException
+     */
     public void runMenu() throws PlayerWithNoTeamException {
         //Player p1 = new Player("JOAO", 0, Team.GIANTS);
         //Player p2 = new Player("JOAO", 0, Team.GIANTS);
@@ -37,7 +41,7 @@ public class PlayerClientDemo {
                         player.showPlayers();
                         System.out.print("Option: ");
                         int playerSelected = sc.nextInt();
-                        int ps = player.givePlayerID(playerSelected);
+                        Player ps = player.givePlayerID(playerSelected);
                         playerS.playerActions(ps);
                     }
                     break;
@@ -52,6 +56,12 @@ public class PlayerClientDemo {
         }
     }
 
+    /**
+     * Method to check is the array of Player is Empty or not
+     *
+     * @param player Object from the class PlayerRegister
+     * @return boolean, true if the array is empty or false if the array has at least 1 Player
+     */
     public boolean isEmpty(PlayerRegister player){
         if (player.playersArray.size() == 0)
             return true;

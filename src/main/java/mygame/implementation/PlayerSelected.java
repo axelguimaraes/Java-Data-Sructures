@@ -4,16 +4,8 @@ import mygame.game.Player;
 
 
 public class PlayerSelected {
-    public void playerActions(Integer playerID){
+    public void playerActions(Player player){
         System.out.println("Hello " + player.getName());
     }
 
-    public Player getPlayerByID(Integer playerID) throws PlayerWithNoTeamException {
-        for (Player player : players) {
-            if (player.getId().equals(playerID)) {
-                return player;
-            }
-        }
-        return null;
-    }
 }
