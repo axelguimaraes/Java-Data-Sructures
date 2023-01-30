@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mygame/exceptions/LocalNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mygame/game/LocalType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Connector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Local.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/game/Portal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/main/Demo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/structures/graphNetwork/Network.java" afterDir="false" />
     </list>
@@ -114,5 +109,12 @@
       <updated>1674431741353</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="mygame.structures.lists.UnorderedArrayList" memberName="list" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

@@ -92,10 +92,8 @@ public class Network<T> implements NetworkADT<T> {
             }
 
             verticesInPath.addToRear(vertex);
-            Iterator<Edge<T>> itr = getNode(vertex).edgeList.iterator();
 
-            while (itr.hasNext()) {
-                Edge<T> tmpEdge = itr.next();
+            for (Edge<T> tmpEdge : getNode(vertex).edgeList) {
                 if (!verticesInPath.contains(tmpEdge.nodeTo.element)) {
                     double minCostToI = minCostToVertex + tmpEdge.weight;
                     Pair<T> tmpPair = new Pair<>(pair, tmpEdge.nodeTo.element, minCostToI);
@@ -132,10 +130,8 @@ public class Network<T> implements NetworkADT<T> {
         }
 
         NetworkNode<T> nodeToRemove = this.getNode(vertex);
-        Iterator<NetworkNode<T>> it = nodesList.iterator();
 
-        while (it.hasNext()) {
-            NetworkNode<T> nodeTemp = it.next();
+        for (NetworkNode<T> nodeTemp : nodesList) {
             Iterator<Edge<T>> itEdge = nodeTemp.edgeList.iterator();
             UnorderedListADT<Edge<T>> found = new UnorderedArrayList<>();
 
@@ -146,10 +142,8 @@ public class Network<T> implements NetworkADT<T> {
                 }
             }
 
-            Iterator<Edge<T>> itFound = found.iterator();
-
-            while (itFound.hasNext()) {
-                nodeTemp.edgeList.remove(itFound.next());
+            for (Edge<T> tEdge : found) {
+                nodeTemp.edgeList.remove(tEdge);
             }
         }
 
@@ -186,7 +180,7 @@ public class Network<T> implements NetworkADT<T> {
     }
 
     @Override
-    public Iterator iteratorBFS(T startVertex) throws EmptyCollectionException {
+    public Iterator<T> iteratorBFS(T startVertex) throws EmptyCollectionException {
         LinkedQueue<NetworkNode<T>> traversalQueue = new LinkedQueue<>();
         UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         NetworkNode<T> nodeTemp, startNode;
@@ -206,9 +200,7 @@ public class Network<T> implements NetworkADT<T> {
             nodeTemp = traversalQueue.dequeue();
             resultList.addToRear(nodeTemp.element);
 
-            Iterator<Edge<T>> itEdges = nodeTemp.edgeList.iterator();
-            while (itEdges.hasNext()) {
-                Edge<T> nextNode = itEdges.next();
+            for (Edge<T> nextNode : nodeTemp.edgeList) {
                 if (!visited.contains(nextNode.nodeTo)) {
                     traversalQueue.enqueue(nextNode.nodeTo);
                     visited.addToRear(nextNode.nodeTo);
@@ -219,7 +211,7 @@ public class Network<T> implements NetworkADT<T> {
     }
 
     @Override
-    public Iterator iteratorDFS(T startVertex) throws EmptyCollectionException {
+    public Iterator<T> iteratorDFS(T startVertex) throws EmptyCollectionException {
         LinkedStack<NetworkNode<T>> traversalStack = new LinkedStack<>();
         UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
         NetworkNode<T> nodeTemp, startNode;
@@ -260,7 +252,7 @@ public class Network<T> implements NetworkADT<T> {
     }
 
     @Override
-    public Iterator iteratorShortestPath(T startVertex, T targetVertex) throws BinaryTreeExceptions, GraphExceptions, EmptyCollectionException, ListExceptions {
+    public Iterator<T> iteratorShortestPath(T startVertex, T targetVertex) throws EmptyCollectionException, ListExceptions {
         UnorderedArrayList<T> resultList = new UnorderedArrayList<>();
 
         try {
@@ -284,7 +276,7 @@ public class Network<T> implements NetworkADT<T> {
         }
     }
 
-    private Pair<T> findLastPairInShortestPath(T startVertex, T targetVertex) throws BinaryTreeExceptions, GraphExceptions, EmptyCollectionException {
+    private Pair<T> findLastPairInShortestPath(T startVertex, T targetVertex) throws GraphExceptions, EmptyCollectionException {
         PriorityQueue<Pair<T>> priorityQueue = new PriorityQueue<>();
         UnorderedArrayList<T> verticesInPath = new UnorderedArrayList<>();
         Pair<T> startPair = new Pair<>(null, startVertex, 0.0);
@@ -301,10 +293,8 @@ public class Network<T> implements NetworkADT<T> {
             }
 
             verticesInPath.addToRear(vertex);
-            Iterator<Edge<T>> it = getNode(vertex).edgeList.iterator();
 
-            while (it.hasNext()) {
-                Edge<T> edgeTemp = it.next();
+            for (Edge<T> edgeTemp : getNode(vertex).edgeList) {
                 if (!verticesInPath.contains(edgeTemp.nodeTo.element)) {
                     double minCostToI = minCostToVertex + edgeTemp.weight;
                     Pair<T> pairTemp = new Pair<>(pair, edgeTemp.nodeTo.element, minCostToI);
@@ -326,7 +316,7 @@ public class Network<T> implements NetworkADT<T> {
             throw new GraphExceptions(GraphExceptions.EMPTY_GRAPH);
         }
 
-        Iterator it = iteratorBFS(nodesList.first().element);
+        Iterator<T> it = iteratorBFS(nodesList.first().element);
         int counter = 0;
 
         while (it.hasNext()) {
@@ -344,13 +334,12 @@ public class Network<T> implements NetworkADT<T> {
 
     @Override
     public String toString() {
-        String text = "";
-        Iterator<NetworkNode<T>> printItr = nodesList.iterator();
-        while (printItr.hasNext()) {
-            text += printItr.next().toString();
+        StringBuilder text = new StringBuilder();
+        for (NetworkNode<T> tNetworkNode : nodesList) {
+            text.append(tNetworkNode.toString());
         }
-        text += "\n";
-        return text;
+        text.append("\n");
+        return text.toString();
     }
 
     public int getNumVertices() {

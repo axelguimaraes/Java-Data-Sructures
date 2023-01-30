@@ -13,12 +13,11 @@ import java.util.Iterator;
 
 public class GameMap {
     private final Network<Local> mapGraph;
-    private UnorderedArrayList<Player> playersInGame;
+    private final UnorderedArrayList<Player> playersInGame;
 
     public GameMap() {
         this.mapGraph = new Network<>();
         this.playersInGame = new UnorderedArrayList<>();
-        this.mapGraph.addVertex(new Portal("Start", 9999, new Coordinates(123123, 123123),null, 9999));
     }
 
 
@@ -51,6 +50,17 @@ public class GameMap {
             }
         }
         throw new LocalNotFoundException();
+    }
+
+    public UnorderedArrayList<LinkedStack<Local>> getPlayerPossibleMoves(Player player) throws GraphExceptions, EmptyCollectionException {
+        Local playerLocation = player.getCurrentPosition();
+        UnorderedArrayList<LinkedStack<Local>> possibleMoves = new UnorderedArrayList<>();
+
+        for (NetworkNode<Local> local : this.mapGraph.getNodesList()) {
+            possibleMoves.addToRear(findShortestPath(playerLocation, local.getElement()));
+        }
+
+        return possibleMoves;
     }
 
     /**
