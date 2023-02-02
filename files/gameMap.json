@@ -1,105 +1,457 @@
 {
-  "mapGraph": {
-    "numVertices": 6,
-    "nodesList": {
-      "list": [
-        {
-          "element": {
-            "name": "Memorial fountain",
-            "team": "NONE",
-            "conqueror": null,
-            "maxEnergy": 100,
-            "id": 1,
-            "energy": 150,
-            "coordinates": {
-              "latitude": 14253.0,
-              "longitude": 142453.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        {
-          "element": {
-            "name": "Baseball field",
-            "team": "NONE",
-            "conqueror": null,
-            "maxEnergy": 100,
-            "id": 2,
-            "energy": 150,
-            "coordinates": {
-              "latitude": 14253.0,
-              "longitude": 142453.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        {
-          "element": {
-            "name": "Ball field",
-            "team": "NONE",
-            "conqueror": null,
-            "maxEnergy": 100,
-            "id": 3,
-            "energy": 150,
-            "coordinates": {
-              "latitude": 14253.0,
-              "longitude": 142453.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        {
-          "element": {
-            "cooldown": 10,
-            "lastInteractions": {},
-            "id": 4,
-            "energy": 2134,
-            "coordinates": {
-              "latitude": 141234.0,
-              "longitude": 1242134.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        {
-          "element": {
-            "cooldown": 14,
-            "lastInteractions": {},
-            "id": 5,
-            "energy": 2134,
-            "coordinates": {
-              "latitude": 141234.0,
-              "longitude": 1242134.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        {
-          "element": {
-            "cooldown": 12,
-            "lastInteractions": {},
-            "id": 6,
-            "energy": 2134,
-            "coordinates": {
-              "latitude": 141234.0,
-              "longitude": 1242134.0
-            }
-          },
-          "edgeList": {},
-          "visited": false
-        },
-        null,
-        null,
-        null,
-        null
+  "map": {
+    "networkAdjMatrix": [
+      [
+        Infinity,
+        Infinity,
+        Infinity,
+        0.5180147525766506,
+        0.43848514527544924,
+        2.3516093893735817,
+        Infinity,
+        Infinity,
+        0.7029385335504872,
+        0.0
       ],
-      "rear": 6,
-      "modCount": 6
-    }
+      [
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        0.682394921791298,
+        2.0366078543040538,
+        4.14055680749165,
+        0.6488881495358662,
+        Infinity,
+        0.0
+      ],
+      [
+        Infinity,
+        Infinity,
+        Infinity,
+        0.6104601472788245,
+        Infinity,
+        Infinity,
+        Infinity,
+        0.46875260617387854,
+        0.5387886515445686,
+        0.0
+      ],
+      [
+        0.5180147525766506,
+        Infinity,
+        0.6104601472788245,
+        Infinity,
+        0.8641736578233772,
+        Infinity,
+        Infinity,
+        0.8290987939512533,
+        1.0514369055842359,
+        0.0
+      ],
+      [
+        0.43848514527544924,
+        0.682394921791298,
+        Infinity,
+        0.8641736578233772,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        0.0
+      ],
+      [
+        2.3516093893735817,
+        2.0366078543040538,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        2.4272401155852066,
+        Infinity,
+        Infinity,
+        0.0
+      ],
+      [
+        Infinity,
+        4.14055680749165,
+        Infinity,
+        Infinity,
+        Infinity,
+        2.4272401155852066,
+        Infinity,
+        4.666612617524653,
+        Infinity,
+        0.0
+      ],
+      [
+        Infinity,
+        0.6488881495358662,
+        0.46875260617387854,
+        0.8290987939512533,
+        Infinity,
+        Infinity,
+        4.666612617524653,
+        Infinity,
+        Infinity,
+        0.0
+      ],
+      [
+        0.7029385335504872,
+        Infinity,
+        0.5387886515445686,
+        1.0514369055842359,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "DEFAULT_CAPACITY": 10,
+    "numVertices": 9,
+    "adjMatrix": [
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    ],
+    "vertices": [
+      {
+        "name": "Sao Bento Railway Station",
+        "team": "NONE",
+        "conqueror": null,
+        "maxEnergy": 500,
+        "id": 1,
+        "energy": 0,
+        "coordinates": {
+          "latitude": 41.14444,
+          "longitude": -8.61037
+        },
+        "localType": "PORTAL"
+      },
+      {
+        "name": "Clerigos Tower",
+        "team": "NONE",
+        "conqueror": null,
+        "maxEnergy": 250,
+        "id": 2,
+        "energy": 0,
+        "coordinates": {
+          "latitude": 41.14578,
+          "longitude": -8.61391
+        },
+        "localType": "PORTAL"
+      },
+      {
+        "name": "Bolsa Palace",
+        "team": "NONE",
+        "conqueror": null,
+        "maxEnergy": 300,
+        "id": 3,
+        "energy": 0,
+        "coordinates": {
+          "latitude": 41.14139,
+          "longitude": -8.61564
+        },
+        "localType": "PORTAL"
+      },
+      {
+        "name": "Lello Bookstore",
+        "team": "NONE",
+        "conqueror": null,
+        "maxEnergy": 350,
+        "id": 4,
+        "energy": 0,
+        "coordinates": {
+          "latitude": 41.14688,
+          "longitude": -8.61564
+        },
+        "localType": "PORTAL"
+      },
+      {
+        "cooldown": 2,
+        "lastInteractions": {
+          "DEFAULT_CAPACITY": 10,
+          "array": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "rear": 0,
+          "modCount": 0
+        },
+        "id": 5,
+        "energy": 100,
+        "coordinates": {
+          "latitude": 41.14053,
+          "longitude": -8.60969
+        },
+        "localType": "CONNECTOR"
+      },
+      {
+        "cooldown": 8,
+        "lastInteractions": {
+          "DEFAULT_CAPACITY": 10,
+          "array": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "rear": 0,
+          "modCount": 0
+        },
+        "id": 6,
+        "energy": 300,
+        "coordinates": {
+          "latitude": 41.15904,
+          "longitude": -8.63069
+        },
+        "localType": "CONNECTOR"
+      },
+      {
+        "cooldown": 1,
+        "lastInteractions": {
+          "DEFAULT_CAPACITY": 10,
+          "array": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "rear": 0,
+          "modCount": 0
+        },
+        "id": 7,
+        "energy": 50,
+        "coordinates": {
+          "latitude": 41.15992,
+          "longitude": -8.65966
+        },
+        "localType": "CONNECTOR"
+      },
+      {
+        "cooldown": 5,
+        "lastInteractions": {
+          "DEFAULT_CAPACITY": 10,
+          "array": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "rear": 0,
+          "modCount": 0
+        },
+        "id": 8,
+        "energy": 150,
+        "coordinates": {
+          "latitude": 41.14069,
+          "longitude": -8.61012
+        },
+        "localType": "CONNECTOR"
+      },
+      {
+        "cooldown": 2,
+        "lastInteractions": {
+          "DEFAULT_CAPACITY": 10,
+          "array": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "rear": 0,
+          "modCount": 0
+        },
+        "id": 9,
+        "energy": 100,
+        "coordinates": {
+          "latitude": 41.13813,
+          "longitude": -8.61088
+        },
+        "localType": "CONNECTOR"
+      },
+      null
+    ]
+  },
+  "playersInGame": {
+    "DEFAULT_CAPACITY": 10,
+    "array": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "rear": 0,
+    "modCount": 0
   }
 }

@@ -5,11 +5,19 @@ public abstract class Local{
     private final int id;
     private int energy;
     private Coordinates coordinates;
+    private LocalType localType;
 
     public Local(int energy, Coordinates coordinates) {
         this.id = ++nextId;
         this.energy = energy;
         this.coordinates = coordinates;
+    }
+    public LocalType getLocalType() {
+        return this.localType;
+    }
+
+    public void setLocalType(LocalType type) {
+        this.localType = type;
     }
 
     public int getEnergy() {

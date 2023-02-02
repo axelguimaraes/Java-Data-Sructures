@@ -2,7 +2,7 @@ package mygame.game;
 
 import mygame.exceptions.ListExceptions;
 import mygame.exceptions.PlayerWithNoTeamException;
-import mygame.structures.lists.UnorderedArrayList;
+import mygame.structures.classes.ArrayUnorderedList;
 
 public class Player {
     private static int nextId;
@@ -84,7 +84,7 @@ public class Player {
         this.team = team;
     }
 
-    public UnorderedArrayList<Portal> getConqueredPortals() {
+    public ArrayUnorderedList<Portal> getConqueredPortals() {
         return null;
     }
 
@@ -129,6 +129,7 @@ public class Player {
                 "Name: " + this.name + "\n" +
                 "Energy: " + this.energy + "\n" +
                 "Team: " + this.team.toString() + "\n" +
-                "Level: " + this.level + "\n";
+                "Level: " + this.level + "\n" +
+                "Current position: " + this.currentPosition.getLocalType() + " ID: " + this.currentPosition.getId();
     }
 }

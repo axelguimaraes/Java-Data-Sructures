@@ -1,0 +1,55 @@
+[
+  {
+    "cooldown": 1,
+    "lastInteractions": {
+      "DEFAULT_CAPACITY": 10,
+      "array": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rear": 0,
+      "modCount": 0
+    },
+    "id": 7,
+    "energy": 50,
+    "coordinates": {
+      "latitude": 41.15992,
+      "longitude": -8.65966
+    },
+    "localType": "CONNECTOR"
+  },
+  {
+    "name": "Bolsa Palace",
+    "team": "NONE",
+    "conqueror": null,
+    "maxEnergy": 300,
+    "id": 3,
+    "energy": 0,
+    "coordinates": {
+      "latitude": 41.14139,
+      "longitude": -8.61564
+    },
+    "localType": "PORTAL"
+  },
+  {
+    "name": "Lello Bookstore",
+    "team": "NONE",
+    "conqueror": null,
+    "maxEnergy": 350,
+    "id": 4,
+    "energy": 0,
+    "coordinates": {
+      "latitude": 41.14688,
+      "longitude": -8.61564
+    },
+    "localType": "PORTAL"
+  }
+]
