@@ -3,11 +3,9 @@ package mygame.io;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import mygame.game.GameMap;
-import mygame.game.Local;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
+import java.lang.reflect.Type;
 
 public class Output {
 
@@ -15,6 +13,7 @@ public class Output {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         gsonBuilder.serializeNulls();
+        gsonBuilder.serializeSpecialFloatingPointValues();
 
         Gson gson = gsonBuilder.create();
 

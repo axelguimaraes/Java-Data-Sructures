@@ -1,16 +1,16 @@
 package mygame.game;
 
 import mygame.exceptions.ListExceptions;
-import mygame.structures.lists.UnorderedArrayList;
+import mygame.structures.classes.ArrayUnorderedList;
 
 public class Connector extends Local {
     private int cooldown;
-    private final UnorderedArrayList<PlayerInteraction> lastInteractions;
+    private final ArrayUnorderedList<PlayerInteraction> lastInteractions;
 
     public Connector(int energy, Coordinates coordinates, int cooldown) {
         super(energy, coordinates);
         this.cooldown = cooldown;
-        this.lastInteractions = new UnorderedArrayList<>();
+        this.lastInteractions = new ArrayUnorderedList<>();
         super.setLocalType(LocalType.CONNECTOR);
     }
 
