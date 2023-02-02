@@ -1,6 +1,7 @@
 package mygame.game;
 
 import mygame.structures.classes.ArrayUnorderedList;
+import mygame.structures.classes.LinkedStack;
 import mygame.structures.classes.Network;
 import mygame.structures.exceptions.ElementNotFoundException;
 
@@ -20,7 +21,7 @@ public class GameMap {
     }
 
     public void addPlayer(Player player) {
-        // TODO: Set player position
+        player.setCurrentPosition(getLocalByID(1));
         playersInGame.addToRear(player);
     }
 
@@ -31,11 +32,25 @@ public class GameMap {
     public Local getLocalByID(int id) {
         Iterator<Local> iterator = this.map.iteratorDFS(0);
         while (iterator.hasNext()) {
-            if (iterator.next().getId() == id) {
-                return iterator.next();
+            Local local = iterator.next();
+            if (local.getId() == id) {
+                return local;
             }
         }
         throw new ElementNotFoundException("network");
+    }
+
+    public ArrayUnorderedList<Local> getShortestPathToLocal(int startID, int targetID) {
+        ArrayUnorderedList<Local> stack = new ArrayUnorderedList<>();
+
+        Local local1 = getLocalByID(startID);
+        Local local2 = getLocalByID(targetID);
+
+        Iterator<Local> it = getIteratorShortestPath(local1, local2);
+        while (it.hasNext()) {
+            stack.addToRear(it.next());
+        }
+        return stack;
     }
 
     public void connectLocations(Local location1, Local location2, double weight) {
@@ -66,5 +81,9 @@ public class GameMap {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return EARTH_RADIUS * c;
+    }
+
+    private Iterator<Local> getIteratorShortestPath(Local start, Local target) {
+        return this.map.iteratorShortestPath(start, target);
     }
 }

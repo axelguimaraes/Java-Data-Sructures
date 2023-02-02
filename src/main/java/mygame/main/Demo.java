@@ -53,9 +53,17 @@ public class Demo {
         gameMap.connectLocationsWithCoordinates(connector5, portal4);
         gameMap.connectLocationsWithCoordinates(connector5, portal3);
 
-        //System.out.println(gameMap);
+        System.out.println(gameMap);
 
-        Output.exportGameMap(gameMap);
-        GameMap newMap = Input.importGameMap();
+        //Output.exportGameMap(gameMap);
+        //GameMap newMap = Input.importGameMap();
+
+        for (Local local : gameMap.getShortestPathToLocal(1, 7)) {
+            System.out.println(local.getId());
+        }
+        System.out.println("\n--\n");
+        for (Local local : gameMap.getShortestPathToLocal(1, 2)) {
+            System.out.println(local.getId());
+        }
     }
 }
