@@ -4,28 +4,35 @@ import mygame.exceptions.ListExceptions;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 
+import java.text.DecimalFormat;
+
 public class Player {
     private static int nextId;
     private final int id;
     private int energy;
     private Team team;
     private String name;
-    private Local currentPosition;
+    private int currentPositionID;
     private int level;
     private double xp;
+    private GameMap map;
 
     public Player(String name, Team team) throws PlayerWithNoTeamException {
         this.name = name;
         this.id = ++nextId;
         this.energy = 0;
         this.team = team;
-        this.currentPosition = null;
+        this.currentPositionID = -1;
         this.level = 1;
         this.xp = 0;
 
         if (this.team == null || this.team.equals(Team.NONE)) {
             throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
         }
+    }
+
+    public void setMap(GameMap map) {
+        this.map = map;
     }
 
     public int getId() {
@@ -93,15 +100,35 @@ public class Player {
     }
 
     public void navigateTo(Local destination) {
-        this.currentPosition = destination; // TODO: here
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        StringBuilder s = new StringBuilder("Navigated to ");
+        if (destination instanceof Portal) {
+            s.append(((Portal) destination).getName());
+        } else {
+            s.append("Connector ID: ").append(destination.getId());
+        }
+        s.append("\tPath: ");
+        for (Local local : this.map.getShortestPathToLocal(this.currentPositionID, destination.getId())) {
+            s.append(local.getId()).append(" ");
+        }
+        s.append("\tDistance: ").append(df.format(this.map.getShortestPathweight(this.map.getLocalByID(this.currentPositionID), this.map.getLocalByID(destination.getId())))).append("km");
+
+        System.out.println(s);
+
+        this.currentPositionID = destination.getId();
     }
 
-    public Local getCurrentPosition() {
-        return currentPosition;
+    public int getCurrentPositionID() {
+        return currentPositionID;
     }
 
-    public void setCurrentPosition(Local currentPosition) {
-        this.currentPosition = currentPosition;
+    public void setCurrentPositionID(int currentPositionID) {
+        this.currentPositionID = currentPositionID;
+    }
+
+    public String getCurrentPositionInfo() {
+        return this.map.getLocalByID(this.currentPositionID).toString();
     }
 
     public boolean chargePortal(Portal portal, int energy) {
@@ -125,11 +152,27 @@ public class Player {
     }
 
     public String toString() {
+        String name;
+        if (this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
+            name = ((Portal) this.map.getLocalByID(this.currentPositionID)).getName();
+        } else {
+            name = "Connector";
+        }
         return "PLAYER\n" +
                 "Name: " + this.name + "\n" +
                 "Energy: " + this.energy + "\n" +
                 "Team: " + this.team.toString() + "\n" +
                 "Level: " + this.level + "\n" +
-                "Current position: " + this.currentPosition.getLocalType() + " ID: " + this.currentPosition.getId();
+                "Current position: " + name + " ID: " + this.currentPositionID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) obj;
+        return player.getName().equals(this.name);
     }
 }

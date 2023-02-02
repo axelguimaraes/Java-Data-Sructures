@@ -1,11 +1,12 @@
 package mygame.game;
 
+import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
-import mygame.structures.classes.LinkedStack;
 import mygame.structures.classes.Network;
 import mygame.structures.exceptions.ElementNotFoundException;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class GameMap {
     private final Network<Local> map;
@@ -21,8 +22,86 @@ public class GameMap {
     }
 
     public void addPlayer(Player player) {
-        player.setCurrentPosition(getLocalByID(1));
+        player.setMap(this);
+        player.setCurrentPositionID(1);
         playersInGame.addToRear(player);
+    }
+
+    public void editPlayer(Player player) throws PlayerWithNoTeamException {
+        if (!this.playersInGame.contains(player)) {
+            throw new ElementNotFoundException("players list");
+        }
+        Scanner scanner = new Scanner(System.in);
+        int team;
+        for (int i = 0; i < this.playersInGame.size(); i++) {
+            if (this.playersInGame.get(i).equals(player)) {
+
+                System.out.println("Change name? (y/n): ");
+                switch (scanner.nextLine()) {
+                    case "y":
+                    case "Y":
+                        System.out.println("Player name: ");
+                        this.playersInGame.get(i).setName(scanner.nextLine());
+                }
+
+                System.out.println("Change team? (y/n): ");
+                switch (scanner.nextLine()) {
+                    case "y":
+                    case "Y":
+                        boolean check = false;
+                        while (!check) {
+                            System.out.println("Team: (1) Sparks | (2) Giants: ");
+                            team = scanner.nextInt();
+                            switch (team) {
+                                case 1:
+                                    this.playersInGame.get(i).setTeam(Team.SPARKS);
+                                    check = true;
+                                    break;
+                                case 2:
+                                    this.playersInGame.get(i).setTeam(Team.GIANTS);
+                                    check = true;
+                                    break;
+                                default:
+                                    System.err.println("Invalid choice!");
+                            }
+                        }
+                }
+
+                System.out.println("Change energy? (y/n):");
+                switch (scanner.nextLine()) {
+                    case "Y":
+                    case "y":
+                        System.out.println("Energy: ");
+                        this.playersInGame.get(i).setEnergy(scanner.nextInt());
+                }
+
+                System.out.println("Change level? (y/n):");
+                switch (scanner.nextLine()) {
+                    case "y":
+                    case "Y":
+                        System.out.println("Level:");
+                        this.playersInGame.get(i).setLevel(scanner.nextInt());
+                }
+
+                System.out.println("Change current location? (y/n):");
+                switch (scanner.nextLine()) {
+                    case "y":
+                    case "Y":
+                        System.out.println("Location ID:");
+                        int id = scanner.nextInt();
+                        if (getLocalByID(id) != null) {
+                            this.playersInGame.get(i).setCurrentPositionID(id);
+                        } else {
+                            System.err.println("No such location!");
+                        }
+                }
+                return;
+            }
+        }
+    }
+
+    public void removePlayer(Player player) {
+        this.playersInGame.remove(player);
     }
 
     public ArrayUnorderedList<Player> getPlayersInGame() {
@@ -41,16 +120,12 @@ public class GameMap {
     }
 
     public ArrayUnorderedList<Local> getShortestPathToLocal(int startID, int targetID) {
-        ArrayUnorderedList<Local> stack = new ArrayUnorderedList<>();
-
-        Local local1 = getLocalByID(startID);
-        Local local2 = getLocalByID(targetID);
-
-        Iterator<Local> it = getIteratorShortestPath(local1, local2);
+        ArrayUnorderedList<Local> list = new ArrayUnorderedList<>();
+        Iterator<Local> it = getIteratorShortestPath(getLocalByID(startID), getLocalByID(targetID));
         while (it.hasNext()) {
-            stack.addToRear(it.next());
+            list.addToRear(it.next());
         }
-        return stack;
+        return list;
     }
 
     public void connectLocations(Local location1, Local location2, double weight) {
@@ -85,5 +160,9 @@ public class GameMap {
 
     private Iterator<Local> getIteratorShortestPath(Local start, Local target) {
         return this.map.iteratorShortestPath(start, target);
+    }
+
+    public double getShortestPathweight(Local start, Local target) {
+        return this.map.shortestPathWeight(start, target);
     }
 }

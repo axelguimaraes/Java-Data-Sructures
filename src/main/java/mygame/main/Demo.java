@@ -4,12 +4,13 @@ import mygame.exceptions.*;
 import mygame.game.*;
 import mygame.io.Input;
 import mygame.io.Output;
+import mygame.structures.classes.LinkedStack;
 
 import javax.sound.sampled.Port;
 import java.io.IOException;
 
 public class Demo {
-    public static void main(String[] args) throws GraphExceptions, LocalNotFoundException, PlayerWithNoTeamException, EmptyCollectionException, IOException {
+    public static void main(String[] args) throws GraphExceptions, LocalNotFoundException, PlayerWithNoTeamException, EmptyCollectionException, IOException, ListExceptions {
         GameMap gameMap = new GameMap();
 
         Portal portal1 = new Portal("Sao Bento Railway Station", 0, new Coordinates(41.14444, -8.61037), null, 500);
@@ -53,17 +54,25 @@ public class Demo {
         gameMap.connectLocationsWithCoordinates(connector5, portal4);
         gameMap.connectLocationsWithCoordinates(connector5, portal3);
 
-        System.out.println(gameMap);
+        //System.out.println(gameMap);
 
-        //Output.exportGameMap(gameMap);
-        //GameMap newMap = Input.importGameMap();
+        Player player = new Player("John Doe", Team.SPARKS);
+        gameMap.addPlayer(player);
+        //System.out.println(player.getCurrentPosition());
 
-        for (Local local : gameMap.getShortestPathToLocal(1, 7)) {
+        /*
+        for (Local local : gameMap.getShortestPathToLocal(1, 5)) {
             System.out.println(local.getId());
         }
-        System.out.println("\n--\n");
-        for (Local local : gameMap.getShortestPathToLocal(1, 2)) {
-            System.out.println(local.getId());
-        }
+         */
+
+        player.navigateTo(gameMap.getLocalByID(7));
+        System.out.println(player.getCurrentPositionInfo());
+        player.rechargeEnergy((Connector) gameMap.getLocalByID(player.getCurrentPositionID()));
+        System.out.println(player);
+        player.rechargeEnergy((Connector) gameMap.getLocalByID(player.getCurrentPositionID()));
+
+        gameMap.editPlayer(player);
+        System.out.println(gameMap.getPlayersInGame());
     }
 }

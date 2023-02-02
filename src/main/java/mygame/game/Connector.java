@@ -30,7 +30,8 @@ public class Connector extends Local {
         for (PlayerInteraction interaction : lastInteractions) {
             if (interaction.getPlayer().equals(player)) { // Se jogador existir na lista
                 if (!interaction.isCooldownOver()) { // Se o cooldown não tiver acabado
-                    System.out.println("Cooldown not over. Elapsed time: " + interaction.getElapsedTime());
+                    long remainingTime = this.cooldown - interaction.getElapsedTime();
+                    System.out.println("You must wait " + remainingTime + " minute(s) before you can recharge in this connector again!");
                     return false;
                 } else if (interaction.isCooldownOver()) {
                     lastInteractions.remove(interaction);
