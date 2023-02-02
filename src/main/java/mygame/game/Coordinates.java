@@ -18,6 +18,6 @@ public class Coordinates {
     }
 
     public String toString() {
-        return this.latitude + " - " + this.longitude;
+        return this.latitude + ", " + this.longitude;
     }
 }

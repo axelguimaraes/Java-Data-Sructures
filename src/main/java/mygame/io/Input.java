@@ -2,22 +2,19 @@ package mygame.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import com.google.gson.stream.JsonWriter;
-import mygame.game.GameMap;
-import mygame.game.Local;
-import mygame.structures.lists.UnorderedArrayList;
-import mygame.structures.lists.UnorderedListADT;
+import com.google.gson.InstanceCreator;
+import com.google.gson.JsonObject;
+import mygame.game.*;
 
-import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Input {
 
+    /*
     public static GameMap importGameMap() throws IOException {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(UnorderedArrayList.class, new UnorderedListTypeAdapter());
@@ -75,5 +72,34 @@ public class Input {
         }
     }
 
+     */
+
+    public static GameMap importGameMap() throws IOException {
+        GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(Local.class, new LocalInstanceCreator());
+        Gson gson = gsonBuilder.create();
+
+        String json = new String(Files.readAllBytes(Paths.get("files/gameMap.json")));
+
+        return gson.fromJson(json, GameMap.class);
+    }
+
+    private static class LocalInstanceCreator implements InstanceCreator<Local> {
+
+        @Override
+        public Local createInstance(Type type) {
+            return null;
+        }
+
+        public Local createInstance(JsonObject json) {
+            String localType = json.get("localType").getAsString();
+            if (localType.equals(LocalType.CONNECTOR.toString())) {
+                return new Gson().fromJson(json, Connector.class);
+            } else if (localType.equals(LocalType.PORTAL.toString())) {
+                return new Gson().fromJson(json, Portal.class);
+            } else {
+                return null;
+            }
+        }
+    }
 }
 
