@@ -7,7 +7,6 @@
     <list default="true" id="1d4cb2df-cb61-4587-b8d3-153c4636cb75" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerClientDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerClientDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerRegister.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerSelected.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mygame/implementation/PlayerSelected.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

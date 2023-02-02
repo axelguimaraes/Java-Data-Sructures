@@ -14,7 +14,8 @@ public class PlayerClientDemo {
 
     /**
      * Method to run the Player Menu
-     * @throws PlayerWithNoTeamException
+     *
+     * @throws PlayerWithNoTeamException throws exception if the Player has no Team associated
      */
     public void runMenu() throws PlayerWithNoTeamException {
         //Player p1 = new Player("JOAO", 0, Team.GIANTS);
