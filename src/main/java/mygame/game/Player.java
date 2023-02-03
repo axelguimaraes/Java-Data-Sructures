@@ -8,11 +8,29 @@ public class Player {
     private static int nextId;
     private final int id;
     private int energy;
+
+    private int maxEnergy;
     private Team team;
     private String name;
     private Local currentPosition;
     private int level;
     private double xp;
+
+    public Player(String name, Team team, int level, double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
+        this.name = name;
+        this.id = ++nextId;
+        this.energy = energy;
+        this.team = team;
+        this.currentPosition = null;
+        this.level = level;
+        this.xp = xp;
+        this.maxEnergy = maxEnergy;
+        this.energy = energy;
+
+        if (this.team == null || this.team.equals(Team.NONE)) {
+            throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
+        }
+    }
 
     public Player(String name, Team team) throws PlayerWithNoTeamException {
         this.name = name;

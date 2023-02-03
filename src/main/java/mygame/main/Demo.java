@@ -67,9 +67,9 @@ public class Demo {
             System.out.println("Name: " + player.getName());
             System.out.println("Team: " + player.getTeam());
             System.out.println("Level: " + player.getLevel());
-            System.out.println("Experience Points: " + player.getExperiencePoints());
-            System.out.println("Max Energy: " + player.getMaxEnergy());
-            System.out.println("Current Energy: " + player.getCurrentEnergy());
+            System.out.println("Experience Points: " + player.getXp());
+            //System.out.println("Max Energy: " + player.getMaxEnergy());
+            System.out.println("Current Energy: " + player.getEnergy());
         }
     }
 }
