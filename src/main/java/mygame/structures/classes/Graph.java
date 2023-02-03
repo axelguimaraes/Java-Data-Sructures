@@ -1,6 +1,7 @@
 package mygame.structures.classes;
 
 import mygame.structures.interfaces.GraphADT;
+
 import java.util.Iterator;
 
 public class Graph<T> implements GraphADT<T> {
@@ -9,18 +10,20 @@ public class Graph<T> implements GraphADT<T> {
     protected boolean[][] adjMatrix;   // adjacency matrix
     protected T[] vertices;   // values of vertices
 
-    /******************************************************************
-     Creates an empty graph.
-     ******************************************************************/
+    /**
+     * Creates an empty graph
+     */
     public Graph() {
         numVertices = 0;
         this.adjMatrix = new boolean[DEFAULT_CAPACITY][DEFAULT_CAPACITY];
         this.vertices = (T[]) (new Object[DEFAULT_CAPACITY]);
     }
 
-    /******************************************************************
-     Returns a string representation of the adjacency matrix.
-     ******************************************************************/
+    /**
+     * Returns a string representation of the adjacency matrix
+     *
+     * @return string representation
+     */
     public String toString() {
         if (numVertices == 0)
             return "Graph is empty";
@@ -62,9 +65,12 @@ public class Graph<T> implements GraphADT<T> {
         return result;
     }
 
-    /******************************************************************
-     Inserts an edge between two vertices of the graph.
-     ******************************************************************/
+    /**
+     * Inserts an edge between two vertices of the graph
+     *
+     * @param index1 first edge
+     * @param index2 second edge
+     */
     public void addEdge(int index1, int index2) {
         if (indexIsValid(index1) && indexIsValid(index2)) {
             adjMatrix[index1][index2] = true;
@@ -72,9 +78,12 @@ public class Graph<T> implements GraphADT<T> {
         }
     }
 
-    /******************************************************************
-     Removes an edge between two vertices of the graph.
-     ******************************************************************/
+    /**
+     * Removes an edge between two vertices of the graph
+     *
+     * @param index1 first edge
+     * @param index2 second edge
+     */
     public void removeEdge(int index1, int index2) {
         if (indexIsValid(index1) && indexIsValid(index2)) {
             adjMatrix[index1][index2] = false;
@@ -82,24 +91,30 @@ public class Graph<T> implements GraphADT<T> {
         }
     }
 
-    /******************************************************************
-     Inserts an edge between two vertices of the graph.
-     ******************************************************************/
+    /**
+     * Inserts an edge between two vertices of the graph
+     *
+     * @param vertex1 first vertex
+     * @param vertex2 second vertex
+     */
     public void addEdge(T vertex1, T vertex2) {
         addEdge(getIndex(vertex1), getIndex(vertex2));
     }
 
-    /******************************************************************
-     Removes an edge between two vertices of the graph.
-     ******************************************************************/
+    /**
+     * Removes an edge between two vertices of the graph
+     *
+     * @param vertex1 first vertex
+     * @param vertex2 second vertex
+     */
     public void removeEdge(T vertex1, T vertex2) {
         removeEdge(getIndex(vertex1), getIndex(vertex2));
     }
 
-    /******************************************************************
-     Adds a vertex to the graph, expanding the capacity of the graph
-     if necessary.
-     ******************************************************************/
+
+    /**
+     * Adds a vertex to the graph, expanding the capacity of the graph if necessary
+     */
     public void addVertex() {
         if (numVertices == vertices.length)
             expandCapacity();
@@ -112,10 +127,13 @@ public class Graph<T> implements GraphADT<T> {
         numVertices++;
     }
 
-    /******************************************************************
-     Adds a vertex to the graph, expanding the capacity of the graph
-     if necessary.  It also associates an object with the vertex.
-     ******************************************************************/
+
+    /**
+     * Adds a vertex to the graph, expanding the capacity of the graph if necessary. It also associated an object
+     * with the vertex
+     *
+     * @param vertex vertex to be added
+     */
     public void addVertex(T vertex) {
         if (numVertices == vertices.length)
             expandCapacity();
@@ -128,10 +146,10 @@ public class Graph<T> implements GraphADT<T> {
         numVertices++;
     }
 
-    /******************************************************************
-     Removes a vertex at the given index from the graph.  Note that
-     this may affect the index values of other vertices.
-     ******************************************************************/
+    /**
+     * Removes a vertex at the given index from the graph
+     * @param index index of the vertex to remove
+     */
     public void removeVertex(int index) {
         if (indexIsValid(index)) {
             numVertices--;
@@ -149,9 +167,11 @@ public class Graph<T> implements GraphADT<T> {
         }
     }
 
-    /******************************************************************
-     Removes a single vertex with the given value from the graph.
-     ******************************************************************/
+
+    /**
+     * Removes a single vertex with the given value from the graph
+     * @param vertex vertex to be removed
+     */
     public void removeVertex(T vertex) {
         for (int i = 0; i < numVertices; i++) {
             if (vertex.equals(vertices[i])) {
