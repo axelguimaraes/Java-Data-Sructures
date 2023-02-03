@@ -60,6 +60,7 @@ public class Portal extends Local {
         if (this.team.equals(Team.NONE)) { // Se o portal nao tiver equipa
             this.team = player.getTeam();
             this.conqueror = player;
+            this.conqueror.addToConqueredPortalsList(this.getId());
 
             System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
             return true;
@@ -91,6 +92,14 @@ public class Portal extends Local {
             System.out.println("Portal already belongs to player's team");
             return false;
         }
+    }
+
+    public int compareByName(Portal other) {
+        return this.name.compareTo(other.getName());
+    }
+
+    public int compareByConqueror(Portal other) {
+        return this.conqueror.compareByName(other.getConqueror());
     }
 
     @Override

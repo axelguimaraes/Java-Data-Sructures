@@ -354,7 +354,7 @@ public class Network<T> extends Graph<T> implements NetworkADT<T> {
                 visited[index] = true;
             }
 
-            /** Update the pathWeight for each vertex that has has not been
+            /** Update the pathWeight for each vertex that has not been
              visited and is adjacent to the last vertex that was visited.
              Also, add each unvisited vertex to the heap. */
             for (int i = 0; i < numVertices; i++) {
@@ -383,12 +383,13 @@ public class Network<T> extends Graph<T> implements NetworkADT<T> {
     }
 
     /******************************************************************
-     Returns the index of the the vertex that that is adjacent to
+     Returns the index of the vertex that that is adjacent to
      the vertex with the given index and also has a pathWeight equal
      to weight.
      ******************************************************************/
     protected int getIndexOfAdjVertexWithWeightOf(boolean[] visited,
-                                                  double[] pathWeight, double weight) {
+                                                  double[] pathWeight,
+                                                  double weight) {
         for (int i = 0; i < numVertices; i++)
             if ((pathWeight[i] == weight) && !visited[i])
                 for (int j = 0; j < numVertices; j++)
