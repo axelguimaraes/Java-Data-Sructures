@@ -72,7 +72,7 @@ public class Demo {
         System.out.println(player);
         player.rechargeEnergy((Connector) gameMap.getLocalByID(player.getCurrentPositionID()));
 
-        gameMap.editPlayer(player);
+        //gameMap.editPlayer(player);
         System.out.println(gameMap.getPlayersInGame());
     }
 }

@@ -4,6 +4,7 @@ import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.Network;
 import mygame.structures.exceptions.ElementNotFoundException;
+import mygame.structures.searchAndSort.ArraySortingAndSearching;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -19,6 +20,129 @@ public class GameMap {
 
     public void addLocation(Local local) {
         this.map.addVertex(local);
+    }
+
+    public void removeLocation(Local local) {
+        this.map.removeVertex(local);
+    }
+
+    public void editLocation(Local local) {
+        Iterator<Local> it = this.map.iteratorBFS(0);
+        Scanner scanner = new Scanner(System.in);
+        while (it.hasNext()) {
+            Local itLocal = it.next();
+            if (itLocal.equals(local)) {
+                if (itLocal instanceof Portal) {
+                    System.out.println("Change name? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "Y":
+                        case "y":
+                            System.out.println("Name:");
+                            ((Portal) itLocal).setName(scanner.nextLine());
+                    }
+
+                    System.out.println("Change team? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            boolean check = false;
+                            while (!check) {
+                                System.out.println("(1) Sparks | (2) Giants | (3) None:");
+                                switch (scanner.nextInt()) {
+                                    case 1:
+                                        ((Portal) itLocal).setTeam(Team.SPARKS);
+                                        check = true;
+                                        break;
+                                    case 2:
+                                        ((Portal) itLocal).setTeam(Team.GIANTS);
+                                        check = true;
+                                        break;
+                                    case 3:
+                                        ((Portal) itLocal).setTeam(Team.NONE);
+                                        check = true;
+                                        break;
+                                    default:
+                                        System.err.println("Invalid option!");
+                                }
+                            }
+                    }
+
+                    System.out.println("Change conqueror? (portal team will change to player's team if different) (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            System.out.println("Player name:");
+                            String name = scanner.nextLine();
+                            boolean found = false;
+                            for (Player player : this.playersInGame) {
+                                if (player.getName().equals(name)) {
+                                    found = true;
+                                    ((Portal) itLocal).setConqueror(player);
+                                    ((Portal) itLocal).setTeam(player.getTeam());
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                System.err.println("Player not found!");
+                            }
+                    }
+
+                    System.out.println("Change energy? (y/n)");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            System.out.println("Energy:");
+                            itLocal.setEnergy(scanner.nextInt());
+                    }
+
+                    System.out.println("Change coordinates? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            double lat, lon;
+                            System.out.println("Latitude:");
+                            lat = scanner.nextLong();
+                            System.out.println("Longitude:");
+                            lon = scanner.nextLong();
+
+                            itLocal.setCoordinates(new Coordinates(lat, lon));
+                    }
+                } else if (itLocal instanceof Connector) {
+                    System.out.println("Change cooldown? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            System.out.println("Cooldown:");
+                            ((Connector) itLocal).setCooldown(scanner.nextInt());
+                    }
+
+                    System.out.println("Change energy? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "Y":
+                        case "y":
+                            System.out.println("Energy");
+                            itLocal.setEnergy(scanner.nextInt());
+                    }
+                    System.out.println("Change coordinates? (y/n):");
+                    switch (scanner.nextLine()) {
+                        case "y":
+                        case "Y":
+                            double lat, lon;
+                            System.out.println("Latitude:");
+                            lat = scanner.nextLong();
+                            System.out.println("Longitude:");
+                            lon = scanner.nextLong();
+
+                            itLocal.setCoordinates(new Coordinates(lat, lon));
+                    }
+                }
+            }
+        }
+    }
+
+    public void listLocations() {
+        // TODO: add here
     }
 
     public void addPlayer(Player player) {

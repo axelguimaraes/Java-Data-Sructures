@@ -175,4 +175,20 @@ public class Player {
         Player player = (Player) obj;
         return player.getName().equals(this.name);
     }
+
+    public int compareByName(Player other) {
+        return this.name.compareTo(other.getName());
+    }
+
+    public int compareByEnergy(Player other) {
+        return Integer.compare(this.energy, other.getEnergy());
+    }
+
+    public int compareByTeam(Player other) {
+        return this.team.compareTo(other.getTeam());
+    }
+
+    public int compareByLevel(Player other) {
+        return Integer.compare(this.level, other.getLevel());
+    }
 }

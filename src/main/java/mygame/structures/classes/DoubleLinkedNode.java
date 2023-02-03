@@ -1,15 +1,15 @@
 package mygame.structures.classes;
 
-public class DoubleLinkedListNode<T> {
+public class DoubleLinkedNode<T> {
 
     private T data;
-    private DoubleLinkedListNode<T> prev;
-    private DoubleLinkedListNode<T> next;
+    private DoubleLinkedNode<T> prev;
+    private DoubleLinkedNode<T> next;
 
     /**
      * Default DllNode class constructor
      */
-    public DoubleLinkedListNode() {
+    public DoubleLinkedNode() {
         this.next = null;
         this.prev = null;
     }
@@ -19,7 +19,7 @@ public class DoubleLinkedListNode<T> {
      *
      * @param data
      */
-    public DoubleLinkedListNode(T data) {
+    public DoubleLinkedNode(T data) {
         this.data = data;
         this.next = null;
         this.prev = null;
@@ -48,7 +48,7 @@ public class DoubleLinkedListNode<T> {
      *
      * @return the previous Node.
      */
-    public DoubleLinkedListNode<T> getPrev() {
+    public DoubleLinkedNode<T> getPrev() {
         return this.prev;
     }
 
@@ -57,7 +57,7 @@ public class DoubleLinkedListNode<T> {
      *
      * @param prev the previous Node
      */
-    public void setPrev(DoubleLinkedListNode<T> prev) {
+    public void setPrev(DoubleLinkedNode<T> prev) {
         this.prev = prev;
     }
 
@@ -66,7 +66,7 @@ public class DoubleLinkedListNode<T> {
      *
      * @return the next Node
      */
-    public DoubleLinkedListNode<T> getNext() {
+    public DoubleLinkedNode<T> getNext() {
         return this.next;
     }
 
@@ -75,7 +75,7 @@ public class DoubleLinkedListNode<T> {
      *
      * @param next the next Node
      */
-    public void setNext(DoubleLinkedListNode<T> next) {
+    public void setNext(DoubleLinkedNode<T> next) {
         this.next = next;
     }
 }

@@ -93,6 +93,14 @@ public class Portal extends Local {
         }
     }
 
+    public int compareByName(Portal other) {
+        return this.name.compareTo(other.getName());
+    }
+
+    public int compareByConqueror(Portal other) {
+        return this.conqueror.compareByName(other.getConqueror());
+    }
+
     @Override
     public String toString() {
         return "PORTAL\n" +
