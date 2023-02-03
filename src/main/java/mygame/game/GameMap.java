@@ -4,13 +4,12 @@ import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.Network;
 import mygame.structures.exceptions.ElementNotFoundException;
-import mygame.structures.searchAndSort.ArraySortingAndSearching;
 
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class GameMap {
-    private final Network<Local> map;
+    private final Network<Local> map; // TODO: this is not directed atm
     private final ArrayUnorderedList<Player> playersInGame;
 
     public GameMap() {
@@ -77,8 +76,10 @@ public class GameMap {
                             for (Player player : this.playersInGame) {
                                 if (player.getName().equals(name)) {
                                     found = true;
+                                    ((Portal) itLocal).getConqueror().removeFromConqueredPortalsList(itLocal.getId());
                                     ((Portal) itLocal).setConqueror(player);
                                     ((Portal) itLocal).setTeam(player.getTeam());
+                                    ((Portal) itLocal).getConqueror().addToConqueredPortalsList(itLocal.getId());
                                     break;
                                 }
                             }
@@ -142,7 +143,7 @@ public class GameMap {
     }
 
     public void listLocations() {
-        // TODO: add here
+        // TODO: sorting here
     }
 
     public void addPlayer(Player player) {
@@ -245,10 +246,26 @@ public class GameMap {
 
     public ArrayUnorderedList<Local> getShortestPathToLocal(int startID, int targetID) {
         ArrayUnorderedList<Local> list = new ArrayUnorderedList<>();
-        Iterator<Local> it = getIteratorShortestPath(getLocalByID(startID), getLocalByID(targetID));
+        Iterator<Local> it = getIteratorShortestPath(startID, targetID);
         while (it.hasNext()) {
             list.addToRear(it.next());
         }
+        return list;
+    }
+
+    public ArrayUnorderedList<Local> getShortestPathBetweenMultipleLocals(int... localIDs) {
+        ArrayUnorderedList<Local> list = new ArrayUnorderedList<>();
+        if (localIDs.length == 0) {
+            throw new IllegalArgumentException("Method must have 1 or more arguments!");
+        }
+
+        for (int i = 0; i + 1 < localIDs.length; i++) {
+            Iterator<Local> it = getIteratorShortestPath(localIDs[i], localIDs[i + 1]);
+            while (it.hasNext()) {
+                list.addToRear(it.next());
+            }
+        }
+
         return list;
     }
 
@@ -258,6 +275,10 @@ public class GameMap {
 
     public void connectLocationsWithCoordinates(Local location1, Local location2) {
         this.map.addEdge(location1, location2, coordinatesDistance(location1, location2));
+    }
+
+    public void removeConnectingPath(int firstLocalID, int secondLocalID) {
+        this.map.removeEdge(getLocalByID(firstLocalID), getLocalByID(secondLocalID));
     }
 
     public String toString() {
@@ -282,11 +303,24 @@ public class GameMap {
         return EARTH_RADIUS * c;
     }
 
-    private Iterator<Local> getIteratorShortestPath(Local start, Local target) {
-        return this.map.iteratorShortestPath(start, target);
+    private Iterator<Local> getIteratorShortestPath(int start, int target) {
+        return this.map.iteratorShortestPath(getLocalByID(start), getLocalByID(target));
     }
 
-    public double getShortestPathweight(Local start, Local target) {
-        return this.map.shortestPathWeight(start, target);
+    public double getShortestPathWeight(int start, int target) {
+        return this.map.shortestPathWeight(getLocalByID(start), getLocalByID(target));
+    }
+
+    public double getShortestPathWeightBetweenMultipleLocals(int... locals) {
+        if (locals.length == 0) {
+            throw new IllegalArgumentException("Method must have 1 or more arguments!");
+        }
+
+        double weight = 0;
+        for (int i = 0; i + 1 < locals.length; i++) {
+            weight += this.map.shortestPathWeight(getLocalByID(locals[i]), getLocalByID(locals[i + 1]));
+        }
+
+        return weight;
     }
 }

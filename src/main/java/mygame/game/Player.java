@@ -16,6 +16,7 @@ public class Player {
     private int level;
     private double xp;
     private GameMap map;
+    private ArrayUnorderedList<Integer> conqueredPortalsIDs;
 
     public Player(String name, Team team) throws PlayerWithNoTeamException {
         this.name = name;
@@ -25,10 +26,23 @@ public class Player {
         this.currentPositionID = -1;
         this.level = 1;
         this.xp = 0;
+        this.conqueredPortalsIDs = new ArrayUnorderedList<>();
 
         if (this.team == null || this.team.equals(Team.NONE)) {
             throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
         }
+    }
+
+    public void addToConqueredPortalsList(int portalID) {
+        this.conqueredPortalsIDs.addToRear(portalID);
+    }
+
+    public void removeFromConqueredPortalsList(int portalID) {
+        this.conqueredPortalsIDs.remove(portalID);
+    }
+
+    public ArrayUnorderedList<Integer> getConqueredPortalsIDs() {
+        return this.conqueredPortalsIDs;
     }
 
     public void setMap(GameMap map) {
@@ -112,7 +126,7 @@ public class Player {
         for (Local local : this.map.getShortestPathToLocal(this.currentPositionID, destination.getId())) {
             s.append(local.getId()).append(" ");
         }
-        s.append("\tDistance: ").append(df.format(this.map.getShortestPathweight(this.map.getLocalByID(this.currentPositionID), this.map.getLocalByID(destination.getId())))).append("km");
+        s.append("\tDistance: ").append(df.format(this.map.getShortestPathWeight(this.currentPositionID, destination.getId()))).append("km");
 
         System.out.println(s);
 
@@ -190,5 +204,9 @@ public class Player {
 
     public int compareByLevel(Player other) {
         return Integer.compare(this.level, other.getLevel());
+    }
+
+    public int compareByNumberOfConqueredPortals(Player other) {
+        return Integer.compare(this.conqueredPortalsIDs.size(), other.getConqueredPortalsIDs().size());
     }
 }

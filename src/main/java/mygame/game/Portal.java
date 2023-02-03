@@ -60,6 +60,7 @@ public class Portal extends Local {
         if (this.team.equals(Team.NONE)) { // Se o portal nao tiver equipa
             this.team = player.getTeam();
             this.conqueror = player;
+            this.conqueror.addToConqueredPortalsList(this.getId());
 
             System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
             return true;

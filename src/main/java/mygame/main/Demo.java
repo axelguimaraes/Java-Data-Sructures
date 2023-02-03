@@ -74,5 +74,12 @@ public class Demo {
 
         //gameMap.editPlayer(player);
         System.out.println(gameMap.getPlayersInGame());
+
+        System.out.println("MULTIPLE PATHS");
+        for (Local local : gameMap.getShortestPathBetweenMultipleLocals(1, 2, 3)) {
+            System.out.println(local.getId());
+        }
+
+        System.out.println("Weight: " + gameMap.getShortestPathWeightBetweenMultipleLocals(1, 2, 3));
     }
 }
