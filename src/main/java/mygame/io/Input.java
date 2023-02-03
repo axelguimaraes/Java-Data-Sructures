@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.InstanceCreator;
 import com.google.gson.JsonObject;
 import mygame.game.*;
+import mygame.exceptions.PlayerWithNoTeamException;
+import mygame.game.Player;
+import mygame.implementation.PlayerRegister;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Input {
-
+    private Gson gson;
     /*
     public static GameMap importGameMap() throws IOException {
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -82,6 +85,34 @@ public class Input {
 
         return gson.fromJson(json, GameMap.class);
     }
+/*
+    public static Connector importConnector() throws IOException{
+        GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(Local.class, new LocalInstanceCreator());
+        Gson gson = gsonBuilder.create();
+
+        String json = new String(Files.readAllBytes(Paths.get("files/connectors.json")));
+
+        return gson.fromJson(json, Connector.class);
+    }
+
+    public static Portal importPortal() throws IOException{
+        GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(Local.class, new LocalInstanceCreator());
+        Gson gson = gsonBuilder.create();
+
+        String json = new String(Files.readAllBytes(Paths.get("files/portals.json")));
+
+        return gson.fromJson(json, Portal.class);
+    }
+*/
+
+    public Input() {
+        gson = new Gson();
+    }
+
+    public PlayerRegister importData(String fileName) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(fileName)));
+        return gson.fromJson(json, PlayerRegister.class);
+    }
 
     private static class LocalInstanceCreator implements InstanceCreator<Local> {
 
@@ -101,5 +132,6 @@ public class Input {
             }
         }
     }
+
 }
 

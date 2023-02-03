@@ -132,4 +132,14 @@ public class Player {
                 "Level: " + this.level + "\n" +
                 "Current position: " + this.currentPosition.getLocalType() + " ID: " + this.currentPosition.getId();
     }
+
+    public String toString2() {
+        return "===PLAYER===\n" +
+                "ID: " + this.id + "\n" +
+                "Name: " + this.name + "\n" +
+                "Energy: " + this.energy + "\n" +
+                "Team: " + this.team.toString() + "\n" +
+                "Level: " + this.level + "\n" +
+                "===========";
+    }
 }

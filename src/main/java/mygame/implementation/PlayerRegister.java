@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import mygame.game.Team;
-import mygame.structures.lists.UnorderedArrayList;
+import mygame.structures.classes.ArrayUnorderedList;
 
 public class PlayerRegister {
-    UnorderedArrayList<Player> playersArray = new UnorderedArrayList<>();
+    ArrayUnorderedList<Player> playersArray = new ArrayUnorderedList<>();
     Player p1 = new Player("Jaoao", Team.GIANTS);
-
+    public ArrayUnorderedList<Player> getPlayers() {
+        return playersArray;
+    }
     /**
      *
      * @throws PlayerWithNoTeamException
@@ -96,7 +98,7 @@ public class PlayerRegister {
      */
     public void showPlayers() {
         for (Player player : playersArray) {
-            System.out.println(player.toString());
+            System.out.println(player.toString2());
             System.out.print("ID Player: " + player.getId());
         }
     }

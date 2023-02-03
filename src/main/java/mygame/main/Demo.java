@@ -2,6 +2,7 @@ package mygame.main;
 
 import mygame.exceptions.*;
 import mygame.game.*;
+import mygame.implementation.PlayerRegister;
 import mygame.io.Input;
 import mygame.io.Output;
 
@@ -55,7 +56,20 @@ public class Demo {
 
         //System.out.println(gameMap);
 
-        Output.exportGameMap(gameMap);
-        GameMap newMap = Input.importGameMap();
+        //Output.exportGameMap(gameMap);
+        //GameMap newMap = Input.importGameMap();
+        //Connector connector = Input.importConnector();
+        //Portal newPortal = Input.importPortal();
+
+        Input importer = new Input();
+        PlayerRegister players = importer.importData("players.json");
+        for (Player player : players.getPlayers()) {
+            System.out.println("Name: " + player.getName());
+            System.out.println("Team: " + player.getTeam());
+            System.out.println("Level: " + player.getLevel());
+            System.out.println("Experience Points: " + player.getExperiencePoints());
+            System.out.println("Max Energy: " + player.getMaxEnergy());
+            System.out.println("Current Energy: " + player.getCurrentEnergy());
+        }
     }
 }
