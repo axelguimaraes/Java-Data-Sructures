@@ -6,18 +6,18 @@ import mygame.structures.interfaces.HeapADT;
 public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
     public HeapNode<T> lastNode;
 
-    /******************************************************************
-     Constructs an empty heap.
-     ******************************************************************/
+
+    /**
+     * Constructor for the {@link Heap} class. Creates an empty {@link Heap}
+     */
     public Heap() {
         super();
     }
 
-    /******************************************************************
-     Adds the specified element to the heap in the appropriate
-     position according to its key value.  Note that equal elements
-     are added to the right.
-     ******************************************************************/
+    /**
+     * Adds a given element to the {@link Heap} in the appropriate position, according to its key value
+     * @param obj element to be added
+     */
     public void addElement(T obj) {
         HeapNode<T> node = new HeapNode<T>(obj);
 
@@ -37,9 +37,10 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
             heapifyAdd();
     }
 
-    /******************************************************************
-     Returns the node that will be the parent of the new node.
-     ******************************************************************/
+    /**
+     * Gets new node's parent
+     * @return parent {@link HeapNode}
+     */
     private HeapNode<T> getNextParentAdd() {
         HeapNode<T> result = lastNode;
         while ((result != root) && (result.parent.left != result))
@@ -60,9 +61,9 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         return result;
     }
 
-    /******************************************************************
-     Reorders the heap after adding a node.
-     ******************************************************************/
+    /**
+     * Reorders the heap after adding a node
+     */
     private void heapifyAdd() {
         T temp;
         HeapNode<T> next = lastNode;
@@ -76,11 +77,12 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         }
     }
 
-    /******************************************************************
-     Remove the element with the lowest value in the heap and
-     returns a reference to it.  Throws an EmptyCollectionException
-     if the heap is empty.
-     ******************************************************************/
+
+    /**
+     * Removes the element with the lowest value in the heap and returns a reference to it.
+     * @return reference of removed element
+     * @throws EmptyCollectionException thrown if the heap is empty
+     */
     public T removeMin() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Empty Heap");
@@ -106,9 +108,10 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         return minElement;
     }
 
-    /******************************************************************
-     Reorders the heap after removing the root element.
-     ******************************************************************/
+
+    /**
+     * Reorders the heap after removing root element
+     */
     private void heapifyRemove() {
         T temp;
         HeapNode<T> node = (HeapNode<T>) root;
@@ -149,9 +152,11 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         }
     }
 
-    /******************************************************************
-     Returns the node that will be the new last node after a remove.
-     ******************************************************************/
+
+    /**
+     * Gets the node that will be the new last node after a remove
+     * @return new last {@link HeapNode}
+     */
     private HeapNode<T> getNewLastNode() {
         HeapNode<T> result = lastNode;
 
@@ -167,10 +172,11 @@ public class Heap<T> extends LinkedBinaryTree<T> implements HeapADT<T> {
         return result;
     }
 
-    /******************************************************************
-     Returns the element with the lowest value in the heap.
-     Throws an EmptyCollectionException if the heap is empty.
-     ******************************************************************/
+    /**
+     * Finds the element with the lowest value in the heap
+     * @return lowest element
+     * @throws EmptyCollectionException thrown if the heap is empty
+     */
     public T findMin() throws EmptyCollectionException {
         if (isEmpty())
             throw new EmptyCollectionException("Empty Heap");
