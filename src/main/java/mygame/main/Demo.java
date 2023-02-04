@@ -13,10 +13,10 @@ public class Demo {
     public static void main(String[] args) throws GraphExceptions, LocalNotFoundException, PlayerWithNoTeamException, EmptyCollectionException, IOException, ListExceptions {
         GameMap gameMap = new GameMap();
 
-        Portal portal1 = new Portal("Sao Bento Railway Station", 0, new Coordinates(41.14444, -8.61037), null, 500);
-        Portal portal2 = new Portal("Clerigos Tower", 0, new Coordinates(41.14578, -8.61391), null, 250);
-        Portal portal3 = new Portal("Bolsa Palace", 0, new Coordinates(41.14139, -8.61564), null, 300);
-        Portal portal4 = new Portal("Lello Bookstore", 0, new Coordinates(41.14688, -8.61564), null, 350);
+        Portal portal1 = new Portal("Sao Bento Railway Station", 0, new Coordinates(41.14444, -8.61037), 500);
+        Portal portal2 = new Portal("Clerigos Tower", 0, new Coordinates(41.14578, -8.61391), 250);
+        Portal portal3 = new Portal("Bolsa Palace", 0, new Coordinates(41.14139, -8.61564), 300);
+        Portal portal4 = new Portal("Lello Bookstore", 0, new Coordinates(41.14688, -8.61564), 350);
 
         Connector connector1 = new Connector(100, new Coordinates(41.14053, -8.60969), 2);
         Connector connector2 = new Connector(300, new Coordinates(41.15904, -8.63069), 8);

@@ -8,23 +8,51 @@ import mygame.structures.exceptions.ElementNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Class that represents a {@link GameMap}
+ */
 public class GameMap {
     private final Network<Local> map; // TODO: this is not directed atm
     private final ArrayUnorderedList<Player> playersInGame;
 
+    /**
+     * Constructor for the {@link GameMap}. It creates an instance of {@link Network} to represent the game map as a
+     * weighted directed graph. It also creates an instance of {@link ArrayUnorderedList} to list all players in-game
+     */
     public GameMap() {
         this.map = new Network<>();
         this.playersInGame = new ArrayUnorderedList<>();
     }
 
+    /**
+     * Getter for the {@link Network map}
+     * @return {@link Network}
+     */
+    public Network<Local> getMap() {
+        return this.map;
+    }
+
+    /**
+     * Adds a new {@link Local location} to the {@link GameMap}
+     * @param local location to add
+     */
     public void addLocation(Local local) {
         this.map.addVertex(local);
     }
 
+    /**
+     * Removes an existing {@link Local location} from the {@link GameMap}
+     * @param local location to be removed
+     */
     public void removeLocation(Local local) {
         this.map.removeVertex(local);
     }
 
+    /**
+     * Edits an existing {@link Local location} of the {@link GameMap}. It prompts the user with questions on the
+     * terminal, so that the user is able to choose which parameters to edit
+     * @param local location to be edited
+     */
     public void editLocation(Local local) {
         Iterator<Local> it = this.map.iteratorBFS(0);
         Scanner scanner = new Scanner(System.in);
@@ -142,17 +170,27 @@ public class GameMap {
         }
     }
 
+    /**
+     * TODO: sorting here
+     */
     public void listLocations() {
-        // TODO: sorting here
     }
 
+    /**
+     * Adds a {@link Player} to the {@link GameMap}
+     * @param player player to be added
+     */
     public void addPlayer(Player player) {
         player.setMap(this);
         player.setCurrentPositionID(1);
         playersInGame.addToRear(player);
     }
 
-    public void editPlayer(Player player) throws PlayerWithNoTeamException {
+    /**
+     * Edits an existing {@link Player} on the {@link GameMap}
+     * @param player player to be edited
+     */
+    public void editPlayer(Player player) {
         if (!this.playersInGame.contains(player)) {
             throw new ElementNotFoundException("players list");
         }
@@ -225,14 +263,27 @@ public class GameMap {
         }
     }
 
+    /**
+     * Removes an existing {@link Player} from the {@link GameMap}
+     * @param player player to be removed
+     */
     public void removePlayer(Player player) {
         this.playersInGame.remove(player);
     }
 
+    /**
+     * Getter for the list of {@link Player players} in-game
+     * @return {@link ArrayUnorderedList list} of {@link Player players} in-game
+     */
     public ArrayUnorderedList<Player> getPlayersInGame() {
         return this.playersInGame;
     }
 
+    /**
+     * Fetches an existing {@link Local location} from the {@link GameMap} by its ID
+     * @param id identification number of the {@link Local location}
+     * @return {@link Local location} to be fetched
+     */
     public Local getLocalByID(int id) {
         Iterator<Local> iterator = this.map.iteratorDFS(0);
         while (iterator.hasNext()) {
@@ -244,6 +295,12 @@ public class GameMap {
         throw new ElementNotFoundException("network");
     }
 
+    /**
+     * Gets the shortest path between two {@link Local locations}
+     * @param startID {@link Local location} of origin
+     * @param targetID {@link Local location} of destination
+     * @return {@link ArrayUnorderedList list} of {@link Local locations} to go through
+     */
     public ArrayUnorderedList<Local> getShortestPathToLocal(int startID, int targetID) {
         ArrayUnorderedList<Local> list = new ArrayUnorderedList<>();
         Iterator<Local> it = getIteratorShortestPath(startID, targetID);
@@ -253,6 +310,12 @@ public class GameMap {
         return list;
     }
 
+    /**
+     * Gets the shortest path between multiple {@link Local locations}. Best used when it's required to calculate the
+     * shortest path, whilst forcefully passing through specific {@link Local locations}
+     * @param localIDs {@link Local locations to be included on the path. Origin and destination included}
+     * @return {@link ArrayUnorderedList list} of {@link Local locations} to go through
+     */
     public ArrayUnorderedList<Local> getShortestPathBetweenMultipleLocals(int... localIDs) {
         ArrayUnorderedList<Local> list = new ArrayUnorderedList<>();
         if (localIDs.length == 0) {
@@ -269,22 +332,61 @@ public class GameMap {
         return list;
     }
 
+    /**
+     * Connects two existing {@link Local locations} on the {@link GameMap}
+     * @param location1 first {@link Local location}
+     * @param location2 second {@link Local location}
+     * @param weight path distance of the {@link Local locations} to connect
+     */
     public void connectLocations(Local location1, Local location2, double weight) {
         this.map.addEdge(location1, location2, weight);
     }
 
+    /**
+     * Connects two existing {@link Local locations} on the {@link GameMap}. The method automatically adds the path
+     * distance, which is calculated using the {@link Local locations's} {@link Coordinates coordinates}
+     * @param location1 first {@link Local location}
+     * @param location2 second {@link Local location}
+     */
     public void connectLocationsWithCoordinates(Local location1, Local location2) {
         this.map.addEdge(location1, location2, coordinatesDistance(location1, location2));
     }
 
+    /**
+     * Removes a connection path between two {@link Local locations}
+     * @param firstLocalID first {@link Local location}
+     * @param secondLocalID second {@link Local location}
+     */
     public void removeConnectingPath(int firstLocalID, int secondLocalID) {
         this.map.removeEdge(getLocalByID(firstLocalID), getLocalByID(secondLocalID));
     }
 
+    /**
+     * Lists all the information relative to the {@link GameMap}
+     * @return {@link String} of all the information
+     */
     public String toString() {
-        return this.map.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.map);
+
+        stringBuilder.append("\nPlayers in-game:\n");
+        if (this.playersInGame.size() > 0) {
+            for (Player player : playersInGame) {
+                stringBuilder.append(player.getName()).append("\n");
+            }
+        } else {
+            stringBuilder.append("No players added\n");
+        }
+
+        return stringBuilder.toString();
     }
 
+    /**
+     * Calculates the distance between two {@link Local locations} using their {@link Coordinates coordinates}
+     * @param local1 first {@link Local location}
+     * @param local2 second {@link Local location}
+     * @return path distance
+     */
     private static double coordinatesDistance(Local local1, Local local2) {
         final int EARTH_RADIUS = 6371;
         double lat1 = local1.getCoordinates().getLatitude();
@@ -303,14 +405,32 @@ public class GameMap {
         return EARTH_RADIUS * c;
     }
 
+    /**
+     * Gets an iterator of the shortest path between two {@link Local locations} using their IDs
+     * @param start ID of the {@link Local location} of origin
+     * @param target ID of the {@link Local location} of destination
+     * @return {@link Iterator} of the shortest path
+     */
     private Iterator<Local> getIteratorShortestPath(int start, int target) {
         return this.map.iteratorShortestPath(getLocalByID(start), getLocalByID(target));
     }
 
+    /**
+     * Gets the shortest path weight between two {@link Local locations} using their IDs
+     * @param start ID of the {@link Local location} of origin
+     * @param target ID of the {@link Local location} of destination
+     * @return shortest path weight
+     */
     public double getShortestPathWeight(int start, int target) {
         return this.map.shortestPathWeight(getLocalByID(start), getLocalByID(target));
     }
 
+    /**
+     * Gets the shortest path weight between multiple {@link Local locations} using their IDs. Best used when calculating
+     * the shortest path between two {@link Local locations}, whilst forcefully passing throw specific {@link Local locations}
+     * @param locals {@link Local locations} to pass through
+     * @return shortest path weight
+     */
     public double getShortestPathWeightBetweenMultipleLocals(int... locals) {
         if (locals.length == 0) {
             throw new IllegalArgumentException("Method must have 1 or more arguments!");
