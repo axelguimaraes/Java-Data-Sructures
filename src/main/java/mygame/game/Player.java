@@ -13,7 +13,10 @@ import java.util.Iterator;
 public class Player {
     private static int nextId;
     private final int id;
+
     private int energy;
+
+    private int maxEnergy;
     private Team team;
     private String name;
     private int currentPositionID;
@@ -21,6 +24,24 @@ public class Player {
     private double xp;
     private GameMap map;
     private ArrayUnorderedList<Integer> conqueredPortalsIDs;
+
+    public Player(String name, Team team, int level,double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
+        this.id = ++nextId;
+        this.name = name;
+        this.energy = 0;
+        this.level = level;
+        this.team = team;
+        this.maxEnergy = maxEnergy;
+        this.energy = energy;
+        this.currentPositionID = -1;
+        this.level = 1;
+        this.xp = 0;
+        this.conqueredPortalsIDs = new ArrayUnorderedList<>();
+
+        if (this.team == null || this.team.equals(Team.NONE)) {
+            throw new PlayerWithNoTeamException(PlayerWithNoTeamException.PLAYER_NO_TEAM);
+        }
+    }
 
     /**
      * Constructor for the {@link Player}. It generates an auto-incremented ID that identifies the {@link Player}. It
@@ -336,6 +357,20 @@ public class Player {
                 "Team: " + this.team.toString() + "\n" +
                 "Level: " + this.level + "\n" +
                 "Current position: " + name + " ID: " + this.currentPositionID;
+    }
+
+    public String showPlayerData(){
+        return "==============\n" +
+                "ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Energy: " + energy + "\n" +
+                "Level: " + level + "\n" +
+                "Team: " + team + "\n" +
+                "Max Energy: " + maxEnergy + "\n" +
+                "Current Position ID: " + currentPositionID + "\n" +
+                "XP: " + xp + "\n" +
+                "Conquered Portals IDs: " + conqueredPortalsIDs + "\n" +
+                "==============\n";
     }
 
     /**
