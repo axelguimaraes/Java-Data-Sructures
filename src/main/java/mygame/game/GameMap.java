@@ -1,5 +1,6 @@
 package mygame.game;
 
+import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.Network;
@@ -277,6 +278,15 @@ public class GameMap {
      */
     public ArrayUnorderedList<Player> getPlayersInGame() {
         return this.playersInGame;
+    }
+
+    public Player getPlayerFromID (int id) throws PlayerNotFoundException {
+        for (Player player : this.playersInGame) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        throw new PlayerNotFoundException();
     }
 
     /**
