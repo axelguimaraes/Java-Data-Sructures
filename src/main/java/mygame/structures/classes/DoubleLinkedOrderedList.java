@@ -23,7 +23,7 @@ public class DoubleLinkedOrderedList<T> extends DoubleLinkedList<T>
         }
 
         Comparable tmp = (Comparable) element;
-        DoubleLinkedListNode<T> newNode = new DoubleLinkedListNode<>(element);
+        DoubleLinkedNode<T> newNode = new DoubleLinkedNode<>(element);
 
         if (head.getData() == null) {
             head.setData(element);
@@ -34,8 +34,8 @@ public class DoubleLinkedOrderedList<T> extends DoubleLinkedList<T>
             head = newNode;
 
         } else {
-            DoubleLinkedListNode<T> n = head;
-            DoubleLinkedListNode<T> next;
+            DoubleLinkedNode<T> n = head;
+            DoubleLinkedNode<T> next;
 
             while (n.getNext() != null
                     && tmp.compareTo(n.getNext().getData()) > 0) {
