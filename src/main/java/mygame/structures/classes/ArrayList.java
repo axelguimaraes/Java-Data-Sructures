@@ -5,7 +5,7 @@ import mygame.structures.interfaces.ListADT;
 import java.util.Iterator;
 
 
-public class ArrayList<T> implements ListADT<T> {
+public abstract class ArrayList<T> implements ListADT<T> {
 
     private final int DEFAULT_CAPACITY = 10;
 

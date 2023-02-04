@@ -16,8 +16,8 @@ public class DoubleLinkedUnorderedList<T> extends DoubleLinkedList<T>
             head.setData(element);
 
         } else {
-            DoubleLinkedListNode<T> tmp = head;
-            head = new DoubleLinkedListNode<>(element);
+            DoubleLinkedNode<T> tmp = head;
+            head = new DoubleLinkedNode<>(element);
             head.setNext(tmp);
         }
 
@@ -36,7 +36,7 @@ public class DoubleLinkedUnorderedList<T> extends DoubleLinkedList<T>
             head.setData(element);
 
         } else {
-            DoubleLinkedListNode<T> newTail = new DoubleLinkedListNode<>(element);
+            DoubleLinkedNode<T> newTail = new DoubleLinkedNode<>(element);
             tail.setNext(newTail);
             newTail.setPrev(tail);
             tail = tail.getNext();
@@ -58,9 +58,9 @@ public class DoubleLinkedUnorderedList<T> extends DoubleLinkedList<T>
             return;
         }
 
-        DoubleLinkedListNode<T> previousNode = returnsNodeByElement(previous);
-        DoubleLinkedListNode<T> nextNode = previousNode.getNext();
-        DoubleLinkedListNode<T> newNode = new DoubleLinkedListNode<>(element);
+        DoubleLinkedNode<T> previousNode = returnsNodeByElement(previous);
+        DoubleLinkedNode<T> nextNode = previousNode.getNext();
+        DoubleLinkedNode<T> newNode = new DoubleLinkedNode<>(element);
         newNode.setPrev(previousNode);
         previousNode.setNext(newNode);
 

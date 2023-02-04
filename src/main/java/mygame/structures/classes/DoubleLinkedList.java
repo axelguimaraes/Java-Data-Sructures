@@ -10,12 +10,12 @@ public class DoubleLinkedList<T> implements ListADT<T> {
     /**
      * The first element of the List.
      */
-    protected DoubleLinkedListNode<T> head;
+    protected DoubleLinkedNode<T> head;
 
     /**
      * The last element of the List.
      */
-    protected DoubleLinkedListNode<T> tail;
+    protected DoubleLinkedNode<T> tail;
 
     /**
      * The number of elements.
@@ -33,8 +33,8 @@ public class DoubleLinkedList<T> implements ListADT<T> {
     public DoubleLinkedList() {
         this.counter = 0;
         this.modCount = 0;
-        this.head = new DoubleLinkedListNode<>();
-        this.tail = new DoubleLinkedListNode<>();
+        this.head = new DoubleLinkedNode<>();
+        this.tail = new DoubleLinkedNode<>();
         this.head = this.tail;
     }
 
@@ -103,8 +103,8 @@ public class DoubleLinkedList<T> implements ListADT<T> {
         return oldLast;
     }
 
-    protected DoubleLinkedListNode<T> returnsNodeByElement(T target) {
-        DoubleLinkedListNode n = this.head;
+    protected DoubleLinkedNode<T> returnsNodeByElement(T target) {
+        DoubleLinkedNode n = this.head;
 
         while (n.getNext() != null) {
             if (n.getData().equals(target)) {
@@ -149,9 +149,9 @@ public class DoubleLinkedList<T> implements ListADT<T> {
             return this.removeLast();
         }
 
-        DoubleLinkedListNode toBeRemoved = this.returnsNodeByElement(element);
-        DoubleLinkedListNode previous = toBeRemoved.getPrev();
-        DoubleLinkedListNode next = toBeRemoved.getNext();
+        DoubleLinkedNode toBeRemoved = this.returnsNodeByElement(element);
+        DoubleLinkedNode previous = toBeRemoved.getPrev();
+        DoubleLinkedNode next = toBeRemoved.getNext();
 
         previous.setNext(next);
         next.setPrev(previous);
@@ -172,6 +172,10 @@ public class DoubleLinkedList<T> implements ListADT<T> {
         return this.head.getData();
     }
 
+    public DoubleLinkedNode<T> getHead() {
+        return this.head;
+    }
+
     /**
      * Returns a reference to the last element in this list.
      *
@@ -180,6 +184,10 @@ public class DoubleLinkedList<T> implements ListADT<T> {
     @Override
     public T last() {
         return this.tail.getData();
+    }
+
+    public DoubleLinkedNode<T> getTail() {
+        return this.tail;
     }
 
     /**
@@ -194,7 +202,7 @@ public class DoubleLinkedList<T> implements ListADT<T> {
             return false;
         }
 
-        DoubleLinkedListNode n = this.head;
+        DoubleLinkedNode n = this.head;
 
         while (n.getNext() != null) {
             if (n.getData().equals(target)) {
@@ -238,7 +246,7 @@ public class DoubleLinkedList<T> implements ListADT<T> {
         }
 
         String str = "";
-        DoubleLinkedListNode<T> n = this.head;
+        DoubleLinkedNode<T> n = this.head;
 
         while (n.getNext() != null) {
             str += n.getData() + "; ";
@@ -262,13 +270,13 @@ public class DoubleLinkedList<T> implements ListADT<T> {
     private class DoubleLinkedListIterator<E> implements Iterator<E> {
 
         private int expectedModcount;
-        private DoubleLinkedListNode<E> current;
+        private DoubleLinkedNode<E> current;
         private boolean okToRemove;
 
         private DoubleLinkedListIterator(int modCount) {
             this.expectedModcount = modCount;
-            this.current = new DoubleLinkedListNode<>();
-            this.current.setNext((DoubleLinkedListNode<E>) head);
+            this.current = new DoubleLinkedNode<>();
+            this.current.setNext((DoubleLinkedNode<E>) head);
             this.okToRemove = false;
         }
 
