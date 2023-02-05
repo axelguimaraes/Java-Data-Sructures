@@ -7,12 +7,13 @@ import mygame.io.Input;
 import mygame.structures.classes.LinkedQueue;
 
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class StartMenu {
     public static void main(String[] args) throws PlayerNotFoundException, PlayerWithNoTeamException {
         GameMap gameMap = new GameMap();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\\n");;
 
         while (true) {
             try {
@@ -52,12 +53,12 @@ public class StartMenu {
                 }
             } catch (InputMismatchException ex) {
                 System.err.println("Invalid option!");
-                scanner = new Scanner(System.in);
+                scanner = new Scanner(System.in).useDelimiter("\\n");
             }
         }
     }
 
-    public static void playersMenu(GameMap gameMap, Scanner scanner) {
+    public static void playersMenu(GameMap gameMap, Scanner scanner) throws PlayerWithNoTeamException, PlayerNotFoundException {
         while (true) {
             System.out.println("== PLAYERS MENU ==\n\n" +
                     "" +
@@ -73,17 +74,72 @@ public class StartMenu {
 
             switch (scanner.nextInt()) {
                 case 1:
-                    // TODO: Register player
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No existing locations to add player!");
+                        break;
+                    }
+
+                    System.out.println(" == REGISTER PLAYER ==\nName: ");
+                    String name = scanner.next();
+
+                    System.out.println("Team (1) Sparks | (2) Giants:");
+                    Team team = null;
+                    switch (scanner.nextInt()) {
+                        case 1:
+                            team = Team.SPARKS;
+                            break;
+                        case 2:
+                            team = Team.GIANTS;
+                            break;
+                        default:
+                            System.err.println("Invalid option!");
+                    }
+
+                    if (team == null) {
+                        System.err.println("Player not added");
+                        break;
+                    }
+
+                    gameMap.addPlayer(new Player(name, team));
+                    System.err.println("Player added!");
                     break;
+
                 case 2:
-                    // TODO: List players
+                    System.out.println("== LIST PLAYERS ==\n");
+                    if (gameMap.getPlayersInGame().isEmpty()) {
+                        System.err.println("No existing players!");
+                        break;
+                    }
+
+                    for (Player player : gameMap.getPlayersInGame()) {
+                        System.out.println(player.toString() + "\n");
+                    }
                     break;
+
                 case 3:
-                    // TODO: Edit players
+                    if (gameMap.getPlayersInGame().isEmpty()) {
+                        System.err.println("No existing players!");
+                        break;
+                    }
+                    System.out.println("== EDIT PLAYER ==\n" +
+                            "ID of player to edit:");
+
+                    gameMap.editPlayer(gameMap.getPlayerFromID(scanner.nextInt()));
+                    System.err.println("Player edited!");
                     break;
+
                 case 4:
-                    // TODO: Remove players
+                    if (gameMap.getPlayersInGame().isEmpty()) {
+                        System.err.println("No existing players!");
+                        break;
+                    }
+                    System.out.println("== REMOVE PLAYER ==\n" +
+                            "ID of player to remove:");
+
+                    gameMap.removePlayer(gameMap.getPlayerFromID(scanner.nextInt()));
+                    System.err.println("Player removed!");
                     break;
+
                 case 5:
                     // TODO: Import players
                     break;
@@ -150,7 +206,6 @@ public class StartMenu {
                     System.out.println("\tTeam: " + portal.getTeam() + "\n" +
                             "\tName: " + portal.getName() + "\n" +
                             "\tEnergy: " + portal.getEnergy());
-                            //"\tConqueror: " + portal.getConqueror().getName() + "\n\n" +
                     try {
                         System.out.println("\tConqueror: " + portal.getConqueror().getName() + "\n\n");
                     } catch (NullPointerException ex) {
@@ -220,29 +275,160 @@ public class StartMenu {
                     "5. Add path\n" +
                     "6. Remove path\n" +
                     "7. Import locations\n" +
-                    "8. Export locations\n;" +
+                    "8. Export locations\n" +
                     "0. Exit\n\n" +
                     "" +
                     "Your choice: ");
 
             switch (scanner.nextInt()) {
                 case 1:
-                    // TODO: Add location
+                    boolean done = false;
+                    Local local = null;
+
+                    while (!done) {
+                        System.out.println("== ADD LOCATION ==\n\n" +
+                                "1. New portal\n" +
+                                "2. New connector\n" +
+                                "0. Exit\n\n" +
+                                "Your choice:");
+
+                        switch (scanner.nextInt()) {
+                            case 1:
+                                System.out.println("Name:");
+                                String name = scanner.next();
+
+                                System.out.println("Energy:");
+                                int energy = scanner.nextInt();
+
+                                System.out.println("Latitude:");
+                                double lat = scanner.nextDouble();
+
+                                System.out.println("Longitude:");
+                                double lon = scanner.nextDouble();
+
+                                System.out.println("Maximum energy:");
+                                int maxEnergy = scanner.nextInt();
+
+                                local = new Portal(name, energy, new Coordinates(lat, lon), maxEnergy);
+                                done = true;
+                                break;
+
+                            case 2:
+                                System.out.println("Energy:");
+                                energy = scanner.nextInt();
+
+                                System.out.println("Latitude:");
+                                lat = scanner.nextDouble();
+
+                                System.out.println("Longitude:");
+                                lon = scanner.nextDouble();
+
+                                System.out.println("Cooldown (minutes):");
+                                int cooldown = scanner.nextInt();
+
+                                local = new Connector(energy, new Coordinates(lat, lon), cooldown);
+                                done = true;
+                                break;
+
+                            case 0:
+                                done = true;
+                                break;
+
+                            default:
+                                System.err.println("Invalid option!");
+                        }
+
+                        if (local == null) {
+                            System.err.println("Location not added!");
+                            break;
+                        }
+
+                        System.err.println("Location added!");
+                        gameMap.addLocation(local);
+                    }
+
                     break;
                 case 2:
-                    // TODO: List locations
+                    System.out.println("== LIST LOCATIONS ==\n");
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No locations available!");
+                        break;
+                    }
+
+                    Iterator<Local> it = gameMap.getMap().iteratorBFS(0);
+                    while (it.hasNext()) {
+                        Local location = it.next();
+
+                        if (location instanceof Portal) {
+                            System.out.println(location + "\n");
+                        } else if (location instanceof Connector) {
+                            System.out.println(location + "\n");
+                        }
+                    }
                     break;
+
                 case 3:
-                    // TODO: Edit location
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No locations available!");
+                        break;
+                    }
+                    System.out.println("== EDIT LOCATION ==\n" +
+                            "ID of location to edit:");
+                    gameMap.editLocation(gameMap.getLocalByID(scanner.nextInt()));
+                    System.err.println("Location edited!");
                     break;
+
                 case 4:
-                    // TODO: Remove location
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No locations available!");
+                        break;
+                    }
+                    System.out.println("== REMOVE LOCATION ==\n" +
+                            "ID of location to remove:");
+                    gameMap.removeLocation(gameMap.getLocalByID(scanner.nextInt()));
+                    System.err.println("Location removed!");
                     break;
+
                 case 5:
-                    // TODO: Add path
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No locations available!");
+                        break;
+                    }
+                    int id1, id2;
+                    double weight;
+
+                    System.out.println("== ADD PATH ==\n" +
+                            "ID of first location:");
+                    id1 = scanner.nextInt();
+
+                    System.out.println("ID of second location:");
+                    id2 = scanner.nextInt();
+
+                    System.out.println("Distance (0 to calculate automatically):");
+                    weight = scanner.nextDouble();
+
+                    if (weight == 0) {
+                        gameMap.connectLocationsWithCoordinates(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2));
+                    } else {
+                        gameMap.connectLocations(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2), weight);
+                    }
+                    System.err.println("Path added!");
                     break;
+
                 case 6:
-                    // TODO: Remove path
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("No locations available!");
+                        break;
+                    }
+                    System.out.println("== REMOVE PATH ==\n" +
+                            "First location ID:");
+                    id1 = scanner.nextInt();
+
+                    System.out.println("Second location ID:");
+                    id2 = scanner.nextInt();
+
+                    gameMap.removeConnectingPath(id1, id2);
+                    System.err.println("Path removed!");
                     break;
                 case 7:
                     // TODO: Import locations
