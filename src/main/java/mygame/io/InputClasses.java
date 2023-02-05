@@ -166,8 +166,8 @@ public class InputClasses {
         for (Object route : routes){
             JSONObject routesJson = (JSONObject) route;
 
-            int from = (((Long) routesJson.get("maxEnergy")).intValue());
-            int to = (((Long) routesJson.get("currentEnergy")).intValue());
+            int from = (((Long) routesJson.get("from")).intValue());
+            int to = (((Long) routesJson.get("to")).intValue());
         }
 
     }
