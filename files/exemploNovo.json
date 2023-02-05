@@ -1,5 +1,5 @@
 {
-  "Portals":[
+  "Portal":[
     {
       "id": 1414,
       "name": "Jacqueline Kennedy Onassis Reservoir",
@@ -8,7 +8,8 @@
         "longitude": -73.9737489
       },
       "gameSettings":{
-        "energy":180,
+        "energy": 180,
+        "maxEnergy": 300,
         "ownership":{
           "player": "LoboMau"
         }
@@ -22,14 +23,15 @@
         "longitude": -63.9390481
       },
       "gameSettings":{
-        "energy":180,
+        "energy": 220,
+        "maxEnergy": 300,
         "ownership":{
           "player": "TatianaNeves"
         }
       }
     }
   ],
-  "Connectors":[
+  "Connector":[
     {
       "id": 5212,
       "coordinates":{

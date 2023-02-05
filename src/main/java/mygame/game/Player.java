@@ -13,9 +13,7 @@ import java.util.Iterator;
 public class Player {
     private static int nextId;
     private final int id;
-
     private int energy;
-
     private int maxEnergy;
     private Team team;
     private String name;
@@ -25,6 +23,25 @@ public class Player {
     private GameMap map;
     private ArrayUnorderedList<Integer> conqueredPortalsIDs;
 
+    public Player(){
+        this.id = ++nextId;
+    }
+
+    /**
+     * Constructor with the objective of saving all the information contained in the json document for the {@link Player}.
+     * It also sets its current position as '-1', meaning that it has no associated position at the moment. It also initiates
+     * its level as 1 and experience points (xp) as 0. Lastly it creates a {@link ArrayUnorderedList list} of conquered
+     * portals, which will contain each conquered portal by the {@link Player}
+     * its level as 1 and experience points (xp) as 0. Lastly it creates a {@link ArrayUnorderedList list} of conquered
+     * portals, which will contain each conquered portal by the {@link Player}
+     * @param name {@link Player Player's} name
+     * @param team {@link Player Player's} to associate the {@link Player}
+     * @param level {@link Player Player's} level
+     * @param xp {@link Player Player's} xp
+     * @param maxEnergy {@link Player Player's} maxEnergy
+     * @param energy {@link Player Player's} energy
+     * @throws PlayerWithNoTeamException
+     */
     public Player(String name, Team team, int level,double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
         this.id = ++nextId;
         this.name = name;
@@ -168,6 +185,22 @@ public class Player {
      */
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    /**
+     * Getter for the energy
+     * @return maxEnergy
+     */
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    /**
+     * Setter for the max energy
+     * @param maxEnergy max energy
+     */
+    public void setMaxEnergy(int maxEnergy) {
+        this.maxEnergy = maxEnergy;
     }
 
     /**
@@ -346,7 +379,8 @@ public class Player {
      */
     public String toString() {
         String name;
-        if (this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
+
+        if (this.map != null && this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
             name = ((Portal) this.map.getLocalByID(this.currentPositionID)).getName();
         } else {
             name = "Connector";
@@ -359,8 +393,12 @@ public class Player {
                 "Current position: " + name + " ID: " + this.currentPositionID;
     }
 
+    /**
+     * Method that displays all player data in a formatted manner
+     * @return a formatted string containing all player data
+     */
     public String showPlayerData(){
-        return "==============\n" +
+        return "=====================\n" +
                 "ID: " + id + "\n" +
                 "Name: " + name + "\n" +
                 "Energy: " + energy + "\n" +
@@ -370,7 +408,7 @@ public class Player {
                 "Current Position ID: " + currentPositionID + "\n" +
                 "XP: " + xp + "\n" +
                 "Conquered Portals IDs: " + conqueredPortalsIDs + "\n" +
-                "==============\n";
+                "=====================\n";
     }
 
     /**

@@ -1,6 +1,6 @@
 package mygame.implementation;
 
-import com.google.gson.Gson;
+
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.Player;
 

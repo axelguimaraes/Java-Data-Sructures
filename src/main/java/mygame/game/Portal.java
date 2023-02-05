@@ -4,10 +4,20 @@ package mygame.game;
  * Class that represents a {@link Portal}
  */
 public class Portal extends Local {
+
     private String name;
     private Team team;
     private Player conqueror;
     private final int maxEnergy;
+
+    public Portal(String name, Coordinates coordinates, int energy, int maxEnergy, Player conqueror){
+        super(energy, coordinates);
+        this.team = Team.NONE;
+        this.conqueror = conqueror;
+        this.name = name;
+        this.maxEnergy = maxEnergy;
+        super.setLocalType(LocalType.PORTAL);
+    }
 
     /**
      * Constructor for the {@link Portal}. It automatically sets the {@link Team} as 'NONE' and the
@@ -167,8 +177,8 @@ public class Portal extends Local {
         return "PORTAL\n" +
                 "ID: " + super.getId() + "\n" +
                 "Name: " + this.name + "\n" +
-                "Team: " + this.team + "\n" +
-                "Conquerer: " + this.conqueror + "\n" +
+                //"Team: " + this.conqueror.getTeam() + "\n" +
+                "Conqueror: " + (this.conqueror != null ? this.conqueror.getName() : "null") + "\n" +
                 "Energy: " + super.getEnergy() + "\n" +
                 "Coordinates: " + super.getCoordinates() + "\n";
     }
