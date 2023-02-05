@@ -3,8 +3,10 @@ package mygame.menu;
 import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
+import mygame.io.Input;
 import mygame.structures.classes.LinkedQueue;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StartMenu {
@@ -13,39 +15,44 @@ public class StartMenu {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("== START MENU ==\n\n" +
-                    "" +
-                    "1. Players menu\n" +
-                    "2. Map menu\n" +
-                    "5. Import Demo (DEV ONLY)\n\n" + // TODO: DEV ONLY!!!
-                    "" +
-                    "3. Start\n" +
-                    "0. Exit\n\n" +
-                    "Your choice:");
+            try {
+                System.out.println("== START MENU ==\n\n" +
+                        "" +
+                        "1. Players menu\n" +
+                        "2. Map menu\n" +
+                        "5. Import Demo (DEV ONLY)\n\n" + // TODO: DEV ONLY!!!
+                        "" +
+                        "3. Start\n" +
+                        "0. Exit\n\n" +
+                        "Your choice:");
 
-            switch (scanner.nextInt()) {
-                case 1:
-                    playersMenu(gameMap, scanner);
-                    break;
-                case 2:
-                    mapMenu(gameMap, scanner);
-                    break;
-                case 3:
-                    if (gameMap.getPlayersInGame().isEmpty()) {
-                        System.err.println("No players registered in the game!");
-                    } else {
-                        gameStart(gameMap, scanner);
-                    }
-                    break;
-                case 5:
-                    importEverything(gameMap);
-                    System.err.println("Imported!");
-                    break;
-                case 0:
-                    System.out.println("Bye!");
-                    System.exit(0);
-                default:
-                    System.err.println("Invalid option!");
+                switch (scanner.nextInt()) {
+                    case 1:
+                        playersMenu(gameMap, scanner);
+                        break;
+                    case 2:
+                        mapMenu(gameMap, scanner);
+                        break;
+                    case 3:
+                        if (gameMap.getPlayersInGame().isEmpty()) {
+                            System.err.println("No players registered in the game!");
+                        } else {
+                            gameStart(gameMap, scanner);
+                        }
+                        break;
+                    case 5:
+                        importEverything(gameMap);
+                        System.err.println("Imported!");
+                        break;
+                    case 0:
+                        System.out.println("Bye!");
+                        System.exit(0);
+                    default:
+                        System.err.println("Invalid option!");
+                }
+            } catch (InputMismatchException ex) {
+                System.err.println("Invalid option!");
+                scanner = new Scanner(System.in);
             }
         }
     }
@@ -121,31 +128,36 @@ public class StartMenu {
     }
 
     public static void gameStart(GameMap gameMap, Scanner scanner) throws PlayerNotFoundException {
-        LinkedQueue<Player> playersTurn = new LinkedQueue<>(); // If stats updating in map but not here, update queue
+        LinkedQueue<Integer> playersTurn = new LinkedQueue<>();
         for (Player player : gameMap.getPlayersInGame()) {
-            playersTurn.enqueue(player);
+            playersTurn.enqueue(player.getId());
         }
 
         while (true) {
-            Player turn = playersTurn.dequeue();
+            Player turn = gameMap.getPlayerFromID(playersTurn.dequeue());
             Local currentPosition = gameMap.getLocalByID(turn.getCurrentPositionID());
 
             System.out.println("\n\n\t== PLAYER " + turn.getId() + " TURN ==\n" +
-                    "Player name: " + turn.getName() + "\n" +
+                    "Player name: " + turn.getName() + "\t| Team: " + turn.getTeam() + "\n" +
                     "Energy: " + turn.getEnergy() + "\n" +
                     "Level: " + turn.getLevel() + "\n" +
                     "XP: " + turn.getXp() + "\n" +
-                    "Current location: " + currentPosition.getLocalType() + " ID " + currentPosition.getId() + "\n");
+                    "Current location: " + currentPosition.getLocalType() + " ID " + currentPosition.getId());
 
             switch (currentPosition.getLocalType()) {
                 case PORTAL:
                     Portal portal = (Portal) currentPosition;
                     System.out.println("\tTeam: " + portal.getTeam() + "\n" +
                             "\tName: " + portal.getName() + "\n" +
-                            "\tEnergy: " + portal.getEnergy() + "\n\n" +
+                            "\tEnergy: " + portal.getEnergy());
                             //"\tConqueror: " + portal.getConqueror().getName() + "\n\n" +
-                            "" +
-                            "1. Conquer portal\n" +
+                    try {
+                        System.out.println("\tConqueror: " + portal.getConqueror().getName() + "\n\n");
+                    } catch (NullPointerException ex) {
+                        System.out.println("\n");
+                    }
+
+                    System.out.println("1. Conquer portal\n" +
                             "2. Charge portal\n" +
                             "3. Navigate to other location\n" +
                             "0. Exit to main menu\n\n" +
@@ -156,7 +168,7 @@ public class StartMenu {
                             break;
                         case 2:
                             System.out.println("How much energy?:");
-                            ((Portal) gameMap.getLocalByID(currentPosition.getId())).rechargeEnergy(gameMap.getPlayerFromID(turn.getId()), scanner.nextInt());
+                            turn.chargePortal(scanner.nextInt());
                             break;
                         case 3:
                             System.out.println("Destination ID: ");
@@ -192,7 +204,7 @@ public class StartMenu {
                     }
                     break;
             }
-            playersTurn.enqueue(turn);
+            playersTurn.enqueue(turn.getId());
 
         }
     }
@@ -246,7 +258,7 @@ public class StartMenu {
         }
     }
 
-    public static void importEverything(GameMap gameMap) throws PlayerWithNoTeamException {
+    private static void importEverything(GameMap gameMap) throws PlayerWithNoTeamException {
         Portal portal1 = new Portal("Sao Bento Railway Station", 0, new Coordinates(41.14444, -8.61037), 500);
         Portal portal2 = new Portal("Clerigos Tower", 0, new Coordinates(41.14578, -8.61391), 250);
         Portal portal3 = new Portal("Bolsa Palace", 0, new Coordinates(41.14139, -8.61564), 300);
