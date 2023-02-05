@@ -3,7 +3,6 @@ package mygame.menu;
 import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
-import mygame.io.Input;
 import mygame.structures.classes.LinkedQueue;
 
 import java.util.InputMismatchException;

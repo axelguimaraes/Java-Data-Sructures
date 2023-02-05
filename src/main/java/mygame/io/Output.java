@@ -1,3 +1,0 @@
-package mygame.io;
-
-
