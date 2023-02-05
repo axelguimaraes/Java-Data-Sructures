@@ -19,7 +19,7 @@ public class InputClasses2 {
                 Object obj = parser.parse(new FileReader("files/exemploNovo.json"));
                 JSONObject jsonObject = (JSONObject) obj;
 
-                JSONArray connectors = (JSONArray) jsonObject.get("Connectors");
+                JSONArray connectors = (JSONArray) jsonObject.get("Connector");
                 JSONArray portals = (JSONArray) jsonObject.get("Portal");
                 JSONArray players = (JSONArray) jsonObject.get("Players");
 
@@ -35,8 +35,11 @@ public class InputClasses2 {
 
                     Object gameSettingsObject = connectorJson.get("gameSettings");
                     JSONObject gameSettings = (JSONObject) gameSettingsObject;
+                    int energy = (((Long) gameSettings.get("energy")).intValue());
+                    int cooldown = (((Long) gameSettings.get("energy")).intValue());
 
-                    Connector connectorObj = new Connector(name, coordinates, energy, maxEnergy , player);
+
+                    Connector connectorObj = new Connector(energy, coordinates , cooldown);
 
                     // set data in localObj
                     connectorList.addToRear(connectorObj);
