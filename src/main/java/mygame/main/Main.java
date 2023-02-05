@@ -1,8 +1,7 @@
 package mygame.main;
 
 import mygame.game.Player;
-import mygame.io.Input;
-import mygame.io.Output;
+
 
 import java.io.IOException;
 

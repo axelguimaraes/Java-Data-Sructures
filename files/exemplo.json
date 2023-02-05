@@ -1,58 +1,78 @@
 {
-	"locals":[
-		{
-			"id": 1414,
-			"type": "Portal",
-			"name": "Jacqueline Kennedy Onassis Reservoir",
-			"coordinates":{
-				"latitude": 40.7656918,
-				"longitude": -73.9737489
-			},
-			"gameSettings":{
-				"energy":180,
-				"ownership":{
-					"player": "LoboMau"
-				}
-
-			}
-		},
-		{
-			"id": 5212,
-			"type": "Connector",
-			"coordinates":{
-				"latitude": 40.7697989,
-				"longitude": -73.9723702
-			},
-			"gameSettings":{
-				"energy":110,
-				"cooldown": 3
-
-			}
-		}
-	],
-	"routes":[
-		{
-			"from": 1414,
-			"to": 5212
-		}
-	],
-	"Players":[
-		{
-			"name": "LoboMau",
-			"team": "Sparks",
-			"level": 5,
-			"experiencePoints": 24998,
-			"maxEnergy": 100,
-			"currentEnergy": 70
-
-		},
-		{
-			"name": "TatianaNeves",
-			"team": "Giants",
-			"level": 7,
-			"experiencePoints": 24519,
-			"maxEnergy": 100,
-			"currentEnergy": 32
-		}
-	]
+  "Connector": [
+    {
+      "gameSettings": {
+        "cooldown": 100,
+        "energy": 100
+      },
+      "coordinates": {
+        "latitude": 1930.1,
+        "longitude": 340.2
+      },
+      "id": 3
+    },
+    {
+      "gameSettings": {
+        "cooldown": 200,
+        "energy": 200
+      },
+      "coordinates": {
+        "latitude": 4310.1,
+        "longitude": 6420.2
+      },
+      "id": 4
+    }
+  ],
+  "Player": [
+    {
+      "maxEnergy": 300,
+      "level": 1,
+      "name": "Joao",
+      "experiencePoints": 0.0,
+      "currentEnergy": 200,
+      "id": 1,
+      "team": SPARKS
+    },
+    {
+      "maxEnergy": 500,
+      "level": 1,
+      "name": "Ines",
+      "experiencePoints": 0.0,
+      "currentEnergy": 340,
+      "id": 2,
+      "team": GIANTS
+    }
+  ],
+  "Portal": [
+    {
+      "gameSettings": {
+        "maxEnergy": 300,
+        "ownership": {
+          "player": "Joao"
+        },
+        "energy": 200
+      },
+      "name": "Ponte D.Luis do Bairro Alto",
+      "coordinates": {
+        "latitude": 10.1,
+        "longitude": 20.2
+      },
+      "id": 1
+    },
+    {
+      "gameSettings": {
+        "maxEnergy": 250,
+        "ownership": {
+          "player": "Ines"
+        },
+        "energy": 100
+      },
+      "name": "ESTG",
+      "coordinates": {
+        "latitude": 30.1,
+        "longitude": 40.2
+      },
+      "id": 2
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 package mygame.implementation;
 
-import com.google.gson.Gson;
+
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.Player;
 
@@ -98,7 +98,7 @@ public class PlayerRegister {
      */
     public void showPlayers() {
         for (Player player : playersArray) {
-            System.out.println(player.toString2());
+            System.out.println(player.showPlayerData());
             System.out.print("ID Player: " + player.getId());
         }
     }

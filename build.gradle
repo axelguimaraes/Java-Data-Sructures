@@ -8,12 +8,37 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
+/**
 dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.json:json:20205000'
+    compile group: 'org.json', name: 'json', version: '20210118'
+    implementation group: 'org.json', name: 'json', version: '20210118'
+
+}
+
+dependencies {
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation group: 'org.json', name: 'json', version: '20210118'
+}
+ */
+
+dependencies {
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13.2'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    // JSON Simple library for parsing and manipulating JSON files
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    // Java Faker library for generating random data such as ids
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+
 }
 
 test {
