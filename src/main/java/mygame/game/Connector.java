@@ -66,7 +66,7 @@ public class Connector extends Local {
             if (interaction.getPlayer().equals(player)) { // Se jogador existir na lista
                 if (!interaction.isCooldownOver()) { // Se o cooldown não tiver acabado
                     long remainingTime = this.cooldown - interaction.getElapsedTime();
-                    System.out.println("You must wait " + remainingTime + " minute(s) before you can recharge in this connector again!");
+                    System.err.println("You must wait " + remainingTime + " minute(s) before you can recharge in this connector again!");
                     return false;
                 } else if (interaction.isCooldownOver()) {
                     lastInteractions.remove(interaction);
@@ -76,7 +76,7 @@ public class Connector extends Local {
         }
 
         player.setEnergy(player.getEnergy() + super.getEnergy());
-        System.out.println("Player charged!");
+        System.err.println("Player charged!");
 
         PlayerInteraction interaction = new PlayerInteraction(player, this.cooldown);
         lastInteractions.addToRear(interaction);

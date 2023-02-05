@@ -1,0 +1,83 @@
+{
+  "Portal":[
+    {
+      "id": 1414,
+      "name": "Jacqueline Kennedy Onassis Reservoir",
+      "coordinates":{
+        "latitude": 40.7656918,
+        "longitude": -73.9737489
+      },
+      "gameSettings":{
+        "energy": 180,
+        "maxEnergy": 300,
+        "ownership":{
+          "player": "LoboMau"
+        }
+      }
+    },
+    {
+      "id": 1414,
+      "name": "Jacqueline Rose",
+      "coordinates":{
+        "latitude": 30.76563918,
+        "longitude": -63.9390481
+      },
+      "gameSettings":{
+        "energy": 220,
+        "maxEnergy": 300,
+        "ownership":{
+          "player": "TatianaNeves"
+        }
+      }
+    }
+  ],
+  "Connector":[
+    {
+      "id": 5212,
+      "coordinates":{
+        "latitude": 40.7697989,
+        "longitude": -73.9723702
+      },
+      "gameSettings":{
+        "energy":110,
+        "cooldown": 3
+      }
+    },
+    {
+      "id": 2034,
+      "coordinates":{
+        "latitude": 12.4341473,
+        "longitude": -15.1457124
+      },
+      "gameSettings":{
+        "energy":110,
+        "cooldown": 3
+      }
+    }
+  ],
+  "routes":[
+    {
+      "from": 1414,
+      "to": 5212
+    }
+  ],
+  "Players":[
+    {
+      "name": "LoboMau",
+      "team": "Sparks",
+      "level": 5,
+      "experiencePoints": 24998,
+      "maxEnergy": 100,
+      "currentEnergy": 70
+
+    },
+    {
+      "name": "TatianaNeves",
+      "team": "Giants",
+      "level": 7,
+      "experiencePoints": 24519,
+      "maxEnergy": 100,
+      "currentEnergy": 32
+    }
+  ]
+}

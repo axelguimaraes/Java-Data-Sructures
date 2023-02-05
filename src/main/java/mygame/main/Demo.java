@@ -2,8 +2,6 @@ package mygame.main;
 
 import mygame.exceptions.*;
 import mygame.game.*;
-import mygame.io.Input;
-import mygame.io.Output;
 import mygame.structures.classes.LinkedStack;
 
 import javax.sound.sampled.Port;
