@@ -42,7 +42,7 @@ public class Player {
      * @param energy {@link Player Player's} energy
      * @throws PlayerWithNoTeamException
      */
-    public Player(String name, Team team, int level,double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
+    public Player(String name, Team team, int level, double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
         this.id = ++nextId;
         this.name = name;
         this.energy = 0;

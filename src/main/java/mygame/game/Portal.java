@@ -85,6 +85,14 @@ public class Portal extends Local {
     }
 
     /**
+     * Getter for the {@link Portal's} max energy
+     * @return maxEnergy
+     */
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    /**
      * Recharges the {@link Portal}'s energy with the given ammount from the {@link Player}
      * @param player {@link Player} to recharge {@link Portal}
      * @param energy ammount of energy to recharge

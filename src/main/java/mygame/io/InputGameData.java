@@ -5,13 +5,11 @@ import mygame.structures.classes.ArrayUnorderedList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 
 import java.io.FileReader;
-import java.io.IOException;
 
-public class InputClasses {
+public class InputGameData {
     private JSONParser parser;
     private JSONArray connectors;
     private JSONArray portals;
@@ -23,7 +21,7 @@ public class InputClasses {
 
     private ArrayUnorderedList<Object> routesList;
 
-    public InputClasses() {
+    public InputGameData() {
         parser = new JSONParser();
     }
 
@@ -173,9 +171,8 @@ public class InputClasses {
     }
 
     public static void main(String[] args) throws PlayerWithNoTeamException {
-        InputClasses inputClasses = new InputClasses();
+        InputGameData inputClasses = new InputGameData();
         inputClasses.parseJSON("files/exemploNovo.json");
         inputClasses.readPlayers();
-
     }
 }
