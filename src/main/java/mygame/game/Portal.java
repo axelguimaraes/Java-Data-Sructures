@@ -22,10 +22,11 @@ public class Portal extends Local {
     /**
      * Constructor for the {@link Portal}. It automatically sets the {@link Team} as 'NONE' and the
      * {@link LocalType} as 'PORTAL'
-     * @param name name of the {@link Portal}
-     * @param energy starting energy of the {@link Portal}
+     *
+     * @param name        name of the {@link Portal}
+     * @param energy      starting energy of the {@link Portal}
      * @param coordinates geographic location of {@link Portal} in {@link Coordinates}
-     * @param maxEnergy maximum energy that the {@link Portal} is able to contain
+     * @param maxEnergy   maximum energy that the {@link Portal} is able to contain
      */
     public Portal(String name, int energy, Coordinates coordinates, int maxEnergy) {
         super(energy, coordinates);
@@ -38,6 +39,7 @@ public class Portal extends Local {
 
     /**
      * Getter for the name
+     *
      * @return name
      */
     public String getName() {
@@ -46,6 +48,7 @@ public class Portal extends Local {
 
     /**
      * Setter for the name
+     *
      * @param name name
      */
     public void setName(String name) {
@@ -54,6 +57,7 @@ public class Portal extends Local {
 
     /**
      * Getter for the {@link Team}
+     *
      * @return {@link Team}
      */
     public Team getTeam() {
@@ -62,6 +66,7 @@ public class Portal extends Local {
 
     /**
      * Setter for the {@link Team}
+     *
      * @param team {@link Team}
      */
     public void setTeam(Team team) {
@@ -70,6 +75,7 @@ public class Portal extends Local {
 
     /**
      * Getter for the {@link Player conqueror}
+     *
      * @return {@link Player conqueror}
      */
     public Player getConqueror() {
@@ -78,6 +84,7 @@ public class Portal extends Local {
 
     /**
      * Setter for the {@link Player conqueror}
+     *
      * @param player {@link Player} conqueror
      */
     public void setConqueror(Player player) {
@@ -94,29 +101,31 @@ public class Portal extends Local {
 
     /**
      * Recharges the {@link Portal}'s energy with the given ammount from the {@link Player}
+     *
      * @param player {@link Player} to recharge {@link Portal}
      * @param energy ammount of energy to recharge
      * @return true if {@link Portal} was recharged; false if {@link Portal} wasn't recharged
      */
     public boolean rechargeEnergy(Player player, int energy) { // TESTED
         if (this.getTeam().equals(Team.NONE)) {
-            System.out.println("Portal not associated to a team");
+            System.err.println("Portal not associated to a team");
             return false;
         }
 
         if (player.isFromDifferentTeam(this)) {
-            System.out.println("Portal doesn't belong to player's team!");
+            System.err.println("Portal doesn't belong to player's team!");
             return false;
         }
 
         this.setEnergy(this.getEnergy() + energy);
         player.setEnergy(player.getEnergy() - energy);
-        System.out.println("Portal recharged by " + energy + " points");
+        System.err.println("Portal recharged by " + energy + " points");
         return true;
     }
 
     /**
      * Get {@link Portal} conquered by a {@link Player}
+     *
      * @param player {@link Player} to conquer the {@link Portal}
      * @return true if the {@link Portal} was conquered; false if {@link Portal} wasn't conquered
      */
@@ -126,7 +135,7 @@ public class Portal extends Local {
             this.conqueror = player;
             this.conqueror.addToConqueredPortalsList(this.getId());
 
-            System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
+            System.err.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
             return true;
         }
 
@@ -140,26 +149,27 @@ public class Portal extends Local {
                     player.setEnergy((int) (player.getEnergy() - this.maxEnergy * 0.25));
                     this.setTeam(player.getTeam());
                     this.setConqueror(player);
-                    System.out.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
+                    System.err.println("Portal conquered by " + player.getName() + " from team " + player.getTeam().toString());
                     return true;
 
                 } else {
                     this.setTeam(Team.NONE);
-                    System.out.println("Portal team set to NONE due to player not having enough energy to conquer");
+                    System.err.println("Portal team set to NONE due to player not having enough energy to conquer");
                     return false;
                 }
             } else {
-                System.out.println("Player doesn't have enough energy to conquer portal. Portal team not changed");
+                System.err.println("Player doesn't have enough energy to conquer portal. Portal team not changed");
                 return false;
             }
         } else {
-            System.out.println("Portal already belongs to player's team");
+            System.err.println("Portal already belongs to player's team");
             return false;
         }
     }
 
     /**
      * Compares two {@link Portal Portals} by their name
+     *
      * @param other {@link Portal} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -169,6 +179,7 @@ public class Portal extends Local {
 
     /**
      * Compares two {@link Portal Portals} by their {@link Player conqueror}
+     *
      * @param other {@link Player conqueror} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -178,16 +189,24 @@ public class Portal extends Local {
 
     /**
      * Lists all information relative to the {@link Portal}
+     *
      * @return {@link String} containing all the information
      */
     @Override
     public String toString() {
-        return "PORTAL\n" +
+        String s = "PORTAL\n" +
                 "ID: " + super.getId() + "\n" +
                 "Name: " + this.name + "\n" +
-                //"Team: " + this.conqueror.getTeam() + "\n" +
-                "Conqueror: " + (this.conqueror != null ? this.conqueror.getName() : "null") + "\n" +
-                "Energy: " + super.getEnergy() + "\n" +
+                "Team: " + this.team + "\n";
+
+        if (this.conqueror == null) {
+            s += "Conqueror: N/A\n";
+        } else {
+          s += "Conqueror: " + this.conqueror + "\n";
+        }
+
+        s += "Energy: " + super.getEnergy() + "\n" +
                 "Coordinates: " + super.getCoordinates() + "\n";
+        return s;
     }
 }

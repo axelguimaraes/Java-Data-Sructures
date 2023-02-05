@@ -1,5 +1,6 @@
 package mygame.game;
 
+import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.Network;
@@ -98,11 +99,11 @@ public class GameMap {
                     switch (scanner.nextLine()) {
                         case "y":
                         case "Y":
-                            System.out.println("Player name:");
-                            String name = scanner.nextLine();
+                            System.out.println("Player ID:");
+                            int id = scanner.nextInt();
                             boolean found = false;
                             for (Player player : this.playersInGame) {
-                                if (player.getName().equals(name)) {
+                                if (player.getId() == id) {
                                     found = true;
                                     ((Portal) itLocal).getConqueror().removeFromConqueredPortalsList(itLocal.getId());
                                     ((Portal) itLocal).setConqueror(player);
@@ -194,6 +195,9 @@ public class GameMap {
         if (!this.playersInGame.contains(player)) {
             throw new ElementNotFoundException("players list");
         }
+
+        System.out.println("Player current data:\n" + player.toString());
+
         Scanner scanner = new Scanner(System.in);
         int team;
         for (int i = 0; i < this.playersInGame.size(); i++) {
@@ -277,6 +281,15 @@ public class GameMap {
      */
     public ArrayUnorderedList<Player> getPlayersInGame() {
         return this.playersInGame;
+    }
+
+    public Player getPlayerFromID (int id) throws PlayerNotFoundException {
+        for (Player player : this.playersInGame) {
+            if (player.getId() == id) {
+                return player;
+            }
+        }
+        throw new PlayerNotFoundException();
     }
 
     /**

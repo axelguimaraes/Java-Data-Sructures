@@ -295,7 +295,7 @@ public class Player {
         }
         s.append("\tDistance: ").append(df.format(this.map.getShortestPathWeight(this.currentPositionID, destination.getId()))).append("km");
 
-        System.out.println(s);
+        System.err.println(s);
 
         this.currentPositionID = destination.getId();
     }
@@ -378,19 +378,19 @@ public class Player {
      * @return {@link String} with all the information
      */
     public String toString() {
-        String name;
-
-        if (this.map != null && this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
-            name = ((Portal) this.map.getLocalByID(this.currentPositionID)).getName();
+        String localName;
+        if (this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
+            localName = ((Portal) this.map.getLocalByID(this.currentPositionID)).getName();
         } else {
-            name = "Connector";
+            localName = "Connector";
         }
         return "PLAYER\n" +
+                "ID: " + this.id + "\n" +
                 "Name: " + this.name + "\n" +
                 "Energy: " + this.energy + "\n" +
                 "Team: " + this.team.toString() + "\n" +
                 "Level: " + this.level + "\n" +
-                "Current position: " + name + " ID: " + this.currentPositionID;
+                "Current position: " + localName + " ID: " + this.currentPositionID;
     }
 
     /**
