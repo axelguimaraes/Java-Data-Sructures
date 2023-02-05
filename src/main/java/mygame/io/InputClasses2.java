@@ -1,9 +1,6 @@
 package mygame.io;
 import mygame.exceptions.PlayerWithNoTeamException;
-import mygame.game.Coordinates;
-import mygame.game.Player;
-import mygame.game.Portal;
-import mygame.game.Team;
+import mygame.game.*;
 import mygame.structures.classes.ArrayUnorderedList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,22 +19,36 @@ public class InputClasses2 {
                 Object obj = parser.parse(new FileReader("files/exemploNovo.json"));
                 JSONObject jsonObject = (JSONObject) obj;
 
-                JSONArray locals = (JSONArray) jsonObject.get("locals");
+                JSONArray connectors = (JSONArray) jsonObject.get("Connectors");
                 JSONArray portals = (JSONArray) jsonObject.get("Portal");
                 JSONArray players = (JSONArray) jsonObject.get("Players");
 
-                /*
-                ArrayUnorderedList<Local> localList = new ArrayUnorderedList<>();
-                for (Object local : locals) {
-                    JSONObject localJson = (JSONObject) local;
+                //Read Connectors
+                ArrayUnorderedList<Connector> connectorList = new ArrayUnorderedList<>();
+                for (Object connector : connectors) {
+                    JSONObject connectorJson = (JSONObject) connector;
                     // extract data from localJson and set it in a Local object
-                    Local localObj = new Local();
+                    JSONObject coordinatesJson = (JSONObject) connectorJson.get("coordinates");
+                    double latitude = (Double) coordinatesJson.get("latitude");
+                    double longitude = (Double) coordinatesJson.get("longitude");
+                    Coordinates coordinates = new Coordinates(latitude, longitude);
+
+                    Object gameSettingsObject = connectorJson.get("gameSettings");
+                    JSONObject gameSettings = (JSONObject) gameSettingsObject;
+
+                    Connector connectorObj = new Connector(name, coordinates, energy, maxEnergy , player);
+
                     // set data in localObj
-                    localList.add(localObj);
+                    connectorList.addToRear(connectorObj);
 
                 }
-                 */
 
+                // Do something with the JSON arrays
+                for (Connector connector : connectorList) {
+                    System.out.println(connector.toString());
+                }
+
+                //Read Portals
                 ArrayUnorderedList<Portal> portalList = new ArrayUnorderedList<>();
                 for (Object portal : portals) {
                     Player player = new Player();
