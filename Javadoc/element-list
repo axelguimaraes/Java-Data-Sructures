@@ -1,7 +1,7 @@
 mygame.exceptions
 mygame.game
 mygame.io
-mygame.main
+mygame.menu
 mygame.structures.classes
 mygame.structures.exceptions
 mygame.structures.interfaces

@@ -1,7 +1,6 @@
 package mygame.game;
 
 import mygame.structures.classes.ArrayUnorderedList;
-
 import java.util.Scanner;
 
 /**
