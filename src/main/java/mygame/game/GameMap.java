@@ -174,7 +174,7 @@ public class GameMap {
     /**
      * TODO: sorting here
      */
-    public void listLocations() {
+    public void listLocations() { // TODO: searchAndSort
     }
 
     /**
