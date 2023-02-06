@@ -3,8 +3,10 @@ package mygame.menu;
 import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
+import mygame.io.IOGameSettings;
 import mygame.structures.classes.LinkedQueue;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -12,7 +14,18 @@ import java.util.Scanner;
 public class StartMenu {
     public static void main(String[] args) throws PlayerNotFoundException, PlayerWithNoTeamException {
         GameMap gameMap = new GameMap();
-        Scanner scanner = new Scanner(System.in).useDelimiter("\\n");;
+        Scanner scanner = new Scanner(System.in).useDelimiter("\\n");
+        GameSettings gameSettings;
+        GameMoves gameMoves = null;
+
+        try {
+            gameSettings = IOGameSettings.importData();
+            gameMoves = new GameMoves(gameSettings);
+        } catch (IOException ex) {
+            System.err.println("Unable to import game settings!");
+            System.exit(1);
+        }
+
 
         while (true) {
             try {
@@ -37,7 +50,7 @@ public class StartMenu {
                         if (gameMap.getPlayersInGame().isEmpty()) {
                             System.err.println("No players registered in the game!");
                         } else {
-                            gameStart(gameMap, scanner);
+                            gameStart(gameMap, scanner, gameMoves);
                         }
                         break;
                     case 5:
@@ -182,7 +195,7 @@ public class StartMenu {
         }
     }
 
-    public static void gameStart(GameMap gameMap, Scanner scanner) throws PlayerNotFoundException {
+    public static void gameStart(GameMap gameMap, Scanner scanner, GameMoves gameMoves) throws PlayerNotFoundException {
         LinkedQueue<Integer> playersTurn = new LinkedQueue<>();
         for (Player player : gameMap.getPlayersInGame()) {
             playersTurn.enqueue(player.getId());
@@ -218,15 +231,18 @@ public class StartMenu {
                             "Your choice: ");
                     switch (scanner.nextInt()) {
                         case 1:
-                            ((Portal) gameMap.getLocalByID(currentPosition.getId())).getConquered(gameMap.getPlayerFromID(turn.getId()));
+                            //((Portal) gameMap.getLocalByID(currentPosition.getId())).getConquered(gameMap.getPlayerFromID(turn.getId()));
+                            gameMoves.playerConquerPortal(gameMap.getPlayerFromID(turn.getId()), (Portal) gameMap.getLocalByID(currentPosition.getId()));
                             break;
                         case 2:
                             System.out.println("How much energy?:");
-                            turn.chargePortal(scanner.nextInt());
+                            gameMoves.playerChargePortal(turn, scanner.nextInt());
+                            //turn.chargePortal(scanner.nextInt());
                             break;
                         case 3:
                             System.out.println("Destination ID: ");
-                            gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
+                            //gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
+                            gameMoves.playerNavigateTo(gameMap.getPlayerFromID(turn.getId()), gameMap.getLocalByID(scanner.nextInt()));
                             break;
                         case 0:
                             return;
@@ -245,11 +261,13 @@ public class StartMenu {
                             "Your choive: ");
                     switch (scanner.nextInt()) {
                         case 1:
-                            gameMap.getPlayerFromID(turn.getId()).rechargeEnergy((Connector) gameMap.getLocalByID(currentPosition.getId()));
+                            //gameMap.getPlayerFromID(turn.getId()).rechargeEnergy((Connector) gameMap.getLocalByID(currentPosition.getId()));
+                            gameMoves.playerRechargeInConnector(gameMap.getPlayerFromID(turn.getId()), (Connector) gameMap.getLocalByID(currentPosition.getId()));
                             break;
                         case 2:
                             System.out.println("Destination ID: ");
-                            gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
+                            //gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
+                            gameMoves.playerNavigateTo(gameMap.getPlayerFromID(turn.getId()), gameMap.getLocalByID(scanner.nextInt()));
                             break;
                         case 0:
                             return;

@@ -1,6 +1,5 @@
 package mygame.game;
 
-import mygame.exceptions.ListExceptions;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 
@@ -265,7 +264,7 @@ public class Player {
      * Navigates to an existing {@link Local location} on the {@link GameMap} using the shortest path
      * @param destination {@link Local location} of destination
      */
-    public void navigateTo(Local destination) {
+    public boolean navigateTo(Local destination) {
         boolean found = false;
         Iterator<Local> it = this.map.getMap().iteratorBFS(0);
         while (it.hasNext()) {
@@ -278,7 +277,7 @@ public class Player {
 
         if (!found) {
             System.err.println("Location not found!");
-            return;
+            return false;
         }
 
         DecimalFormat df = new DecimalFormat("0.00");
@@ -298,6 +297,7 @@ public class Player {
         System.err.println(s);
 
         this.currentPositionID = destination.getId();
+        return true;
     }
 
     /**
