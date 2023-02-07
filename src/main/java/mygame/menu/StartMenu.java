@@ -210,7 +210,7 @@ public class StartMenu {
                     "Player name: " + turn.getName() + "\t| Team: " + turn.getTeam() + "\n" +
                     "Energy: " + turn.getEnergy() + "\n" +
                     "Level: " + turn.getLevel() + "\n" +
-                    "XP: " + turn.getXp() + "\n" +
+                    "XP: " + (int) turn.getXp() + "\n" +
                     "Current location: " + currentPosition.getLocalType() + " ID " + currentPosition.getId());
 
             switch (currentPosition.getLocalType()) {

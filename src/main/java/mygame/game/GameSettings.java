@@ -4,10 +4,10 @@ package mygame.game;
  * Class that represents {@link GameSettings}, which defines global game settings
  */
 public class GameSettings {
-    private int portalConquestPoints;
-    private int portalChargingPoints;
-    private int connectorPlayerChargingPoints;
-    private int playerNavigatePoints;
+    private double portalConquestPoints;
+    private double portalChargingPoints;
+    private double connectorPlayerChargingPoints;
+    private double playerNavigatePoints;
     private double pointsY;
 
     /**
@@ -17,7 +17,7 @@ public class GameSettings {
      * @param connectorPlayerChargingPoints experience points to earn by charging a {@link Player} in a {@link Connector}
      * @param playerNavigatePoints experience points to earn by moving a {@link Player} to another {@link Local location} of the {@link GameMap map}
      */
-    public GameSettings(int portalConquestPoints, int portalChargingPoints, int connectorPlayerChargingPoints, int playerNavigatePoints, double pointsY) {
+    public GameSettings(double portalConquestPoints, double portalChargingPoints, double connectorPlayerChargingPoints, double playerNavigatePoints, double pointsY) {
         this.portalConquestPoints = portalConquestPoints;
         this.portalChargingPoints = portalChargingPoints;
         this.connectorPlayerChargingPoints = connectorPlayerChargingPoints;
@@ -29,7 +29,7 @@ public class GameSettings {
      * Getter for portal conquest points
      * @return experience points
      */
-    public int getPortalConquestPoints() {
+    public double getPortalConquestPoints() {
         return portalConquestPoints;
     }
 
@@ -37,7 +37,7 @@ public class GameSettings {
      * Setter for portal conquest points
      * @param portalConquestPoints experience points
      */
-    public void setPortalConquestPoints(int portalConquestPoints) {
+    public void setPortalConquestPoints(double portalConquestPoints) {
         this.portalConquestPoints = portalConquestPoints;
     }
 
@@ -45,7 +45,7 @@ public class GameSettings {
      * Getter for portal charging points
      * @return experience points
      */
-    public int getPortalChargingPoints() {
+    public double getPortalChargingPoints() {
         return portalChargingPoints;
     }
 
@@ -53,7 +53,7 @@ public class GameSettings {
      * Setter for portal charging points
      * @param portalChargingPoints experience points
      */
-    public void setPortalChargingPoints(int portalChargingPoints) {
+    public void setPortalChargingPoints(double portalChargingPoints) {
         this.portalChargingPoints = portalChargingPoints;
     }
 
@@ -61,7 +61,7 @@ public class GameSettings {
      * Getter for player charging in connector points
      * @return experience points
      */
-    public int getConnectorPlayerChargingPoints() {
+    public double getConnectorPlayerChargingPoints() {
         return connectorPlayerChargingPoints;
     }
 
@@ -69,7 +69,7 @@ public class GameSettings {
      * Setter for player charging in connector points
      * @param connectorPlayerChargingPoints experience points
      */
-    public void setConnectorPlayerChargingPoints(int connectorPlayerChargingPoints) {
+    public void setConnectorPlayerChargingPoints(double connectorPlayerChargingPoints) {
         this.connectorPlayerChargingPoints = connectorPlayerChargingPoints;
     }
 
@@ -77,7 +77,7 @@ public class GameSettings {
      * Getter for player navigation points
      * @return experience points
      */
-    public int getPlayerNavigatePoints() {
+    public double getPlayerNavigatePoints() {
         return playerNavigatePoints;
     }
 
@@ -85,7 +85,7 @@ public class GameSettings {
      * Setter for player navigation points
      * @param playerNavigatePoints experience points
      */
-    public void setPlayerNavigatePoints(int playerNavigatePoints) {
+    public void setPlayerNavigatePoints(double playerNavigatePoints) {
         this.playerNavigatePoints = playerNavigatePoints;
     }
 
@@ -114,9 +114,10 @@ public class GameSettings {
     public String toString() {
         return "GameSettings{" +
                 "portalConquestPoints=" + portalConquestPoints +
-                ", portalChargoingPoints=" + portalChargingPoints +
+                ", portalChargingPoints=" + portalChargingPoints +
                 ", connectorPlayerChargingPoints=" + connectorPlayerChargingPoints +
                 ", playerNavigatePoints=" + playerNavigatePoints +
+                ", pointsY=" + pointsY +
                 '}';
     }
 }

@@ -1,7 +1,5 @@
 package mygame.game;
 
-import static java.lang.Math.pow;
-
 /**
  * Class that represents a {@link Player player}'s possible moves in the game
  */
@@ -25,8 +23,7 @@ public class GameMoves {
      */
     public void playerConquerPortal(Player player, Portal portal) {
         if (player.conquerPortal(portal)) {
-            player.addXp(this.gameSettings.getPortalConquestPoints());
-            player.setLevel(levelUp(player));
+            playerPortalConquestXP(player);
         }
     }
 
@@ -38,8 +35,7 @@ public class GameMoves {
      */
     public void playerChargePortal(Player player, int energy) {
         if (player.chargePortal(energy)) {
-            player.addXp(this.gameSettings.getPortalChargingPoints());
-            player.setLevel(levelUp(player));
+            playerPortalChargingXP(player);
         }
     }
 
@@ -51,8 +47,7 @@ public class GameMoves {
      */
     public void playerRechargeInConnector(Player player, Connector connector) {
         if (player.rechargeEnergy(connector)) {
-            player.addXp(this.gameSettings.getConnectorPlayerChargingPoints());
-            player.setLevel(levelUp(player));
+            playerConnectorRechargingXP(player);
         }
     }
 
@@ -64,23 +59,47 @@ public class GameMoves {
      */
     public void playerNavigateTo(Player player, Local destination) {
         if (player.navigateTo(destination)) {
-            player.addXp(this.gameSettings.getPlayerNavigatePoints());
-            player.setLevel(levelUp(player));
+            playerNavigateToXP(player);
         }
     }
 
     /**
-     * Increments a {@link Player} level based on a specific formula
+     * Sets player's XP and level based on the executed move
      *
-     * @param player {@link Player} to level up
+     * @param player {@link Player} to make move
      */
-    private int levelUp(Player player) { // TODO: fix formula
-        System.err.println(Math.pow((player.getLevel() / player.getXp()), gameSettings.getPointsY()));
-        int level = (int) Math.pow((player.getLevel() / player.getXp()), gameSettings.getPointsY());
-        if (level == 0) {
-            return 1;
-        }
+    private void playerPortalConquestXP(Player player) {
+        player.addXp(Math.pow(player.getLevel() / gameSettings.getPortalConquestPoints(), gameSettings.getPointsY()));
+        player.setLevel((int) (gameSettings.getPortalConquestPoints() * Math.sqrt(player.getXp())));
+    }
 
-        return level;
+    /**
+     * Sets player's XP and level based on the executed move
+     *
+     * @param player {@link Player} to make move
+     */
+    private void playerPortalChargingXP(Player player) {
+        player.addXp(Math.pow(player.getLevel() / gameSettings.getPortalChargingPoints(), gameSettings.getPointsY()));
+        player.setLevel((int) (gameSettings.getPortalChargingPoints() * Math.sqrt(player.getXp())));
+    }
+
+    /**
+     * Sets player's XP and level based on the executed move
+     *
+     * @param player {@link Player} to make move
+     */
+    private void playerConnectorRechargingXP(Player player) {
+        player.addXp(Math.pow(player.getLevel() / gameSettings.getConnectorPlayerChargingPoints(), gameSettings.getPointsY()));
+        player.setLevel((int) (gameSettings.getConnectorPlayerChargingPoints() * Math.sqrt(player.getXp())));
+    }
+
+    /**
+     * Sets player's XP and level based on the executed move
+     *
+     * @param player {@link Player} to make move
+     */
+    private void playerNavigateToXP(Player player) {
+        player.addXp(Math.pow(player.getLevel() / gameSettings.getPlayerNavigatePoints(), gameSettings.getPointsY()));
+        player.setLevel((int) (gameSettings.getPlayerNavigatePoints() * Math.sqrt(player.getXp())));
     }
 }
