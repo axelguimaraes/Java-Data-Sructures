@@ -1,4 +1,5 @@
 package mygame.io;
+
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
 import mygame.structures.classes.ArrayUnorderedList;
@@ -49,9 +50,8 @@ public class InputGameData {
      * The resulting Connector objects are stored in the 'connectorList' ArrayUnorderedList.
      * Finally, the method prints the toString representation of each Connector in the 'connectorList'.
      */
-    public void readConnectors() {
+    public void readConnectors(GameMap gameMap) {
         connectorList = new ArrayUnorderedList<>();
-        GameMap gameMap = new GameMap();
         for (Object connector : connectors) {
             JSONObject connectorJson = (JSONObject) connector;
             JSONObject coordinatesJson = (JSONObject) connectorJson.get("coordinates");
@@ -66,17 +66,17 @@ public class InputGameData {
             Connector connectorObj = new Connector(energy, coordinates, cooldown);
             connectorList.addToRear(connectorObj);
 
-            for (Local connectorToSend : connectorList) {
-                gameMap.addLocation(connectorToSend);
-            }
 
+        }
+        for (Local connectorToSend : connectorList) {
+            gameMap.addLocation(connectorToSend);
         }
 
         for (Connector connectors : connectorList) {
             System.out.println(connectors.toString());
 
         }
-        }
+    }
 
     /**
      * Reads the portals from the JSON object and adds it to the portalList.
@@ -105,7 +105,7 @@ public class InputGameData {
             if (gameSettings.get("ownership") != null) {
                 JSONObject ownershipJson = (JSONObject) gameSettings.get("ownership");
                 player.setName((String) ownershipJson.get("player"));
-            }else{
+            } else {
                 player.setName(null);
             }
 
@@ -125,6 +125,7 @@ public class InputGameData {
     /**
      * Reads the players from the JSON object and adds it to the playerList.
      * Finally, the method prints the data of each Player in the 'playerList' by using the 'showPlayerData()' method
+     *
      * @throws PlayerWithNoTeamException if a player does not have a team specified.
      */
     public void readPlayers() throws PlayerWithNoTeamException {
@@ -155,7 +156,7 @@ public class InputGameData {
             int currentEnergy = (((Long) playerJson.get("currentEnergy")).intValue());
 
             // extract data from playerJson and set it in a Player object
-            Player playerObj = new Player(name,team,level,experiencePoints,maxEnergy,currentEnergy);
+            Player playerObj = new Player(name, team, level, experiencePoints, maxEnergy, currentEnergy);
             // set data in playerObj
             playerList.addToRear(playerObj);
         }
@@ -169,9 +170,9 @@ public class InputGameData {
     /**
      * Reads the routes from the JSON object.
      */
-    public void readRoutes(){
+    public void readRoutes() {
         routesList = new ArrayUnorderedList<>();
-        for (Object route : routes){
+        for (Object route : routes) {
             JSONObject routesJson = (JSONObject) route;
 
             int from = (((Long) routesJson.get("from")).intValue());

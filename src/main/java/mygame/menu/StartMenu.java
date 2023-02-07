@@ -188,7 +188,7 @@ public class StartMenu {
                     inputClasses.parseJSON("files/exemploNovo.json");
                     //inputClasses.readPortals();
 
-                    inputClasses.readConnectors();
+                    inputClasses.readConnectors(gameMap);
                     System.out.println("Import Data with Success");
                     // TODO: Import map
                     break;
