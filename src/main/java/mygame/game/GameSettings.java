@@ -8,6 +8,7 @@ public class GameSettings {
     private int portalChargingPoints;
     private int connectorPlayerChargingPoints;
     private int playerNavigatePoints;
+    private double pointsY;
 
     /**
      * Constructor for the {@link GameSettings} class
@@ -16,11 +17,12 @@ public class GameSettings {
      * @param connectorPlayerChargingPoints experience points to earn by charging a {@link Player} in a {@link Connector}
      * @param playerNavigatePoints experience points to earn by moving a {@link Player} to another {@link Local location} of the {@link GameMap map}
      */
-    public GameSettings(int portalConquestPoints, int portalChargingPoints, int connectorPlayerChargingPoints, int playerNavigatePoints) {
+    public GameSettings(int portalConquestPoints, int portalChargingPoints, int connectorPlayerChargingPoints, int playerNavigatePoints, double pointsY) {
         this.portalConquestPoints = portalConquestPoints;
         this.portalChargingPoints = portalChargingPoints;
         this.connectorPlayerChargingPoints = connectorPlayerChargingPoints;
         this.playerNavigatePoints = playerNavigatePoints;
+        this.pointsY = pointsY;
     }
 
     /**
@@ -85,6 +87,23 @@ public class GameSettings {
      */
     public void setPlayerNavigatePoints(int playerNavigatePoints) {
         this.playerNavigatePoints = playerNavigatePoints;
+    }
+
+
+    /**
+     * Getter for Y value of points formula
+     * @return Y value
+     */
+    public double getPointsY() {
+        return pointsY;
+    }
+
+    /**
+     * Setter for Y value of points formula
+     * @param pointsY Y value
+     */
+    public void setPointsY(double pointsY) {
+        this.pointsY = pointsY;
     }
 
     /**

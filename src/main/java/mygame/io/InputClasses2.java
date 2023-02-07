@@ -128,7 +128,7 @@ public class InputClasses2 {
                 }
                 // Do something with the JSON arrays
                 for (Player player : playerList) {
-                    System.out.println(player.showPlayerData());
+                    System.out.println(player.toString());
                 }
 
             } catch (IOException | ParseException e) {

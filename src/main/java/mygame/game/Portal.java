@@ -209,4 +209,9 @@ public class Portal extends Local {
                 "Coordinates: " + super.getCoordinates() + "\n";
         return s;
     }
+
+    @Override
+    public int compareTo(Local o) {
+        return compareByID(o);
+    }
 }

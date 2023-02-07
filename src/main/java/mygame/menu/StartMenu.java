@@ -7,6 +7,7 @@ import mygame.io.IOGameSettings;
 import mygame.structures.classes.LinkedQueue;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -231,17 +232,15 @@ public class StartMenu {
                             "Your choice: ");
                     switch (scanner.nextInt()) {
                         case 1:
-                            //((Portal) gameMap.getLocalByID(currentPosition.getId())).getConquered(gameMap.getPlayerFromID(turn.getId()));
                             gameMoves.playerConquerPortal(gameMap.getPlayerFromID(turn.getId()), (Portal) gameMap.getLocalByID(currentPosition.getId()));
                             break;
                         case 2:
                             System.out.println("How much energy?:");
                             gameMoves.playerChargePortal(turn, scanner.nextInt());
-                            //turn.chargePortal(scanner.nextInt());
                             break;
                         case 3:
+                            listLocations(gameMap, turn);
                             System.out.println("Destination ID: ");
-                            //gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
                             gameMoves.playerNavigateTo(gameMap.getPlayerFromID(turn.getId()), gameMap.getLocalByID(scanner.nextInt()));
                             break;
                         case 0:
@@ -258,15 +257,14 @@ public class StartMenu {
                             "1. Recharge player energy\n" +
                             "2. Navigate to other location\n" +
                             "0. Exit to main menu\n\n" +
-                            "Your choive: ");
+                            "Your choice: ");
                     switch (scanner.nextInt()) {
                         case 1:
-                            //gameMap.getPlayerFromID(turn.getId()).rechargeEnergy((Connector) gameMap.getLocalByID(currentPosition.getId()));
                             gameMoves.playerRechargeInConnector(gameMap.getPlayerFromID(turn.getId()), (Connector) gameMap.getLocalByID(currentPosition.getId()));
                             break;
                         case 2:
+                            listLocations(gameMap, turn);
                             System.out.println("Destination ID: ");
-                            //gameMap.getPlayerFromID(turn.getId()).navigateTo(gameMap.getLocalByID(scanner.nextInt()));
                             gameMoves.playerNavigateTo(gameMap.getPlayerFromID(turn.getId()), gameMap.getLocalByID(scanner.nextInt()));
                             break;
                         case 0:
@@ -507,5 +505,19 @@ public class StartMenu {
         gameMap.addPlayer(new Player("Tom", Team.GIANTS));
         gameMap.addPlayer(new Player("Jerry", Team.SPARKS));
         gameMap.addPlayer(new Player("Abe", Team.GIANTS));
+    }
+
+    private static void listLocations(GameMap gameMap, Player player) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        Iterator<Local> it = gameMap.getMap().iteratorBFS(0);
+        while (it.hasNext()) {
+            Local location = it.next();
+
+            if (location instanceof Portal) {
+                System.out.println("ID: " + location.getId() + "\tName: " + ((Portal) location).getName() + "\t\tDistance: " + df.format(gameMap.getShortestPathWeight(player.getCurrentPositionID(), location.getId())) + "km");
+            } else {
+                System.out.println("ID: " + location.getId() + "\tName: Connector " + location.getId() + "\t\tDistance: " + df.format(gameMap.getShortestPathWeight(player.getCurrentPositionID(), location.getId())) + "km");
+            }
+        }
     }
 }
