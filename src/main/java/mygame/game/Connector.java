@@ -146,4 +146,10 @@ public class Connector extends Local {
     public int compareByCooldown(Connector other) {
         return Integer.compare(this.cooldown, other.getCooldown());
     }
+
+
+    @Override
+    public int compareTo(Local o) {
+        return compareByID(o);
+    }
 }

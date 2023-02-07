@@ -44,7 +44,7 @@ public class PlayerInteraction {
      * @return ammount of {@link Duration time} passed, in seconds
      */
     public long getElapsedTime() {
-        return Duration.between(interactionTime, Instant.now()).toSeconds();
+        return Duration.between(interactionTime, Instant.now()).toMinutes();
     }
 
     /**
@@ -52,6 +52,7 @@ public class PlayerInteraction {
      * @return true if the cooldown is over; false if the cooldown is not over
      */
     public boolean isCooldownOver() {
-        return Duration.between(interactionTime, Instant.now()).toSeconds() >= this.cooldown;
+        System.err.println("Duration: " + Duration.between(interactionTime, Instant.now()).toMinutes() + "\tCooldown: " + this.cooldown);
+        return Duration.between(interactionTime, Instant.now()).toMinutes() >= this.cooldown;
     }
 }

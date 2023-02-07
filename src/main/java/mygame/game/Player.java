@@ -1,6 +1,5 @@
 package mygame.game;
 
-import mygame.exceptions.ListExceptions;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 
@@ -10,7 +9,7 @@ import java.util.Iterator;
 /**
  * Class that represents a {@link Player}
  */
-public class Player {
+public class Player implements Comparable<Player> {
     private static int nextId;
     private final int id;
     private int energy;
@@ -23,7 +22,7 @@ public class Player {
     private GameMap map;
     private ArrayUnorderedList<Integer> conqueredPortalsIDs;
 
-    public Player(){
+    public Player() {
         this.id = ++nextId;
     }
 
@@ -34,12 +33,13 @@ public class Player {
      * portals, which will contain each conquered portal by the {@link Player}
      * its level as 1 and experience points (xp) as 0. Lastly it creates a {@link ArrayUnorderedList list} of conquered
      * portals, which will contain each conquered portal by the {@link Player}
-     * @param name {@link Player Player's} name
-     * @param team {@link Player Player's} to associate the {@link Player}
-     * @param level {@link Player Player's} level
-     * @param xp {@link Player Player's} xp
+     *
+     * @param name      {@link Player Player's} name
+     * @param team      {@link Player Player's} to associate the {@link Player}
+     * @param level     {@link Player Player's} level
+     * @param xp        {@link Player Player's} xp
      * @param maxEnergy {@link Player Player's} maxEnergy
-     * @param energy {@link Player Player's} energy
+     * @param energy    {@link Player Player's} energy
      * @throws PlayerWithNoTeamException
      */
     public Player(String name, Team team, int level, double xp, int maxEnergy, int energy) throws PlayerWithNoTeamException {
@@ -65,6 +65,7 @@ public class Player {
      * also sets its current position as '-1', meaning that it has no associated position at the moment. It also initiates
      * its level as 1 and experience points (xp) as 0. Lastly it creates a {@link ArrayUnorderedList list} of conquered
      * portals, which will contain each conquered portal by the {@link Player}
+     *
      * @param name {@link Player Player's} name
      * @param team {@link Team} to associate the {@link Player}
      * @throws PlayerWithNoTeamException thrown when the {@link Player} is created with no associated {@link Team}
@@ -86,6 +87,7 @@ public class Player {
 
     /**
      * Adds a {@link Portal} to the conquered portals list
+     *
      * @param portalID ID of the conquered {@link Portal} to add
      */
     public void addToConqueredPortalsList(int portalID) {
@@ -94,6 +96,7 @@ public class Player {
 
     /**
      * Removes a {@link Portal} from the conquered portals list
+     *
      * @param portalID ID of the {@link Portal} to remove
      */
     public void removeFromConqueredPortalsList(int portalID) {
@@ -102,6 +105,7 @@ public class Player {
 
     /**
      * Getter for the {@link ArrayUnorderedList list} of all the conquered {@link Portal portals} by the {@link Player}
+     *
      * @return {@link ArrayUnorderedList list} of conquered portals
      */
     public ArrayUnorderedList<Integer> getConqueredPortalsIDs() {
@@ -110,6 +114,7 @@ public class Player {
 
     /**
      * Setter for the {@link GameMap}
+     *
      * @param map {@link GameMap}
      */
     public void setMap(GameMap map) {
@@ -118,6 +123,7 @@ public class Player {
 
     /**
      * Getter for the ID
+     *
      * @return ID
      */
     public int getId() {
@@ -126,6 +132,7 @@ public class Player {
 
     /**
      * Getter for the level
+     *
      * @return level
      */
     public int getLevel() {
@@ -134,6 +141,7 @@ public class Player {
 
     /**
      * Setter for the level
+     *
      * @param level level
      */
     public void setLevel(int level) {
@@ -141,14 +149,8 @@ public class Player {
     }
 
     /**
-     * Increases the {@link Player player's} level by 1
-     */
-    public void levelUp() {
-        this.level++;
-    }
-
-    /**
      * Getter for the experience points
+     *
      * @return experience points
      */
     public double getXp() {
@@ -157,6 +159,7 @@ public class Player {
 
     /**
      * Setter for the experience points
+     *
      * @param xp experience points
      */
     public void setXp(double xp) {
@@ -165,6 +168,7 @@ public class Player {
 
     /**
      * Adds an ammount of experience points to the already existing ammount
+     *
      * @param xp experience points to add
      */
     public void addXp(double xp) {
@@ -173,6 +177,7 @@ public class Player {
 
     /**
      * Getter for the energy
+     *
      * @return energy
      */
     public int getEnergy() {
@@ -181,6 +186,7 @@ public class Player {
 
     /**
      * Setter for the energy
+     *
      * @param energy energy
      */
     public void setEnergy(int energy) {
@@ -189,6 +195,7 @@ public class Player {
 
     /**
      * Getter for the energy
+     *
      * @return maxEnergy
      */
     public int getMaxEnergy() {
@@ -197,6 +204,7 @@ public class Player {
 
     /**
      * Setter for the max energy
+     *
      * @param maxEnergy max energy
      */
     public void setMaxEnergy(int maxEnergy) {
@@ -205,6 +213,7 @@ public class Player {
 
     /**
      * Adds an ammount of energy to the already existing ammount
+     *
      * @param energy
      */
     public void addEnergy(int energy) {
@@ -213,6 +222,7 @@ public class Player {
 
     /**
      * Conquers a {@link Portal} by the {@link Player}
+     *
      * @param portal {@link Portal} to be conquered
      * @return true if conquered; false if not conquered
      */
@@ -222,6 +232,7 @@ public class Player {
 
     /**
      * Recharges a {@link Player}'s energy with the {@link Connector}'s ammount
+     *
      * @param connector {@link Connector} to charge {@link Player}
      * @return true if recharged; false if not recharged
      */
@@ -231,6 +242,7 @@ public class Player {
 
     /**
      * Getter for the {@link Team}
+     *
      * @return {@link Team}
      */
     public Team getTeam() {
@@ -239,6 +251,7 @@ public class Player {
 
     /**
      * Setter for the {@link Team}
+     *
      * @param team {@link Team}
      */
     public void setTeam(Team team) {
@@ -247,6 +260,7 @@ public class Player {
 
     /**
      * Getter for the conquuered portals {@link ArrayUnorderedList list}
+     *
      * @return {@link ArrayUnorderedList list} of conquered portals
      */
     public ArrayUnorderedList<Portal> getConqueredPortals() {
@@ -255,6 +269,7 @@ public class Player {
 
     /**
      * Getter for the {@link Local location}
+     *
      * @return {@link Local}
      */
     public Local getLocation() {
@@ -263,9 +278,15 @@ public class Player {
 
     /**
      * Navigates to an existing {@link Local location} on the {@link GameMap} using the shortest path
+     *
      * @param destination {@link Local location} of destination
      */
-    public void navigateTo(Local destination) {
+    public boolean navigateTo(Local destination) {
+        if (destination.getId() == this.currentPositionID) {
+            System.err.println("Player is already in that location!");
+            return false;
+        }
+
         boolean found = false;
         Iterator<Local> it = this.map.getMap().iteratorBFS(0);
         while (it.hasNext()) {
@@ -278,7 +299,7 @@ public class Player {
 
         if (!found) {
             System.err.println("Location not found!");
-            return;
+            return false;
         }
 
         DecimalFormat df = new DecimalFormat("0.00");
@@ -298,10 +319,12 @@ public class Player {
         System.err.println(s);
 
         this.currentPositionID = destination.getId();
+        return true;
     }
 
     /**
      * Getter for the {@link Player}'s current position
+     *
      * @return ID of the current {@link Local position}
      */
     public int getCurrentPositionID() {
@@ -310,6 +333,7 @@ public class Player {
 
     /**
      * Setter for the {@link Player}'s current position
+     *
      * @param currentPositionID ID for the current {@link Local} position
      */
     public void setCurrentPositionID(int currentPositionID) {
@@ -318,6 +342,7 @@ public class Player {
 
     /**
      * Gets current {@link Local position} information
+     *
      * @return {@link String} containing all current {@link Local position} information
      */
     public String getCurrentPositionInfo() {
@@ -326,11 +351,12 @@ public class Player {
 
     /**
      * Charges the {@link Portal} where the {@link Player} is located at, using a given ammount of its energy
+     *
      * @param energy ammount of energy to charge the {@link Portal}
      * @return true if charged; false if not charged
      */
     public boolean chargePortal(int energy) {
-        if (!((this.map.getLocalByID(this.currentPositionID))instanceof Portal)) {
+        if (!((this.map.getLocalByID(this.currentPositionID)) instanceof Portal)) {
             System.err.println("This player isn't on any portal at the moment");
             return false;
         }
@@ -346,6 +372,7 @@ public class Player {
 
     /**
      * Getter for the name
+     *
      * @return name
      */
     public String getName() {
@@ -354,6 +381,7 @@ public class Player {
 
     /**
      * Setter for the name
+     *
      * @param name name
      */
     public void setName(String name) {
@@ -362,6 +390,7 @@ public class Player {
 
     /**
      * Check if a {@link Portal} belongs to the player's {@link Team}
+     *
      * @param portal {@link Portal} to be checked
      * @return true if it belongs; false if it doesn't belong
      */
@@ -375,6 +404,7 @@ public class Player {
 
     /**
      * Lists all the information regarding the {@link Player}
+     *
      * @return {@link String} with all the information
      */
     public String toString() {
@@ -393,26 +423,10 @@ public class Player {
                 "Current position: " + localName + " ID: " + this.currentPositionID;
     }
 
-    /**
-     * Method that displays all player data in a formatted manner
-     * @return a formatted string containing all player data
-     */
-    public String showPlayerData(){
-        return "=====================\n" +
-                "ID: " + id + "\n" +
-                "Name: " + name + "\n" +
-                "Energy: " + energy + "\n" +
-                "Level: " + level + "\n" +
-                "Team: " + team + "\n" +
-                "Max Energy: " + maxEnergy + "\n" +
-                "Current Position ID: " + currentPositionID + "\n" +
-                "XP: " + xp + "\n" +
-                "Conquered Portals IDs: " + conqueredPortalsIDs + "\n" +
-                "=====================\n";
-    }
 
     /**
      * Check if an {@link Object} is equal to the {@link Player}
+     *
      * @param obj {@link Object} to be compared to
      * @return true if it's equal; false if it's not equal
      */
@@ -428,6 +442,7 @@ public class Player {
 
     /**
      * Compares two {@link Player players} by their name
+     *
      * @param other {@link Player} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -437,6 +452,7 @@ public class Player {
 
     /**
      * Compares two {@link Player players} by their energy
+     *
      * @param other {@link Player} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -446,6 +462,7 @@ public class Player {
 
     /**
      * Compares two {@link Player players} by their {@link Team}
+     *
      * @param other {@link Player} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -455,6 +472,7 @@ public class Player {
 
     /**
      * Compares two {@link Player players} by their level
+     *
      * @param other {@link Player} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
@@ -464,10 +482,20 @@ public class Player {
 
     /**
      * Compares two {@link Player players} by their numbered of conquered {@link Portal portals}
+     *
      * @param other {@link Player} to be compared to
      * @return '-1' if lesser; '0' if equal; '1' if greater
      */
     public int compareByNumberOfConqueredPortals(Player other) {
         return Integer.compare(this.conqueredPortalsIDs.size(), other.getConqueredPortalsIDs().size());
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if (o == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return Integer.compare(this.getId(), o.getId());
     }
 }

@@ -5,6 +5,8 @@ import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.Network;
 import mygame.structures.exceptions.ElementNotFoundException;
+import mygame.structures.interfaces.UnorderedListADT;
+import mygame.structures.searchAndSort.ArraySortingAndSearching;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -171,10 +173,36 @@ public class GameMap {
         }
     }
 
-    /**
-     * TODO: sorting here
-     */
-    public void listLocations() {
+    public void listLocationsByID() { // TODO: searchAndSort
+        Local[] list = new Local[this.map.size()];
+        Iterator<Local> it = this.map.iteratorBFS(0);
+        int count = 0;
+        while (it.hasNext()) {
+            list[count] = it.next();
+            count++;
+        }
+        ArraySortingAndSearching.quickSort(list, 0, list.length); // Worst case: O(n²)
+
+        System.out.println("== Locations by ID ==");
+        for (Local local : list) {
+            System.out.println(local);
+        }
+    }
+
+    public void listPlayersByID() { // TODO: searchAndSort
+        Player[] list = new Player[this.playersInGame.size()];
+
+        int count = 0;
+        for (Player player: playersInGame) {
+            list[count] = player;
+            count++;
+        }
+        ArraySortingAndSearching.quickSort(list, 0, list.length); // Worst case: O(n²)
+
+        System.out.println("== Players by ID ==");
+        for (Player player : list) {
+            System.out.println(player);
+        }
     }
 
     /**

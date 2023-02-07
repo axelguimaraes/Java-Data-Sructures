@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
  * Abstract class that represents a {@link Local}
  */
-public abstract class Local {
+public abstract class Local implements Comparable<Local> {
     private static int nextId;
     private final int id;
     private int energy;
