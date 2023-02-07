@@ -496,7 +496,6 @@ public class Player implements Comparable<Player> {
             throw new IllegalArgumentException();
         }
 
-        return Integer.compare(this.getId(), ((Player) o).getId());
+        return Integer.compare(this.getId(), o.getId());
     }
-
 }

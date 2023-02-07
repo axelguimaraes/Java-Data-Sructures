@@ -181,7 +181,7 @@ public class GameMap {
             list[count] = it.next();
             count++;
         }
-        ArraySortingAndSearching.insertionSort(list);
+        ArraySortingAndSearching.quickSort(list, 0, list.length); // Worst case: O(n²)
 
         System.out.println("== Locations by ID ==");
         for (Local local : list) {
@@ -197,7 +197,7 @@ public class GameMap {
             list[count] = player;
             count++;
         }
-        ArraySortingAndSearching.insertionSort(list);
+        ArraySortingAndSearching.quickSort(list, 0, list.length); // Worst case: O(n²)
 
         System.out.println("== Players by ID ==");
         for (Player player : list) {

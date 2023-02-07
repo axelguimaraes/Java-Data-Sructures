@@ -505,7 +505,7 @@ public class StartMenu {
         gameMap.addPlayer(new Player("Tom", Team.GIANTS));
         gameMap.addPlayer(new Player("Jerry", Team.SPARKS));
         gameMap.addPlayer(new Player("Abe", Team.GIANTS));
-    }
+    } // DEV
 
     private static void listLocations(GameMap gameMap, Player player) {
         DecimalFormat df = new DecimalFormat("0.00");
