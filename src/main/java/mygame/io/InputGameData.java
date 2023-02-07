@@ -82,7 +82,7 @@ public class InputGameData {
      * Reads the portals from the JSON object and adds it to the portalList.
      * Finally, the method prints the toString representation of each Portal in the 'portalList'
      */
-    public void readPortals() {
+    public void readPortals(GameMap gameMap) {
         portalList = new ArrayUnorderedList<>();
         for (Object portal : portals) {
 
@@ -120,6 +120,11 @@ public class InputGameData {
             System.out.println(portals.toString());
         }
 
+        for (Local portalsToSend : portalList) {
+            gameMap.addLocation(portalsToSend);
+
+        }
+
     }
 
     /**
@@ -128,7 +133,7 @@ public class InputGameData {
      *
      * @throws PlayerWithNoTeamException if a player does not have a team specified.
      */
-    public void readPlayers() throws PlayerWithNoTeamException {
+    public void readPlayers(GameMap gameMap) throws PlayerWithNoTeamException {
         playerList = new ArrayUnorderedList<>();
         for (Object player : players) {
             JSONObject playerJson = (JSONObject) player;
@@ -165,6 +170,12 @@ public class InputGameData {
         for (Player players : playerList) {
             System.out.println(players.showPlayerData());
         }
+
+        for (Player playersToSend : playerList) {
+            gameMap.addPlayer(playersToSend);
+
+        }
+
     }
 
     /**
@@ -184,6 +195,6 @@ public class InputGameData {
     public static void main(String[] args) throws PlayerWithNoTeamException {
         InputGameData inputClasses = new InputGameData();
         inputClasses.parseJSON("files/exemploNovo.json");
-        inputClasses.readPlayers();
+        //inputClasses.readPortals();
     }
 }
