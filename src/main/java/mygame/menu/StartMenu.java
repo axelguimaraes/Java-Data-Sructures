@@ -5,6 +5,8 @@ import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
 import mygame.io.IOGameSettings;
 import mygame.structures.classes.LinkedQueue;
+import mygame.io.InputGameData;
+import mygame.io.ExportGameData;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -182,6 +184,12 @@ public class StartMenu {
                     locationsMenu(gameMap, scanner);
                     break;
                 case 2:
+                    InputGameData inputClasses = new InputGameData();
+                    inputClasses.parseJSON("files/exemploNovo.json");
+                    //inputClasses.readPortals();
+
+                    inputClasses.readConnectors();
+                    System.out.println("Import Data with Success");
                     // TODO: Import map
                     break;
                 case 3:
@@ -448,6 +456,7 @@ public class StartMenu {
                     System.err.println("Path removed!");
                     break;
                 case 7:
+
                     // TODO: Import locations
                     break;
                 case 8:

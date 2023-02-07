@@ -51,6 +51,7 @@ public class InputGameData {
      */
     public void readConnectors() {
         connectorList = new ArrayUnorderedList<>();
+        GameMap gameMap = new GameMap();
         for (Object connector : connectors) {
             JSONObject connectorJson = (JSONObject) connector;
             JSONObject coordinatesJson = (JSONObject) connectorJson.get("coordinates");
@@ -65,11 +66,17 @@ public class InputGameData {
             Connector connectorObj = new Connector(energy, coordinates, cooldown);
             connectorList.addToRear(connectorObj);
 
+            for (Local connectorToSend : connectorList) {
+                gameMap.addLocation(connectorToSend);
+            }
+
         }
+
         for (Connector connectors : connectorList) {
             System.out.println(connectors.toString());
+
         }
-    }
+        }
 
     /**
      * Reads the portals from the JSON object and adds it to the portalList.
@@ -78,6 +85,7 @@ public class InputGameData {
     public void readPortals() {
         portalList = new ArrayUnorderedList<>();
         for (Object portal : portals) {
+
             Player player = new Player();
             JSONObject portalJson = (JSONObject) portal;
             String name = (String) portalJson.get("name");
@@ -97,6 +105,8 @@ public class InputGameData {
             if (gameSettings.get("ownership") != null) {
                 JSONObject ownershipJson = (JSONObject) gameSettings.get("ownership");
                 player.setName((String) ownershipJson.get("player"));
+            }else{
+                player.setName(null);
             }
 
             // extract data from portalJson and set it in a Portal object
