@@ -162,14 +162,15 @@ public class InputGameData {
 
             // extract data from playerJson and set it in a Player object
             Player playerObj = new Player(name, team, level, experiencePoints, maxEnergy, currentEnergy);
+            gameMap.addPlayer(playerObj);
+            playerObj.setMap(gameMap);
+            playerObj.setCurrentPositionID(0);
+
+
             // set data in playerObj
             playerList.addToRear(playerObj);
         }
 
-        // print the playerList
-        for (Player players : playerList) {
-            System.out.println(players.toString());
-        }
 
         for (Player playersToSend : playerList) {
             gameMap.addPlayer(playersToSend);
