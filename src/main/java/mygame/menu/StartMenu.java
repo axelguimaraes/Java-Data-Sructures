@@ -169,6 +169,7 @@ public class StartMenu {
                     System.err.println("Players imported!");
                     break;
                 case 6:
+                    System.out.println("== EXPORT PLAYERS ==");
                     ExportGameData exportGameData = new ExportGameData();
                     exportGameData.playersExportToJson(gameMap.getPlayersInGame());
                     break;

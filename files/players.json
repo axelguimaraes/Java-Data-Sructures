@@ -7,7 +7,7 @@
       "experiencePoints": 0.0,
       "currentEnergy": 0,
       "id": 1,
-      "team": SPARKS
+      "team": "SPARKS"
     },
     {
       "maxEnergy": 0,
@@ -16,7 +16,7 @@
       "experiencePoints": 0.0,
       "currentEnergy": 0,
       "id": 2,
-      "team": GIANTS
+      "team": "GIANTS"
     },
     {
       "maxEnergy": 0,
@@ -25,7 +25,7 @@
       "experiencePoints": 0.0,
       "currentEnergy": 0,
       "id": 3,
-      "team": SPARKS
+      "team": "SPARKS"
     },
     {
       "maxEnergy": 0,
@@ -34,7 +34,7 @@
       "experiencePoints": 0.0,
       "currentEnergy": 0,
       "id": 4,
-      "team": GIANTS
+      "team": "GIANTS"
     }
   ]
 }

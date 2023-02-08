@@ -118,7 +118,7 @@ public class ExportGameData {
             JSONObject playerObject = new JSONObject();
             playerObject.put("id", player.getId());
             playerObject.put("name", player.getName());
-            playerObject.put("team", player.getTeam());
+            playerObject.put("team", player.getTeam().toString());
             playerObject.put("level", player.getLevel());
             playerObject.put("experiencePoints", player.getXp());
             playerObject.put("maxEnergy", player.getMaxEnergy());
