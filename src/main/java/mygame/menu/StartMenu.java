@@ -7,7 +7,7 @@ import mygame.io.IOGameSettings;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.LinkedQueue;
 import mygame.structures.exceptions.ElementNotFoundException;
-import mygame.io.InputGameData;
+import mygame.io.ImportGameData;
 import mygame.io.ExportGameData;
 
 import java.io.IOException;
@@ -163,7 +163,7 @@ public class StartMenu {
                         System.err.println("Can't add players to an empty map!");
                         break;
                     }
-                    InputGameData inputClasses = new InputGameData();
+                    ImportGameData inputClasses = new ImportGameData();
                     inputClasses.parseJSON("files/players.json");
                     inputClasses.readPlayers(gameMap);
                     System.err.println("Players imported!");
@@ -181,7 +181,7 @@ public class StartMenu {
         }
     }
 
-    public static void mapMenu(GameMap gameMap, Scanner scanner) {
+    public static void mapMenu(GameMap gameMap, Scanner scanner) throws PlayerWithNoTeamException {
         while (true) {
             System.out.println("== MAP MENU ==\n\n" +
                     "" +
@@ -198,7 +198,7 @@ public class StartMenu {
                     break;
                 case 2:
                     System.out.println("== IMPORT MAP ==");
-                    InputGameData inputClasses = new InputGameData();
+                    ImportGameData inputClasses = new ImportGameData();
                     inputClasses.parseJSON("files/map.json");
                     inputClasses.readPortals(gameMap);
                     inputClasses.readConnectors(gameMap);

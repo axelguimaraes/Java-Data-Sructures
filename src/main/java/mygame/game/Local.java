@@ -1,5 +1,7 @@
 package mygame.game;
 
+import mygame.structures.classes.ArrayUnorderedList;
+
 import java.util.Comparator;
 
 /**
@@ -11,6 +13,7 @@ public abstract class Local implements Comparable<Local> {
     private int energy;
     private Coordinates coordinates;
     private LocalType localType;
+    private ArrayUnorderedList<Integer> pathsTo;
 
     /**
      * Constructor for the {@link Local}. It generates an auto-incremented ID that identifies the {@link Local}
@@ -22,6 +25,19 @@ public abstract class Local implements Comparable<Local> {
         this.id = ++nextId;
         this.energy = energy;
         this.coordinates = coordinates;
+        this.pathsTo = new ArrayUnorderedList<>();
+    }
+
+    public ArrayUnorderedList<Integer> getPathsTo() {
+        return pathsTo;
+    }
+
+    public void setPathsTo(ArrayUnorderedList<Integer> pathsTo) {
+        this.pathsTo = pathsTo;
+    }
+
+    public void addPathTo(int destination) {
+        this.pathsTo.addToRear(destination);
     }
 
     /**

@@ -9,7 +9,13 @@
         "latitude": 41.14053,
         "longitude": -8.60969
       },
-      "id": 5
+      "id": 5,
+      "pathTo": [
+        1,
+        2,
+        2,
+        4
+      ]
     },
     {
       "gameSettings": {
@@ -20,7 +26,12 @@
         "latitude": 41.15904,
         "longitude": -8.63069
       },
-      "id": 6
+      "id": 6,
+      "pathTo": [
+        2,
+        1,
+        7
+      ]
     },
     {
       "gameSettings": {
@@ -31,7 +42,13 @@
         "latitude": 41.13813,
         "longitude": -8.61088
       },
-      "id": 9
+      "id": 9,
+      "pathTo": [
+        1,
+        4,
+        4,
+        3
+      ]
     },
     {
       "gameSettings": {
@@ -42,7 +59,14 @@
         "latitude": 41.14069,
         "longitude": -8.61012
       },
-      "id": 8
+      "id": 8,
+      "pathTo": [
+        3,
+        4,
+        7,
+        2,
+        3
+      ]
     },
     {
       "gameSettings": {
@@ -53,11 +77,28 @@
         "latitude": 41.15992,
         "longitude": -8.65966
       },
-      "id": 7
+      "id": 7,
+      "pathTo": [
+        2,
+        6,
+        8
+      ]
     }
   ],
   "Portal": [
     {
+      "ownership": {
+        "player": {
+          "maxEnergy": 0,
+          "level": 1,
+          "name": "John Doe",
+          "XP": 204.0816326530612,
+          "ID": 1,
+          "team": "SPARKS",
+          "energy": 0,
+          "current position": 1
+        }
+      },
       "gameSettings": {
         "maxEnergy": 500,
         "energy": 0
@@ -67,9 +108,18 @@
         "latitude": 41.14444,
         "longitude": -8.61037
       },
-      "id": 1
+      "id": 1,
+      "pathTo": [
+        5,
+        9,
+        4,
+        6
+      ]
     },
     {
+      "ownership": {
+        "player": "None"
+      },
       "gameSettings": {
         "maxEnergy": 350,
         "energy": 0
@@ -79,9 +129,20 @@
         "latitude": 41.14688,
         "longitude": -8.61564
       },
-      "id": 4
+      "id": 4,
+      "pathTo": [
+        3,
+        1,
+        8,
+        9,
+        5,
+        9
+      ]
     },
     {
+      "ownership": {
+        "player": "None"
+      },
       "gameSettings": {
         "maxEnergy": 300,
         "energy": 0
@@ -91,9 +152,18 @@
         "latitude": 41.14139,
         "longitude": -8.61564
       },
-      "id": 3
+      "id": 3,
+      "pathTo": [
+        4,
+        8,
+        8,
+        9
+      ]
     },
     {
+      "ownership": {
+        "player": "None"
+      },
       "gameSettings": {
         "maxEnergy": 250,
         "energy": 0
@@ -103,7 +173,14 @@
         "latitude": 41.14578,
         "longitude": -8.61391
       },
-      "id": 2
+      "id": 2,
+      "pathTo": [
+        5,
+        7,
+        5,
+        6,
+        8
+      ]
     }
   ]
 }

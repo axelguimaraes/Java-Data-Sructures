@@ -10,7 +10,7 @@ public class Portal extends Local {
     private Player conqueror;
     private final int maxEnergy;
 
-    public Portal(String name, Coordinates coordinates, int energy, int maxEnergy, Player conqueror){
+    public Portal(String name, Coordinates coordinates, int energy, int maxEnergy, Player conqueror) {
         super(energy, coordinates);
         this.team = Team.NONE;
         this.conqueror = conqueror;
@@ -93,6 +93,7 @@ public class Portal extends Local {
 
     /**
      * Getter for the {@link Portal's} max energy
+     *
      * @return maxEnergy
      */
     public int getMaxEnergy() {
@@ -201,19 +202,18 @@ public class Portal extends Local {
                 "Conqueror: " + (this.conqueror != null ? this.conqueror.getName() : "null") + "\n" +
                 "Energy: " + super.getEnergy() + "\n" +
                 "Coordinates: " + super.getCoordinates() + "\n";
-        return s;
-/*
+
         if (this.conqueror == null) {
             s += "Conqueror: N/A\n";
         } else {
-          s += "Conqueror: " + this.conqueror + "\n";
+            s += "Conqueror: " + this.conqueror + "\n";
         }
 
         s += "Energy: " + super.getEnergy() + "\n" +
                 "Coordinates: " + super.getCoordinates() + "\n";
         return s;
 
- */
+
     }
 
     @Override

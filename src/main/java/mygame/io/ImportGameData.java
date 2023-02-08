@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 
-public class InputGameData {
+public class ImportGameData {
     private JSONParser parser;
     private JSONArray connectors;
     private JSONArray portals;
@@ -22,7 +22,7 @@ public class InputGameData {
 
     private ArrayUnorderedList<Object> routesList;
 
-    public InputGameData() {
+    public ImportGameData() {
         parser = new JSONParser();
     }
 
@@ -63,29 +63,32 @@ public class InputGameData {
             int energy = (((Long) gameSettings.get("energy")).intValue());
             int cooldown = (((Long) gameSettings.get("energy")).intValue());
 
+            JSONArray pathsArray = (JSONArray) connectorJson.get("pathTo");
+            ArrayUnorderedList<Integer> list = new ArrayUnorderedList<>();
+            for (Object integer : pathsArray) {
+                int temp = (int) (long) integer;
+                list.addToRear(temp);
+            }
             Connector connectorObj = new Connector(energy, coordinates, cooldown);
+            connectorObj.setPathsTo(list);
             connectorList.addToRear(connectorObj);
-
-
         }
+
         for (Local connectorToSend : connectorList) {
             gameMap.addLocation(connectorToSend);
         }
 
-        for (Connector connectors : connectorList) {
-            System.out.println(connectors.toString());
 
-        }
     }
 
     /**
      * Reads the portals from the JSON object and adds it to the portalList.
      * Finally, the method prints the toString representation of each Portal in the 'portalList'
      */
-    public void readPortals(GameMap gameMap) {
+    public void readPortals(GameMap gameMap) throws PlayerWithNoTeamException {
         portalList = new ArrayUnorderedList<>();
-        for (Object portal : portals) {
 
+        for (Object portal : portals) {
             Player player = new Player();
             JSONObject portalJson = (JSONObject) portal;
             String name = (String) portalJson.get("name");
@@ -108,21 +111,47 @@ public class InputGameData {
             } else {
                 player.setName(null);
             }
+            JSONArray pathsArray = (JSONArray) portalJson.get("pathTo");
+            ArrayUnorderedList<Integer> list = new ArrayUnorderedList<>();
+            for (Object integer : pathsArray) {
+                int temp = (int) (long) integer;
+                list.addToRear(temp);
+            }
 
             // extract data from portalJson and set it in a Portal object
             Portal portalObj = new Portal(name, coordinates, energy, maxEnergy, player);
+            portalObj.setPathsTo(list);
+
+            JSONObject ownership = (JSONObject) portalJson.get("ownership");
+            if (!(ownership.get("player").equals("None"))) {
+                JSONObject playerJson = (JSONObject) ownership.get("player");
+                int playerEnergy = (int) (long) playerJson.get("energy");
+                int currentPosition = (int) (long) playerJson.get("current position");
+                Team team;
+                if (playerJson.get("team").equals("SPARKS")) {
+                    team = Team.SPARKS;
+                } else {
+                    team = Team.GIANTS;
+                }
+                int level = (int) (long) playerJson.get("level");
+                String playerName = (String) playerJson.get("name");
+                double xp = (double) playerJson.get("XP");
+                int playerMaxEnergy = (int) (long) playerJson.get("maxEnergy");
+
+                Player player1 = new Player(playerName, team, level, xp, playerMaxEnergy, playerEnergy);
+                player1.setCurrentPositionID(currentPosition);
+
+                portalObj.setConqueror(player1);
+            } else if (ownership.get("player").equals("None")) {
+                portalObj.setConqueror(null);
+            }
+
             // set data in portalObj
             portalList.addToRear(portalObj);
-
-        }
-        // print the portalList
-        for (Portal portals : portalList) {
-            System.out.println(portals.toString());
         }
 
         for (Local portalsToSend : portalList) {
             gameMap.addLocation(portalsToSend);
-
         }
 
     }

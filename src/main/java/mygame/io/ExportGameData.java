@@ -56,15 +56,30 @@ public class ExportGameData {
 
 
                 JSONObject ownership = new JSONObject();
-                if(portal.getConqueror()== null){
-                    ownership.put("ownership", "N/A");
-                    ownership.put("player", "N/A");
-                }else{
-                    ownership.put("ownership", ownership);
-                    ownership.put("player", portal.getConqueror().getName());
+                if (portal.getConqueror() == null) {
+                    ownership.put("player", "None");
+                } else {
+                    JSONObject conqueror = new JSONObject();
+                    conqueror.put("ID", portal.getConqueror().getId());
+                    conqueror.put("name", portal.getConqueror().getName());
+                    conqueror.put("energy", portal.getConqueror().getEnergy());
+                    conqueror.put("team", portal.getConqueror().getTeam().toString());
+                    conqueror.put("level", portal.getConqueror().getLevel());
+                    conqueror.put("current position", portal.getConqueror().getCurrentPositionID());
+                    conqueror.put("XP", portal.getConqueror().getXp());
+                    conqueror.put("maxEnergy", portal.getConqueror().getMaxEnergy());
+
+                    ownership.put("player",conqueror);
                 }
 
+                portalObject.put("ownership", ownership);
                 portalObject.put("gameSettings", gameSettings);
+
+                JSONArray pathsArray = new JSONArray();
+                for (Integer integer : portal.getPathsTo()) {
+                    pathsArray.add(integer);
+                }
+                portalObject.put("pathTo", pathsArray);
 
                 // Add the portal object to the portal array
                 portalArray.add(portalObject);
@@ -90,7 +105,14 @@ public class ExportGameData {
                 gameSettings.put("cooldown", connector.getCooldown());
                 connectorObject.put("gameSettings", gameSettings);
 
-                // Add the connector object to the portal array
+                JSONArray pathsArray = new JSONArray();
+                for (Integer integer : connector.getPathsTo()) {
+                    pathsArray.add(integer);
+                }
+                connectorObject.put("pathTo", pathsArray);
+
+
+                // Add the connector object to the connector array
                 connectorArray.add(connectorObject);
             }
             // Add the connector array to the data object

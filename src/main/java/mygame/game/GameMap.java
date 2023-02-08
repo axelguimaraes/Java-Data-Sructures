@@ -405,6 +405,8 @@ public class GameMap {
      */
     public void connectLocationsWithCoordinates(Local location1, Local location2) {
         this.map.addEdge(location1, location2, coordinatesDistance(location1, location2));
+        location1.addPathTo(location2.getId());
+        location2.addPathTo(location1.getId());
     }
 
     /**
