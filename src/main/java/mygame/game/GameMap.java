@@ -392,8 +392,8 @@ public class GameMap {
      * @param location2 second {@link Local location}
      * @param weight    path distance of the {@link Local locations} to connect
      */
-    public void connectLocations(Local location1, Local location2, double weight) {
-        this.map.addEdge(location1, location2, weight);
+    public void connectLocations(int location1, int location2, double weight) {
+        this.map.addEdge(location1 - 1, location2 - 1, weight);
     }
 
     /**
@@ -403,8 +403,8 @@ public class GameMap {
      * @param location1 first {@link Local location}
      * @param location2 second {@link Local location}
      */
-    public void connectLocationsWithCoordinates(Local location1, Local location2) {
-        this.map.addEdge(location1, location2, coordinatesDistance(location1, location2));
+    public void connectLocationsWithCoordinates(int location1, int location2) {
+        this.map.addEdge(location1 - 1, location2 - 1, coordinatesDistance(location1, location2));
     }
 
     /**
@@ -445,12 +445,16 @@ public class GameMap {
      * @param local2 second {@link Local location}
      * @return path distance
      */
-    private static double coordinatesDistance(Local local1, Local local2) {
+    private double coordinatesDistance(int local1, int local2) {
         final int EARTH_RADIUS = 6371;
-        double lat1 = local1.getCoordinates().getLatitude();
-        double lat2 = local2.getCoordinates().getLatitude();
-        double lon1 = local1.getCoordinates().getLongitude();
-        double lon2 = local2.getCoordinates().getLongitude();
+
+        Object[] objects = this.map.getVertices();
+        Local[] locals = (Local[]) objects;
+
+        double lat1 = locals[local1].getCoordinates().getLatitude();
+        double lat2 = locals[local2].getCoordinates().getLatitude();
+        double lon1 = locals[local1].getCoordinates().getLongitude();
+        double lon2 = locals[local2].getCoordinates().getLongitude();
 
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
