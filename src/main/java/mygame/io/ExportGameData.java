@@ -1,4 +1,5 @@
 package mygame.io;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,90 +14,92 @@ import org.json.simple.JSONObject;
 public class ExportGameData {
     /**
      * Method to return all the data of the Map, it includes Portals and Connectors
-     * @param portals
-     * @param connectors
+     *
+     * @param gameMap map of the game
      */
-    public void mapExportToJson(GameMap gameMap){
+    public void mapExportToJson(GameMap gameMap) {
 
-        ArrayUnorderedList portals = new ArrayUnorderedList<Local>();
-        ArrayUnorderedList connectors = new ArrayUnorderedList<Local>();
+        ArrayUnorderedList<Portal> portals = new ArrayUnorderedList<>();
+        ArrayUnorderedList<Connector> connectors = new ArrayUnorderedList<>();
 
         Iterator<Local> it = gameMap.getMap().iteratorBFS(0);
         while (it.hasNext()) {
             Local local = it.next();
             if (local instanceof Portal) {
-                portals.addToRear(local);
+                portals.addToRear((Portal) local);
             }
             if (local instanceof Connector) {
-                connectors.addToRear(local);
+                connectors.addToRear((Connector) local);
             }
 
 
             // Create a JSONObject to store the data
-        JSONObject data = new JSONObject();
-        // Create a JSONArray for the portals
-        JSONArray portalArray = new JSONArray();
-        // Iterate through each portal in the list
-        for (Portal portal : portals) {
-            // Create a JSONObject for each portal
-            JSONObject portalObject = new JSONObject();
-            portalObject.put("id", portal.getId());
-            portalObject.put("name", portal.getName());
+            JSONObject data = new JSONObject();
+            // Create a JSONArray for the portals
+            JSONArray portalArray = new JSONArray();
+            // Iterate through each portal in the list
+            for (Portal portal : portals) {
+                // Create a JSONObject for each portal
+                JSONObject portalObject = new JSONObject();
+                portalObject.put("id", portal.getId());
+                portalObject.put("name", portal.getName());
 
-            JSONObject coords = new JSONObject();
-            coords.put("latitude", portal.getCoordinates().getLatitude());
-            coords.put("longitude", portal.getCoordinates().getLongitude());
-            portalObject.put("coordinates", coords);
+                JSONObject coords = new JSONObject();
+                coords.put("latitude", portal.getCoordinates().getLatitude());
+                coords.put("longitude", portal.getCoordinates().getLongitude());
+                portalObject.put("coordinates", coords);
 
-            JSONObject gameSettings = new JSONObject();
-            gameSettings.put("energy", portal.getEnergy());
-            gameSettings.put("maxEnergy", portal.getMaxEnergy());
+                JSONObject gameSettings = new JSONObject();
+                gameSettings.put("energy", portal.getEnergy());
+                gameSettings.put("maxEnergy", portal.getMaxEnergy());
 
 
-            JSONObject ownership = new JSONObject();
-            ownership.put("player", portal.getConqueror().getName());
-            gameSettings.put("ownership", ownership);
-            portalObject.put("gameSettings", gameSettings);
+                JSONObject ownership = new JSONObject();
+                ownership.put("player", portal.getConqueror().getName());
+                gameSettings.put("ownership", ownership);
+                portalObject.put("gameSettings", gameSettings);
 
-            // Add the portal object to the portal array
-            portalArray.add(portalObject);
+                // Add the portal object to the portal array
+                portalArray.add(portalObject);
+            }
+
+            data.put("Portal", portalArray);
+
+            // Create a JSONArray for the connectors
+            JSONArray connectorArray = new JSONArray();
+            // Iterate through each connector in the list
+            for (Connector connector : connectors) {
+                // Create a JSONObject for each connector
+                JSONObject connectorObject = new JSONObject();
+                connectorObject.put("id", connector.getId());
+
+                JSONObject coords = new JSONObject();
+                coords.put("latitude", connector.getCoordinates().getLatitude());
+                coords.put("longitude", connector.getCoordinates().getLongitude());
+                connectorObject.put("coordinates", coords);
+
+                JSONObject gameSettings = new JSONObject();
+                gameSettings.put("energy", connector.getEnergy());
+                gameSettings.put("cooldown", connector.getCooldown());
+                connectorObject.put("gameSettings", gameSettings);
+
+                // Add the connector object to the portal array
+                connectorArray.add(connectorObject);
+            }
+            // Add the connector array to the data object
+            data.put("Connector", connectorArray);
+
+            writeFile(data, "Map");
         }
-
-        data.put("Portal", portalArray);
-
-        // Create a JSONArray for the connectors
-        JSONArray connectorArray = new JSONArray();
-        // Iterate through each connector in the list
-        for (Connector connector : connectors) {
-            // Create a JSONObject for each connector
-            JSONObject connectorObject = new JSONObject();
-            connectorObject.put("id", connector.getId());
-
-            JSONObject coords = new JSONObject();
-            coords.put("latitude", connector.getCoordinates().getLatitude());
-            coords.put("longitude", connector.getCoordinates().getLongitude());
-            connectorObject.put("coordinates", coords);
-
-            JSONObject gameSettings = new JSONObject();
-            gameSettings.put("energy", connector.getEnergy());
-            gameSettings.put("cooldown", connector.getCooldown());
-            connectorObject.put("gameSettings", gameSettings);
-
-            // Add the connector object to the portal array
-            connectorArray.add(connectorObject);
-        }
-        // Add the connector array to the data object
-        data.put("Connector", connectorArray);
-
-        writeFile(data, "Map");
     }
 
 
     /**
      * Method to export all the Player Data into a Json file
+     *
      * @param players
      */
-    public void playersExportToJson(ArrayUnorderedList<Player> players ){
+    public void playersExportToJson(ArrayUnorderedList<Player> players) {
         // Create a JSONObject to store the data
         JSONObject data = new JSONObject();
         // Create a JSONArray for the Players
@@ -121,6 +124,7 @@ public class ExportGameData {
 
         writeFile(data, "PLayer");
     }
+
     public void exportToJson(ArrayUnorderedList<Portal> portals, ArrayUnorderedList<Connector> connectors, ArrayUnorderedList<Player> players) {
         // Create a JSONObject to store the data
         JSONObject data = new JSONObject();
@@ -207,14 +211,14 @@ public class ExportGameData {
 
     }
 
-    private void writeFile(JSONObject data, String type){
+    private void writeFile(JSONObject data, String type) {
         if (data == null) {
             System.out.println("Data is null, cannot export to JSON file.");
             return;
         }
         String fileName = "";
 
-        if(type.equals("Map")){
+        if (type.equals("Map")) {
             fileName = "files/map.json";
         } else if (type.equals("Player")) {
             fileName = "files/players.json";
