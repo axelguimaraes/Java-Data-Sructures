@@ -164,7 +164,7 @@ public class StartMenu {
                         break;
                     }
                     InputGameData inputClasses = new InputGameData();
-                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.parseJSON("files/players.json");
                     inputClasses.readPlayers(gameMap);
                     System.err.println("Players imported!");
                     break;
@@ -197,14 +197,16 @@ public class StartMenu {
                     locationsMenu(gameMap, scanner);
                     break;
                 case 2:
+                    System.out.println("== IMPORT MAP ==");
                     InputGameData inputClasses = new InputGameData();
-                    inputClasses.parseJSON("files/players.json");
+                    inputClasses.parseJSON("files/map.json");
                     inputClasses.readPortals(gameMap);
                     inputClasses.readConnectors(gameMap);
-                    System.out.println("Import Data with Success");
+                    System.err.println("Data imported successfully");
                     // TODO: Import map
                     break;
                 case 3:
+                    System.out.println("== EXPORT MAP ==");
                     ExportGameData exportGameData = new ExportGameData();
                     exportGameData.mapExportToJson(gameMap);
                     // TODO: Export map
@@ -510,7 +512,7 @@ public class StartMenu {
                     break;
                 case 8:
                     ExportGameData exportGameData = new ExportGameData();
-                    exportGameData.mapExportToJson(gameMap);
+                    exportGameData.locationsExportToJson(gameMap);
                     // TODO: Export locations
                     break;
                 case 0:

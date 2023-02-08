@@ -133,7 +133,22 @@ public class ExportGameData {
         writeFile(data, "Player");
     }
 
-    public void exportToJson(ArrayUnorderedList<Portal> portals, ArrayUnorderedList<Connector> connectors, ArrayUnorderedList<Player> players) {
+    public void locationsExportToJson(GameMap gameMap) {
+        ArrayUnorderedList<Portal> portals = new ArrayUnorderedList<>();
+        ArrayUnorderedList<Connector> connectors = new ArrayUnorderedList<>();
+        ArrayUnorderedList<Player> players = gameMap.getPlayersInGame();
+
+        Iterator<Local> it = gameMap.getMap().iteratorBFS(0);
+        while (it.hasNext()) {
+            Local local = it.next();
+
+            if (local instanceof Portal) {
+                portals.addToRear((Portal) local);
+            } else {
+                connectors.addToRear((Connector) local);
+            }
+        }
+
         // Create a JSONObject to store the data
         JSONObject data = new JSONObject();
         // Create a JSONArray for the portals
@@ -156,7 +171,12 @@ public class ExportGameData {
 
 
             JSONObject ownership = new JSONObject();
-            ownership.put("player", portal.getConqueror().getName());
+            if (portal.getConqueror() != null) {
+                ownership.put("player", portal.getConqueror().getName());
+            } else {
+                ownership.put("player", "N/A");
+            }
+
             gameSettings.put("ownership", ownership);
             portalObject.put("gameSettings", gameSettings);
 
@@ -210,7 +230,7 @@ public class ExportGameData {
         // Add the player array to the data object
         data.put("Player", playerArray);
 
-        try (FileWriter file = new FileWriter("files/gameDataExported.json")) {
+        try (FileWriter file = new FileWriter("files/gameData.json")) {
             file.write(data.toJSONString());
             System.err.println("Successfully exported data to JSON file.");
         } catch (IOException e) {

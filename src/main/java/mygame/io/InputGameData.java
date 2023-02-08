@@ -38,7 +38,7 @@ public class InputGameData {
             JSONObject jsonObject = (JSONObject) obj;
             connectors = (JSONArray) jsonObject.get("Connector");
             portals = (JSONArray) jsonObject.get("Portal");
-            players = (JSONArray) jsonObject.get("Players");
+            players = (JSONArray) jsonObject.get("Player");
             routes = (JSONArray) jsonObject.get("routes");
         } catch (Exception e) {
             System.out.println("Error reading JSON file: " + e.getMessage());
@@ -156,7 +156,7 @@ public class InputGameData {
             // extract the rest of the player data
             Long levelLong = (Long) playerJson.get("level");
             int level = levelLong.intValue();
-            Double experiencePoints = ((Long) playerJson.get("experiencePoints")).doubleValue();
+            Double experiencePoints = (Double) playerJson.get("experiencePoints");
             int maxEnergy = (((Long) playerJson.get("maxEnergy")).intValue());
             int currentEnergy = (((Long) playerJson.get("currentEnergy")).intValue());
 
@@ -184,11 +184,5 @@ public class InputGameData {
             int to = (((Long) routesJson.get("to")).intValue());
         }
 
-    }
-
-    public static void main(String[] args) throws PlayerWithNoTeamException {
-        InputGameData inputClasses = new InputGameData();
-        inputClasses.parseJSON("files/exemploNovo.json");
-        //inputClasses.readPortals();
     }
 }
