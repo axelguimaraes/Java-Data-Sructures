@@ -9,7 +9,6 @@ import mygame.structures.classes.LinkedQueue;
 import mygame.structures.exceptions.ElementNotFoundException;
 import mygame.io.InputGameData;
 import mygame.io.ExportGameData;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
@@ -138,11 +137,8 @@ public class StartMenu {
                         System.err.println("No existing players!");
                         break;
                     }
-                    System.out.println("== EDIT PLAYER ==\n");
-                    for (Player player : gameMap.getPlayersInGame()) {
-                        System.out.println("ID: " + player.getId() + "\tName: " + player.getName() + "\tTeam: " + player.getTeam());
-                    }
-                    System.out.println("ID of player to edit:");
+                    System.out.println("== EDIT PLAYER ==\n" +
+                            "ID of player to edit:");
 
                     gameMap.editPlayer(gameMap.getPlayerFromID(scanner.nextInt()));
                     System.err.println("Player edited!");
@@ -432,14 +428,8 @@ public class StartMenu {
                         System.err.println("No locations available!");
                         break;
                     }
-                    System.out.println("== EDIT LOCATION ==\n");
-                    Iterator<Local> iterator = gameMap.getMap().iteratorBFS(0);
-                    while (iterator.hasNext()) {
-                        Local local1 = iterator.next();
-                        System.out.println("ID: " + local1.getId() + "\tType: " + local1.getLocalType());
-                    }
-                    System.out.println("Location ID:");
-
+                    System.out.println("== EDIT LOCATION ==\n" +
+                            "ID of location to edit:");
                     gameMap.editLocation(gameMap.getLocalByID(scanner.nextInt()));
                     System.err.println("Location edited!");
                     break;
@@ -474,9 +464,9 @@ public class StartMenu {
                     weight = scanner.nextDouble();
 
                     if (weight == 0) {
-                        gameMap.connectLocationsWithCoordinates(id1, id2);
+                        gameMap.connectLocationsWithCoordinates(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2));
                     } else {
-                        gameMap.connectLocations(id1, id2, weight);
+                        gameMap.connectLocations(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2), weight);
                     }
                     System.err.println("Path added!");
                     break;
@@ -533,25 +523,25 @@ public class StartMenu {
         gameMap.addLocation(connector4);
         gameMap.addLocation(connector5);
 
-        gameMap.connectLocationsWithCoordinates(portal1.getId(), connector1.getId());
-        gameMap.connectLocationsWithCoordinates(portal1.getId(), connector5.getId());
-        gameMap.connectLocationsWithCoordinates(portal2.getId(), connector1.getId());
-        gameMap.connectLocationsWithCoordinates(portal2.getId(), connector3.getId());
-        gameMap.connectLocationsWithCoordinates(portal3.getId(), portal4.getId());
-        gameMap.connectLocationsWithCoordinates(portal3.getId(), connector4.getId());
-        gameMap.connectLocationsWithCoordinates(portal4.getId(), portal1.getId());
-        gameMap.connectLocationsWithCoordinates(portal4.getId(), connector4.getId());
-        gameMap.connectLocationsWithCoordinates(portal4.getId(), connector5.getId());
-        gameMap.connectLocationsWithCoordinates(connector1.getId(), portal2.getId());
-        gameMap.connectLocationsWithCoordinates(connector1.getId(), portal4.getId());
-        gameMap.connectLocationsWithCoordinates(connector2.getId(), portal2.getId());
-        gameMap.connectLocationsWithCoordinates(connector2.getId(), portal1.getId());
-        gameMap.connectLocationsWithCoordinates(connector3.getId(), connector2.getId());
-        gameMap.connectLocationsWithCoordinates(connector4.getId(), connector3.getId());
-        gameMap.connectLocationsWithCoordinates(connector4.getId(), portal2.getId());
-        gameMap.connectLocationsWithCoordinates(connector4.getId(), portal3.getId());
-        gameMap.connectLocationsWithCoordinates(connector5.getId(), portal4.getId());
-        gameMap.connectLocationsWithCoordinates(connector5.getId(), portal3.getId());
+        gameMap.connectLocationsWithCoordinates(portal1, connector1);
+        gameMap.connectLocationsWithCoordinates(portal1, connector5);
+        gameMap.connectLocationsWithCoordinates(portal2, connector1);
+        gameMap.connectLocationsWithCoordinates(portal2, connector3);
+        gameMap.connectLocationsWithCoordinates(portal3, portal4);
+        gameMap.connectLocationsWithCoordinates(portal3, connector4);
+        gameMap.connectLocationsWithCoordinates(portal4, portal1);
+        gameMap.connectLocationsWithCoordinates(portal4, connector4);
+        gameMap.connectLocationsWithCoordinates(portal4, connector5);
+        gameMap.connectLocationsWithCoordinates(connector1, portal2);
+        gameMap.connectLocationsWithCoordinates(connector1, portal4);
+        gameMap.connectLocationsWithCoordinates(connector2, portal2);
+        gameMap.connectLocationsWithCoordinates(connector2, portal1);
+        gameMap.connectLocationsWithCoordinates(connector3, connector2);
+        gameMap.connectLocationsWithCoordinates(connector4, connector3);
+        gameMap.connectLocationsWithCoordinates(connector4, portal2);
+        gameMap.connectLocationsWithCoordinates(connector4, portal3);
+        gameMap.connectLocationsWithCoordinates(connector5, portal4);
+        gameMap.connectLocationsWithCoordinates(connector5, portal3);
 
         gameMap.addPlayer(new Player("John Doe", Team.SPARKS));
         gameMap.addPlayer(new Player("Tom", Team.GIANTS));
