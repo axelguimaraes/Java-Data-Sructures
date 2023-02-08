@@ -152,7 +152,7 @@ public class StartMenu {
 
                     gameMap.removePlayer(gameMap.getPlayerFromID(scanner.nextInt()));
                     System.err.println("Player removed!");
-                    break;1
+                    break;
 
                 case 5:
                     InputGameData inputClasses = new InputGameData();
@@ -161,6 +161,8 @@ public class StartMenu {
                     // TODO: Import players
                     break;
                 case 6:
+
+
                     // TODO: Export players
                     break;
                 case 0:
@@ -195,6 +197,8 @@ public class StartMenu {
                     // TODO: Import map
                     break;
                 case 3:
+                    ExportGameData exportGameData = new ExportGameData();
+                    //exportGameData.mapExportToJson(gameMap.);
                     // TODO: Export map
                     break;
                 case 0:
