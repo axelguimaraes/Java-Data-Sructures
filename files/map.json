@@ -1,0 +1,109 @@
+{
+  "Connector": [
+    {
+      "gameSettings": {
+        "cooldown": 2,
+        "energy": 100
+      },
+      "coordinates": {
+        "latitude": 41.14053,
+        "longitude": -8.60969
+      },
+      "id": 5
+    },
+    {
+      "gameSettings": {
+        "cooldown": 8,
+        "energy": 300
+      },
+      "coordinates": {
+        "latitude": 41.15904,
+        "longitude": -8.63069
+      },
+      "id": 6
+    },
+    {
+      "gameSettings": {
+        "cooldown": 2,
+        "energy": 100
+      },
+      "coordinates": {
+        "latitude": 41.13813,
+        "longitude": -8.61088
+      },
+      "id": 9
+    },
+    {
+      "gameSettings": {
+        "cooldown": 5,
+        "energy": 150
+      },
+      "coordinates": {
+        "latitude": 41.14069,
+        "longitude": -8.61012
+      },
+      "id": 8
+    },
+    {
+      "gameSettings": {
+        "cooldown": 1,
+        "energy": 50
+      },
+      "coordinates": {
+        "latitude": 41.15992,
+        "longitude": -8.65966
+      },
+      "id": 7
+    }
+  ],
+  "Portal": [
+    {
+      "gameSettings": {
+        "maxEnergy": 500,
+        "energy": 0
+      },
+      "name": "Sao Bento Railway Station",
+      "coordinates": {
+        "latitude": 41.14444,
+        "longitude": -8.61037
+      },
+      "id": 1
+    },
+    {
+      "gameSettings": {
+        "maxEnergy": 350,
+        "energy": 0
+      },
+      "name": "Lello Bookstore",
+      "coordinates": {
+        "latitude": 41.14688,
+        "longitude": -8.61564
+      },
+      "id": 4
+    },
+    {
+      "gameSettings": {
+        "maxEnergy": 300,
+        "energy": 0
+      },
+      "name": "Bolsa Palace",
+      "coordinates": {
+        "latitude": 41.14139,
+        "longitude": -8.61564
+      },
+      "id": 3
+    },
+    {
+      "gameSettings": {
+        "maxEnergy": 250,
+        "energy": 0
+      },
+      "name": "Clerigos Tower",
+      "coordinates": {
+        "latitude": 41.14578,
+        "longitude": -8.61391
+      },
+      "id": 2
+    }
+  ]
+}

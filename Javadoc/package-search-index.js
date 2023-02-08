@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"mygame.exceptions"},{"l":"mygame.game"},{"l":"mygame.io"},{"l":"mygame.menu"},{"l":"mygame.structures.classes"},{"l":"mygame.structures.exceptions"},{"l":"mygame.structures.interfaces"},{"l":"mygame.structures.searchAndSort"}]
