@@ -212,7 +212,7 @@ public class ExportGameData {
 
         try (FileWriter file = new FileWriter("files/gameDataExported.json")) {
             file.write(data.toJSONString());
-            System.out.println("Successfully exported data to JSON file.");
+            System.err.println("Successfully exported data to JSON file.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -221,7 +221,7 @@ public class ExportGameData {
 
     private void writeFile(JSONObject data, String type) {
         if (data == null) {
-            System.out.println("Data is null, cannot export to JSON file.");
+            System.err.println("Data is null, cannot export to JSON file.");
             return;
         }
         String fileName = "";
@@ -231,12 +231,12 @@ public class ExportGameData {
         } else if (type.equals("Player")) {
             fileName = "files/players.json";
         } else {
-            System.out.println("Error: Invalid data type.");
+            System.err.println("Error: Invalid data type.");
             return;
         }
         try (FileWriter file = new FileWriter(fileName)) {
             file.write(data.toJSONString());
-            System.out.println("Successfully exported " + type + " data to JSON file.");
+            System.err.println("Successfully exported " + type + " data to JSON file.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

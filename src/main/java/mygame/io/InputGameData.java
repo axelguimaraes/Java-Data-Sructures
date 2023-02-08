@@ -164,19 +164,12 @@ public class InputGameData {
             Player playerObj = new Player(name, team, level, experiencePoints, maxEnergy, currentEnergy);
             gameMap.addPlayer(playerObj);
             playerObj.setMap(gameMap);
-            playerObj.setCurrentPositionID(0);
+            playerObj.setCurrentPositionID(1);
 
 
             // set data in playerObj
             playerList.addToRear(playerObj);
         }
-
-
-        for (Player playersToSend : playerList) {
-            gameMap.addPlayer(playersToSend);
-
-        }
-
     }
 
     /**

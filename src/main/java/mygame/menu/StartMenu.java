@@ -158,6 +158,7 @@ public class StartMenu {
                     break;
 
                 case 5:
+                    System.out.println("== IMPORT PLAYERS ==");
                     if (gameMap.getMap().isEmpty()) {
                         System.err.println("Can't add players to an empty map!");
                         break;
@@ -165,12 +166,11 @@ public class StartMenu {
                     InputGameData inputClasses = new InputGameData();
                     inputClasses.parseJSON("files/exemploNovo.json");
                     inputClasses.readPlayers(gameMap);
-                    // TODO: Import players
+                    System.err.println("Players imported!");
                     break;
                 case 6:
                     ExportGameData exportGameData = new ExportGameData();
                     exportGameData.playersExportToJson(gameMap.getPlayersInGame());
-                    // TODO: Export players
                     break;
                 case 0:
                     return;
