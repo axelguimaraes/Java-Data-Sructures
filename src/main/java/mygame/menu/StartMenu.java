@@ -197,7 +197,7 @@ public class StartMenu {
                     break;
                 case 2:
                     InputGameData inputClasses = new InputGameData();
-                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.parseJSON("files/players.json");
                     inputClasses.readPortals(gameMap);
                     inputClasses.readConnectors(gameMap);
                     System.out.println("Import Data with Success");
