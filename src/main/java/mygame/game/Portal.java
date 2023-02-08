@@ -197,8 +197,12 @@ public class Portal extends Local {
         String s = "PORTAL\n" +
                 "ID: " + super.getId() + "\n" +
                 "Name: " + this.name + "\n" +
-                "Team: " + this.team + "\n";
-
+                "Team: " + this.team + "\n" +
+                "Conqueror: " + (this.conqueror != null ? this.conqueror.getName() : "null") + "\n" +
+                "Energy: " + super.getEnergy() + "\n" +
+                "Coordinates: " + super.getCoordinates() + "\n";
+        return s;
+/*
         if (this.conqueror == null) {
             s += "Conqueror: N/A\n";
         } else {
@@ -208,6 +212,8 @@ public class Portal extends Local {
         s += "Energy: " + super.getEnergy() + "\n" +
                 "Coordinates: " + super.getCoordinates() + "\n";
         return s;
+
+ */
     }
 
     @Override

@@ -45,6 +45,7 @@ public class GameMap {
         this.map.addVertex(local);
     }
 
+
     /**
      * Removes an existing {@link Local location} from the {@link GameMap}
      *

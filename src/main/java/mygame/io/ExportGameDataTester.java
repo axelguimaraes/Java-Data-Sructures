@@ -13,7 +13,7 @@ public class ExportGameDataTester {
         Coordinates coordsCon = new Coordinates(1930.100, 340.200);
         Coordinates coordsCon2 = new Coordinates(4310.100, 6420.200);
 
-        Player player = new Player("Joao", Team.SPARKS, 100, 200, 300, 200);
+        Player player = new Player("Joao H", Team.SPARKS, 100, 200, 300, 200);
         Player player2 = new Player("Ines", Team.GIANTS, 10, 20, 500, 340);
 
         Portal portal = new Portal("Ponte D.Luis do Bairro Alto", coords, 200, 300, player);
@@ -36,6 +36,15 @@ public class ExportGameDataTester {
 
 
         ExportGameData egd = new ExportGameData();
+        egd.playersExportToJson(playersList);
         egd.exportToJson(portalList, connectorList, playersList);
+        egd.mapExportToJson(portalList, connectorList);
+        /*
+        egd.playersExportToJson(playersList);
+
+        egd.portalsExportToJson(portalList);
+        egd.connectorsExportToJson(connectorList);
+
+         */
     }
 }

@@ -515,7 +515,7 @@ public class Player implements Comparable<Player> {
      */
     public String toString() {
         String localName;
-        if (this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
+        if (this.map != null && this.map.getLocalByID(this.currentPositionID) instanceof Portal) {
             localName = ((Portal) this.map.getLocalByID(this.currentPositionID)).getName();
         } else {
             localName = "Connector";

@@ -7,7 +7,8 @@ import mygame.io.IOGameSettings;
 import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.LinkedQueue;
 import mygame.structures.exceptions.ElementNotFoundException;
-
+import mygame.io.InputGameData;
+import mygame.io.ExportGameData;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
@@ -156,9 +157,14 @@ public class StartMenu {
                     break;
 
                 case 5:
+                    InputGameData inputClasses = new InputGameData();
+                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.readPlayers(gameMap);
                     // TODO: Import players
                     break;
                 case 6:
+
+
                     // TODO: Export players
                     break;
                 case 0:
@@ -185,9 +191,16 @@ public class StartMenu {
                     locationsMenu(gameMap, scanner);
                     break;
                 case 2:
+                    InputGameData inputClasses = new InputGameData();
+                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.readPortals(gameMap);
+                    inputClasses.readConnectors(gameMap);
+                    System.out.println("Import Data with Success");
                     // TODO: Import map
                     break;
                 case 3:
+                    ExportGameData exportGameData = new ExportGameData();
+                    //exportGameData.mapExportToJson(gameMap.);
                     // TODO: Export map
                     break;
                 case 0:
@@ -474,6 +487,7 @@ public class StartMenu {
                     System.err.println("Path removed!");
                     break;
                 case 7:
+
                     // TODO: Import locations
                     break;
                 case 8:
