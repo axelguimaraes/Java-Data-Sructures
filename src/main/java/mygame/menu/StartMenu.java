@@ -163,8 +163,8 @@ public class StartMenu {
                     // TODO: Import players
                     break;
                 case 6:
-
-
+                    ExportGameData exportGameData = new ExportGameData();
+                    exportGameData.playersExportToJson(gameMap.getPlayersInGame());
                     // TODO: Export players
                     break;
                 case 0:
@@ -200,7 +200,7 @@ public class StartMenu {
                     break;
                 case 3:
                     ExportGameData exportGameData = new ExportGameData();
-                    //exportGameData.mapExportToJson(gameMap.);
+                    exportGameData.mapExportToJson(gameMap);
                     // TODO: Export map
                     break;
                 case 0:
@@ -491,6 +491,8 @@ public class StartMenu {
                     // TODO: Import locations
                     break;
                 case 8:
+                    ExportGameData exportGameData = new ExportGameData();
+                    exportGameData.mapExportToJson(gameMap);
                     // TODO: Export locations
                     break;
                 case 0:

@@ -38,7 +38,7 @@ public class ExportGameDataTester {
         ExportGameData egd = new ExportGameData();
         egd.playersExportToJson(playersList);
         egd.exportToJson(portalList, connectorList, playersList);
-        egd.mapExportToJson(portalList, connectorList);
+        //egd.mapExportToJson(portalList, connectorList);
         /*
         egd.playersExportToJson(playersList);
 
