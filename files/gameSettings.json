@@ -1,6 +1,8 @@
 {
-  "portalConquestPoints": 123,
-  "portalChargingPoints": 123,
-  "connectorPlayerChargingPoints": 123,
-  "playerNavigatePoints": 123
+  "portalConquestPoints": 0.07,
+  "portalChargingPoints": 0.07,
+  "connectorPlayerChargingPoints": 0.07,
+  "playerNavigatePoints": 0.07,
+
+  "pointsY": 2
 }

@@ -168,7 +168,7 @@ public class InputGameData {
 
         // print the playerList
         for (Player players : playerList) {
-            System.out.println(players.showPlayerData());
+            System.out.println(players.toString());
         }
 
         for (Player playersToSend : playerList) {

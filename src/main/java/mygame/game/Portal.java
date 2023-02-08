@@ -215,4 +215,9 @@ public class Portal extends Local {
 
  */
     }
+
+    @Override
+    public int compareTo(Local o) {
+        return compareByID(o);
+    }
 }
