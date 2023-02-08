@@ -9,6 +9,7 @@ import mygame.structures.classes.LinkedQueue;
 import mygame.structures.exceptions.ElementNotFoundException;
 import mygame.io.InputGameData;
 import mygame.io.ExportGameData;
+
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
@@ -157,15 +158,20 @@ public class StartMenu {
                     break;
 
                 case 5:
+                    System.out.println("== IMPORT PLAYERS ==");
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("Can't add players to an empty map!");
+                        break;
+                    }
                     InputGameData inputClasses = new InputGameData();
-                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.parseJSON("files/players.json");
                     inputClasses.readPlayers(gameMap);
-                    // TODO: Import players
+                    System.err.println("Players imported!");
                     break;
                 case 6:
-
-
-                    // TODO: Export players
+                    System.out.println("== EXPORT PLAYERS ==");
+                    ExportGameData exportGameData = new ExportGameData();
+                    exportGameData.playersExportToJson(gameMap.getPlayersInGame());
                     break;
                 case 0:
                     return;
@@ -191,17 +197,17 @@ public class StartMenu {
                     locationsMenu(gameMap, scanner);
                     break;
                 case 2:
+                    System.out.println("== IMPORT MAP ==");
                     InputGameData inputClasses = new InputGameData();
-                    inputClasses.parseJSON("files/exemploNovo.json");
+                    inputClasses.parseJSON("files/map.json");
                     inputClasses.readPortals(gameMap);
                     inputClasses.readConnectors(gameMap);
-                    System.out.println("Import Data with Success");
-                    // TODO: Import map
+                    System.err.println("Data imported successfully");
                     break;
                 case 3:
+                    System.out.println("== EXPORT MAP ==");
                     ExportGameData exportGameData = new ExportGameData();
-                    //exportGameData.mapExportToJson(gameMap.);
-                    // TODO: Export map
+                    exportGameData.mapExportToJson(gameMap);
                     break;
                 case 0:
                     return;
@@ -330,8 +336,7 @@ public class StartMenu {
                     "4. Remove location\n" +
                     "5. Add path\n" +
                     "6. Remove path\n" +
-                    "7. Import locations\n" +
-                    "8. Export locations\n" +
+                    "7. Export locations\n" +
                     "0. Exit\n\n" +
                     "" +
                     "Your choice: ");
@@ -362,8 +367,18 @@ public class StartMenu {
                                 System.out.println("Longitude:");
                                 double lon = scanner.nextDouble();
 
-                                System.out.println("Maximum energy:");
-                                int maxEnergy = scanner.nextInt();
+                                boolean check = false;
+                                int maxEnergy = 0;
+                                while (!check) {
+                                    System.out.println("Maximum energy:");
+                                    maxEnergy = scanner.nextInt();
+
+                                    if (maxEnergy < energy) {
+                                        System.err.println("Maximum energy can't be less than current energy!");
+                                    } else {
+                                        check = true;
+                                    }
+                                }
 
                                 local = new Portal(name, energy, new Coordinates(lat, lon), maxEnergy);
                                 done = true;
@@ -464,7 +479,9 @@ public class StartMenu {
                     weight = scanner.nextDouble();
 
                     if (weight == 0) {
-                        gameMap.connectLocationsWithCoordinates(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2));
+                        Local local1 = (Local) gameMap.getMap().getVertices()[id1 - 1];
+                        Local local2 = (Local) gameMap.getMap().getVertices()[id2 - 1];
+                        gameMap.connectLocationsWithCoordinates(local1, local2);
                     } else {
                         gameMap.connectLocations(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2), weight);
                     }
@@ -487,11 +504,8 @@ public class StartMenu {
                     System.err.println("Path removed!");
                     break;
                 case 7:
-
-                    // TODO: Import locations
-                    break;
-                case 8:
-                    // TODO: Export locations
+                    ExportGameData exportGameData = new ExportGameData();
+                    exportGameData.locationsExportToJson(gameMap);
                     break;
                 case 0:
                     return;

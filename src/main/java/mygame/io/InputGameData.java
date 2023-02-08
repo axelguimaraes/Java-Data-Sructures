@@ -38,7 +38,7 @@ public class InputGameData {
             JSONObject jsonObject = (JSONObject) obj;
             connectors = (JSONArray) jsonObject.get("Connector");
             portals = (JSONArray) jsonObject.get("Portal");
-            players = (JSONArray) jsonObject.get("Players");
+            players = (JSONArray) jsonObject.get("Player");
             routes = (JSONArray) jsonObject.get("routes");
         } catch (Exception e) {
             System.out.println("Error reading JSON file: " + e.getMessage());
@@ -156,26 +156,20 @@ public class InputGameData {
             // extract the rest of the player data
             Long levelLong = (Long) playerJson.get("level");
             int level = levelLong.intValue();
-            Double experiencePoints = ((Long) playerJson.get("experiencePoints")).doubleValue();
+            Double experiencePoints = (Double) playerJson.get("experiencePoints");
             int maxEnergy = (((Long) playerJson.get("maxEnergy")).intValue());
             int currentEnergy = (((Long) playerJson.get("currentEnergy")).intValue());
 
             // extract data from playerJson and set it in a Player object
             Player playerObj = new Player(name, team, level, experiencePoints, maxEnergy, currentEnergy);
+            gameMap.addPlayer(playerObj);
+            playerObj.setMap(gameMap);
+            playerObj.setCurrentPositionID(1);
+
+
             // set data in playerObj
             playerList.addToRear(playerObj);
         }
-
-        // print the playerList
-        for (Player players : playerList) {
-            System.out.println(players.toString());
-        }
-
-        for (Player playersToSend : playerList) {
-            gameMap.addPlayer(playersToSend);
-
-        }
-
     }
 
     /**
@@ -190,11 +184,5 @@ public class InputGameData {
             int to = (((Long) routesJson.get("to")).intValue());
         }
 
-    }
-
-    public static void main(String[] args) throws PlayerWithNoTeamException {
-        InputGameData inputClasses = new InputGameData();
-        inputClasses.parseJSON("files/exemploNovo.json");
-        //inputClasses.readPortals();
     }
 }

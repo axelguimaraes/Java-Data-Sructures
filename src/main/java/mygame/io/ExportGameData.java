@@ -2,6 +2,7 @@ package mygame.io;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,8 +56,14 @@ public class ExportGameData {
 
 
                 JSONObject ownership = new JSONObject();
-                ownership.put("player", portal.getConqueror().getName());
-                gameSettings.put("ownership", ownership);
+                if(portal.getConqueror()== null){
+                    ownership.put("ownership", "N/A");
+                    ownership.put("player", "N/A");
+                }else{
+                    ownership.put("ownership", ownership);
+                    ownership.put("player", portal.getConqueror().getName());
+                }
+
                 portalObject.put("gameSettings", gameSettings);
 
                 // Add the portal object to the portal array
@@ -100,6 +107,7 @@ public class ExportGameData {
      * @param players
      */
     public void playersExportToJson(ArrayUnorderedList<Player> players) {
+
         // Create a JSONObject to store the data
         JSONObject data = new JSONObject();
         // Create a JSONArray for the Players
@@ -110,7 +118,7 @@ public class ExportGameData {
             JSONObject playerObject = new JSONObject();
             playerObject.put("id", player.getId());
             playerObject.put("name", player.getName());
-            playerObject.put("team", player.getTeam());
+            playerObject.put("team", player.getTeam().toString());
             playerObject.put("level", player.getLevel());
             playerObject.put("experiencePoints", player.getXp());
             playerObject.put("maxEnergy", player.getMaxEnergy());
@@ -122,10 +130,25 @@ public class ExportGameData {
         // Add the player array to the data object
         data.put("Player", playerArray);
 
-        writeFile(data, "PLayer");
+        writeFile(data, "Player");
     }
 
-    public void exportToJson(ArrayUnorderedList<Portal> portals, ArrayUnorderedList<Connector> connectors, ArrayUnorderedList<Player> players) {
+    public void locationsExportToJson(GameMap gameMap) {
+        ArrayUnorderedList<Portal> portals = new ArrayUnorderedList<>();
+        ArrayUnorderedList<Connector> connectors = new ArrayUnorderedList<>();
+        ArrayUnorderedList<Player> players = gameMap.getPlayersInGame();
+
+        Iterator<Local> it = gameMap.getMap().iteratorBFS(0);
+        while (it.hasNext()) {
+            Local local = it.next();
+
+            if (local instanceof Portal) {
+                portals.addToRear((Portal) local);
+            } else {
+                connectors.addToRear((Connector) local);
+            }
+        }
+
         // Create a JSONObject to store the data
         JSONObject data = new JSONObject();
         // Create a JSONArray for the portals
@@ -148,7 +171,12 @@ public class ExportGameData {
 
 
             JSONObject ownership = new JSONObject();
-            ownership.put("player", portal.getConqueror().getName());
+            if (portal.getConqueror() != null) {
+                ownership.put("player", portal.getConqueror().getName());
+            } else {
+                ownership.put("player", "N/A");
+            }
+
             gameSettings.put("ownership", ownership);
             portalObject.put("gameSettings", gameSettings);
 
@@ -190,7 +218,7 @@ public class ExportGameData {
             JSONObject playerObject = new JSONObject();
             playerObject.put("id", player.getId());
             playerObject.put("name", player.getName());
-            playerObject.put("team", player.getTeam());
+            playerObject.put("team", player.getTeam().toString());
             playerObject.put("level", player.getLevel());
             playerObject.put("experiencePoints", player.getXp());
             playerObject.put("maxEnergy", player.getMaxEnergy());
@@ -202,9 +230,9 @@ public class ExportGameData {
         // Add the player array to the data object
         data.put("Player", playerArray);
 
-        try (FileWriter file = new FileWriter("files/gameDataExported.json")) {
+        try (FileWriter file = new FileWriter("files/gameData.json")) {
             file.write(data.toJSONString());
-            System.out.println("Successfully exported data to JSON file.");
+            System.err.println("Successfully exported data to JSON file.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -213,7 +241,7 @@ public class ExportGameData {
 
     private void writeFile(JSONObject data, String type) {
         if (data == null) {
-            System.out.println("Data is null, cannot export to JSON file.");
+            System.err.println("Data is null, cannot export to JSON file.");
             return;
         }
         String fileName = "";
@@ -223,12 +251,12 @@ public class ExportGameData {
         } else if (type.equals("Player")) {
             fileName = "files/players.json";
         } else {
-            System.out.println("Error: Invalid data type.");
+            System.err.println("Error: Invalid data type.");
             return;
         }
         try (FileWriter file = new FileWriter(fileName)) {
             file.write(data.toJSONString());
-            System.out.println("Successfully exported " + type + " data to JSON file.");
+            System.err.println("Successfully exported " + type + " data to JSON file.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

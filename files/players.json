@@ -1,0 +1,40 @@
+{
+  "Player": [
+    {
+      "maxEnergy": 0,
+      "level": 1,
+      "name": "John Doe",
+      "experiencePoints": 0.0,
+      "currentEnergy": 0,
+      "id": 1,
+      "team": "SPARKS"
+    },
+    {
+      "maxEnergy": 0,
+      "level": 1,
+      "name": "Tom",
+      "experiencePoints": 0.0,
+      "currentEnergy": 0,
+      "id": 2,
+      "team": "GIANTS"
+    },
+    {
+      "maxEnergy": 0,
+      "level": 1,
+      "name": "Jerry",
+      "experiencePoints": 0.0,
+      "currentEnergy": 0,
+      "id": 3,
+      "team": "SPARKS"
+    },
+    {
+      "maxEnergy": 0,
+      "level": 1,
+      "name": "Abe",
+      "experiencePoints": 0.0,
+      "currentEnergy": 0,
+      "id": 4,
+      "team": "GIANTS"
+    }
+  ]
+}
