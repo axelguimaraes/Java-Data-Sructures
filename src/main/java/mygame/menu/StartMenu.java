@@ -9,6 +9,7 @@ import mygame.structures.classes.LinkedQueue;
 import mygame.structures.exceptions.ElementNotFoundException;
 import mygame.io.InputGameData;
 import mygame.io.ExportGameData;
+
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
@@ -157,6 +158,10 @@ public class StartMenu {
                     break;
 
                 case 5:
+                    if (gameMap.getMap().isEmpty()) {
+                        System.err.println("Can't add players to an empty map!");
+                        break;
+                    }
                     InputGameData inputClasses = new InputGameData();
                     inputClasses.parseJSON("files/exemploNovo.json");
                     inputClasses.readPlayers(gameMap);
@@ -362,8 +367,18 @@ public class StartMenu {
                                 System.out.println("Longitude:");
                                 double lon = scanner.nextDouble();
 
-                                System.out.println("Maximum energy:");
-                                int maxEnergy = scanner.nextInt();
+                                boolean check = false;
+                                int maxEnergy = 0;
+                                while (!check) {
+                                    System.out.println("Maximum energy:");
+                                    maxEnergy = scanner.nextInt();
+
+                                    if (maxEnergy < energy) {
+                                        System.err.println("Maximum energy can't be less than current energy!");
+                                    } else {
+                                        check = true;
+                                    }
+                                }
 
                                 local = new Portal(name, energy, new Coordinates(lat, lon), maxEnergy);
                                 done = true;
@@ -464,7 +479,9 @@ public class StartMenu {
                     weight = scanner.nextDouble();
 
                     if (weight == 0) {
-                        gameMap.connectLocationsWithCoordinates(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2));
+                        Local local1 = (Local) gameMap.getMap().getVertices()[id1 - 1];
+                        Local local2 = (Local) gameMap.getMap().getVertices()[id2 - 1];
+                        gameMap.connectLocationsWithCoordinates(local1, local2);
                     } else {
                         gameMap.connectLocations(gameMap.getLocalByID(id1), gameMap.getLocalByID(id2), weight);
                     }
