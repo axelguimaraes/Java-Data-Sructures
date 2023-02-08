@@ -203,13 +203,11 @@ public class StartMenu {
                     inputClasses.readPortals(gameMap);
                     inputClasses.readConnectors(gameMap);
                     System.err.println("Data imported successfully");
-                    // TODO: Import map
                     break;
                 case 3:
                     System.out.println("== EXPORT MAP ==");
                     ExportGameData exportGameData = new ExportGameData();
                     exportGameData.mapExportToJson(gameMap);
-                    // TODO: Export map
                     break;
                 case 0:
                     return;
@@ -338,8 +336,7 @@ public class StartMenu {
                     "4. Remove location\n" +
                     "5. Add path\n" +
                     "6. Remove path\n" +
-                    "7. Import locations\n" +
-                    "8. Export locations\n" +
+                    "7. Export locations\n" +
                     "0. Exit\n\n" +
                     "" +
                     "Your choice: ");
@@ -507,13 +504,8 @@ public class StartMenu {
                     System.err.println("Path removed!");
                     break;
                 case 7:
-
-                    // TODO: Import locations
-                    break;
-                case 8:
                     ExportGameData exportGameData = new ExportGameData();
                     exportGameData.locationsExportToJson(gameMap);
-                    // TODO: Export locations
                     break;
                 case 0:
                     return;
