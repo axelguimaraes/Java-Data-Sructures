@@ -64,6 +64,17 @@ public class GameMoves {
     }
 
     /**
+     * Navigates to an existing location, whilst forcefully going through other locations
+     * @param player {@link Player} to navigate
+     * @param destination list of {@link Local destinations} to travel through
+     */
+    public void playerNavigateToByMultipleLocations(Player player, Local... destination) {
+        if (player.navigateToByMultipleLocations(destination)) {
+            playerNavigateToXP(player);
+        }
+    }
+
+    /**
      * Sets player's XP and level based on the executed move
      *
      * @param player {@link Player} to make move

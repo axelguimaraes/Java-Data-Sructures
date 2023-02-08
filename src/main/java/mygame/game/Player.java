@@ -323,6 +323,112 @@ public class Player implements Comparable<Player> {
     }
 
     /**
+     * Navigates to an existing location, whilst forcefully going through other locations
+     * @param destination destination list
+     * @return true if navigated; false if not navigated
+     */
+    public boolean navigateToByMultipleLocations(Local... destination) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        StringBuilder s = new StringBuilder("Navigated to ");
+
+        if (destination.length == 1) {
+            if (destination[0].getId() == this.currentPositionID) {
+                System.err.println("Player is already in that location!");
+                return false;
+            }
+
+            boolean found = false;
+            Iterator<Local> it = this.map.getMap().iteratorBFS(0);
+            while (it.hasNext()) {
+                Local local = it.next();
+                if (local.equals(destination[0])) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.err.println("Location not found!");
+                return false;
+            }
+
+            if (destination[0] instanceof Portal) {
+                s.append((((Portal) destination[0]).getName()));
+            } else {
+                s.append("Connector ID: ").append(destination[0].getId());
+            }
+            s.append("\tPath: ");
+            for (Local local : this.map.getShortestPathToLocal(this.currentPositionID, destination[0].getId())) {
+                s.append(local.getId()).append(" ");
+            }
+            s.append("\tDistance: ").append(df.format(this.map.getShortestPathWeight(this.currentPositionID, destination[0].getId()))).append("km");
+
+            System.err.println(s);
+
+            this.currentPositionID = destination[0].getId();
+            return true;
+        }
+
+        boolean[] found = new boolean[destination.length];
+        for (int i = 0; i < destination.length; i++) {
+            Iterator<Local> it = this.map.getMap().iteratorBFS(0);
+            while (it.hasNext()) {
+                Local temp = it.next();
+                if (temp.equals(destination[i])) {
+                    found[i] = true;
+                    break;
+                }
+            }
+        }
+
+        int count = 0;
+        for (boolean index : found) {
+            if (!index) {
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            System.err.println(count + " location(s) not found!");
+            return false;
+        }
+
+        if (destination[destination.length - 1] instanceof Portal) {
+            s.append(((Portal) destination[destination.length - 1]).getName());
+        } else {
+            s.append("Connector ID: ").append(destination[destination.length - 1].getId());
+        }
+
+        s.append("\nTravelled through:");
+
+        for (int i = 0; i < destination.length - 1; i++) {
+            if (destination[i] instanceof Portal) {
+                s.append("\n\t- Portal ID ").append(destination[i].getId());
+            } else {
+                s.append("\n\t- Connector ID ").append(destination[i].getId());
+            }
+        }
+
+        s.append("\nPath: ");
+        for (int i = 0; i < destination.length - 1; i++) {
+            for (Local local : this.map.getShortestPathToLocal(destination[i].getId(), destination[i + 1].getId())) {
+                s.append(local.getId()).append(" ");
+            }
+        }
+
+        int[] locals = new int[destination.length];
+        for (int i = 0; i < destination.length; i++) {
+            locals[i] = destination[i].getId();
+        }
+
+        s.append("\nDistance: ").append(df.format(this.map.getShortestPathWeightBetweenMultipleLocals(locals))).append("km");
+        System.err.println(s);
+
+        this.currentPositionID = destination[destination.length - 1].getId();
+        return true;
+    }
+
+    /**
      * Getter for the {@link Player}'s current position
      *
      * @return ID of the current {@link Local position}

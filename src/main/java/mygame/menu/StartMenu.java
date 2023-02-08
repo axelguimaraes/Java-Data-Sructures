@@ -4,7 +4,9 @@ import mygame.exceptions.PlayerNotFoundException;
 import mygame.exceptions.PlayerWithNoTeamException;
 import mygame.game.*;
 import mygame.io.IOGameSettings;
+import mygame.structures.classes.ArrayUnorderedList;
 import mygame.structures.classes.LinkedQueue;
+import mygame.structures.exceptions.ElementNotFoundException;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -228,6 +230,7 @@ public class StartMenu {
                     System.out.println("1. Conquer portal\n" +
                             "2. Charge portal\n" +
                             "3. Navigate to other location\n" +
+                            "4. Navigate through multiple locations\n" +
                             "0. Exit to main menu\n\n" +
                             "Your choice: ");
                     switch (scanner.nextInt()) {
@@ -243,6 +246,31 @@ public class StartMenu {
                             System.out.println("Destination ID: ");
                             gameMoves.playerNavigateTo(gameMap.getPlayerFromID(turn.getId()), gameMap.getLocalByID(scanner.nextInt()));
                             break;
+                        case 4:
+                            listLocations(gameMap, turn);
+                            ArrayUnorderedList<Local> locations = new ArrayUnorderedList<>();
+                            int opt = 0, size = 0;
+                            while (opt != -1) {
+                                System.out.println("Destination ID (-1 to finish): ");
+                                opt = scanner.nextInt();
+                                if (opt != -1) {
+                                    try {
+                                        gameMap.getLocalByID(opt);
+                                        locations.addToRear(gameMap.getLocalByID(opt));
+                                    } catch (ElementNotFoundException e) {
+                                        System.err.println("Invalid option!");
+                                    }
+                                }
+                            }
+                            Local[] list = new Local[locations.size()];
+                            for (Local local : locations) {
+                                list[size++] = local;
+                            }
+
+
+                            gameMoves.playerNavigateToByMultipleLocations(gameMap.getPlayerFromID(turn.getId()), list);
+                            break;
+
                         case 0:
                             return;
                         default:

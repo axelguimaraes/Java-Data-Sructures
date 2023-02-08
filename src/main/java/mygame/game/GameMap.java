@@ -29,6 +29,7 @@ public class GameMap {
 
     /**
      * Getter for the {@link Network map}
+     *
      * @return {@link Network}
      */
     public Network<Local> getMap() {
@@ -37,6 +38,7 @@ public class GameMap {
 
     /**
      * Adds a new {@link Local location} to the {@link GameMap}
+     *
      * @param local location to add
      */
     public void addLocation(Local local) {
@@ -45,6 +47,7 @@ public class GameMap {
 
     /**
      * Removes an existing {@link Local location} from the {@link GameMap}
+     *
      * @param local location to be removed
      */
     public void removeLocation(Local local) {
@@ -54,6 +57,7 @@ public class GameMap {
     /**
      * Edits an existing {@link Local location} of the {@link GameMap}. It prompts the user with questions on the
      * terminal, so that the user is able to choose which parameters to edit
+     *
      * @param local location to be edited
      */
     public void editLocation(Local local) {
@@ -193,7 +197,7 @@ public class GameMap {
         Player[] list = new Player[this.playersInGame.size()];
 
         int count = 0;
-        for (Player player: playersInGame) {
+        for (Player player : playersInGame) {
             list[count] = player;
             count++;
         }
@@ -207,6 +211,7 @@ public class GameMap {
 
     /**
      * Adds a {@link Player} to the {@link GameMap}
+     *
      * @param player player to be added
      */
     public void addPlayer(Player player) {
@@ -217,6 +222,7 @@ public class GameMap {
 
     /**
      * Edits an existing {@link Player} on the {@link GameMap}
+     *
      * @param player player to be edited
      */
     public void editPlayer(Player player) {
@@ -297,6 +303,7 @@ public class GameMap {
 
     /**
      * Removes an existing {@link Player} from the {@link GameMap}
+     *
      * @param player player to be removed
      */
     public void removePlayer(Player player) {
@@ -305,13 +312,14 @@ public class GameMap {
 
     /**
      * Getter for the list of {@link Player players} in-game
+     *
      * @return {@link ArrayUnorderedList list} of {@link Player players} in-game
      */
     public ArrayUnorderedList<Player> getPlayersInGame() {
         return this.playersInGame;
     }
 
-    public Player getPlayerFromID (int id) throws PlayerNotFoundException {
+    public Player getPlayerFromID(int id) throws PlayerNotFoundException {
         for (Player player : this.playersInGame) {
             if (player.getId() == id) {
                 return player;
@@ -322,10 +330,11 @@ public class GameMap {
 
     /**
      * Fetches an existing {@link Local location} from the {@link GameMap} by its ID
+     *
      * @param id identification number of the {@link Local location}
      * @return {@link Local location} to be fetched
      */
-    public Local getLocalByID(int id) {
+    public Local getLocalByID(int id) throws ElementNotFoundException {
         Iterator<Local> iterator = this.map.iteratorDFS(0);
         while (iterator.hasNext()) {
             Local local = iterator.next();
@@ -338,7 +347,8 @@ public class GameMap {
 
     /**
      * Gets the shortest path between two {@link Local locations}
-     * @param startID {@link Local location} of origin
+     *
+     * @param startID  {@link Local location} of origin
      * @param targetID {@link Local location} of destination
      * @return {@link ArrayUnorderedList list} of {@link Local locations} to go through
      */
@@ -354,6 +364,7 @@ public class GameMap {
     /**
      * Gets the shortest path between multiple {@link Local locations}. Best used when it's required to calculate the
      * shortest path, whilst forcefully passing through specific {@link Local locations}
+     *
      * @param localIDs {@link Local locations to be included on the path. Origin and destination included}
      * @return {@link ArrayUnorderedList list} of {@link Local locations} to go through
      */
@@ -375,9 +386,10 @@ public class GameMap {
 
     /**
      * Connects two existing {@link Local locations} on the {@link GameMap}
+     *
      * @param location1 first {@link Local location}
      * @param location2 second {@link Local location}
-     * @param weight path distance of the {@link Local locations} to connect
+     * @param weight    path distance of the {@link Local locations} to connect
      */
     public void connectLocations(Local location1, Local location2, double weight) {
         this.map.addEdge(location1, location2, weight);
@@ -386,6 +398,7 @@ public class GameMap {
     /**
      * Connects two existing {@link Local locations} on the {@link GameMap}. The method automatically adds the path
      * distance, which is calculated using the {@link Local locations's} {@link Coordinates coordinates}
+     *
      * @param location1 first {@link Local location}
      * @param location2 second {@link Local location}
      */
@@ -395,7 +408,8 @@ public class GameMap {
 
     /**
      * Removes a connection path between two {@link Local locations}
-     * @param firstLocalID first {@link Local location}
+     *
+     * @param firstLocalID  first {@link Local location}
      * @param secondLocalID second {@link Local location}
      */
     public void removeConnectingPath(int firstLocalID, int secondLocalID) {
@@ -404,6 +418,7 @@ public class GameMap {
 
     /**
      * Lists all the information relative to the {@link GameMap}
+     *
      * @return {@link String} of all the information
      */
     public String toString() {
@@ -424,6 +439,7 @@ public class GameMap {
 
     /**
      * Calculates the distance between two {@link Local locations} using their {@link Coordinates coordinates}
+     *
      * @param local1 first {@link Local location}
      * @param local2 second {@link Local location}
      * @return path distance
@@ -448,7 +464,8 @@ public class GameMap {
 
     /**
      * Gets an iterator of the shortest path between two {@link Local locations} using their IDs
-     * @param start ID of the {@link Local location} of origin
+     *
+     * @param start  ID of the {@link Local location} of origin
      * @param target ID of the {@link Local location} of destination
      * @return {@link Iterator} of the shortest path
      */
@@ -458,7 +475,8 @@ public class GameMap {
 
     /**
      * Gets the shortest path weight between two {@link Local locations} using their IDs
-     * @param start ID of the {@link Local location} of origin
+     *
+     * @param start  ID of the {@link Local location} of origin
      * @param target ID of the {@link Local location} of destination
      * @return shortest path weight
      */
@@ -469,6 +487,7 @@ public class GameMap {
     /**
      * Gets the shortest path weight between multiple {@link Local locations} using their IDs. Best used when calculating
      * the shortest path between two {@link Local locations}, whilst forcefully passing throw specific {@link Local locations}
+     *
      * @param locals {@link Local locations} to pass through
      * @return shortest path weight
      */
